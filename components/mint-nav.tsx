@@ -9,25 +9,16 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 const mintTiers = [
   {
-    name: "Early Mint",
-    label: "early",
-    href: "/mint/early",
+    name: "Pre Mint",
+    label: "late",
+    href: "/mint/late",
   },
   {
     name: "Public Mint",
     label: "public",
     href: "/mint/public",
   },
-  {
-    name: "WL1 Mint",
-    label: "late",
-    href: "/mint/late",
-  },
-  {
-    name: "Token Mint",
-    label: "token",
-    href: "/mint/token",
-  },
+
 ]
 
 interface MintNavProps extends React.HTMLAttributes<HTMLDivElement> {}
