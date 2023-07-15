@@ -8,6 +8,11 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
+import dynamic from 'next/dynamic';
+const WalletMultiButtonDynamic = dynamic(
+  () => import('@solana/wallet-adapter-react-ui').then((mod) => mod.WalletMultiButton),
+  { ssr: false }  // This line is important. It disables server-side rendering for this component.
+);
 
 export function SiteHeader() {
   return (
@@ -17,9 +22,9 @@ export function SiteHeader() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
             <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
+              href={siteConfig.links.discord}
+              // target="_blank"
+              // rel="noreferrer"
               className="hidden md:block"
             >
               <div
@@ -34,8 +39,8 @@ export function SiteHeader() {
             </Link>
             <Link
               href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
+              // target="_blank"
+              // rel="noreferrer"
               className="hidden md:block"
             >
               <div
@@ -48,7 +53,7 @@ export function SiteHeader() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>
-            <WalletMultiButton />
+<WalletMultiButtonDynamic />
             <ThemeToggle />
           </nav>
         </div>

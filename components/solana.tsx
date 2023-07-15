@@ -22,10 +22,13 @@ export const SolanaWalletContext: FC<Props> = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet
 
   // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(
-    () => process.env.NEXT_PUBLIC_RPC_ENDPOINT ?? clusterApiUrl(network),
-    [network]
-  )
+  // const endpoint = useMemo(
+  //   () => process.env.NEXT_PUBLIC_RPC_ENDPOINT ?? clusterApiUrl(network),
+  //   [network]
+  // )
+  const endpoint = `https://${process.env.NEXT_PUBLIC_RPC_ENDPOINT}`;
+
+
 
   const wallets = useMemo(
     () => [
@@ -43,11 +46,11 @@ export const SolanaWalletContext: FC<Props> = ({ children }) => {
        */
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [network]
+    []
   )
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
+    <ConnectionProvider endpoint={endpoint} config={{commitment: "confirmed"}}>
       <WalletProvider wallets={wallets} autoConnect>
         <UmiProvider>
           <WalletModalProvider>{children}</WalletModalProvider>
