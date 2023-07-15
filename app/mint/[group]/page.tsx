@@ -24,7 +24,7 @@ export default function GroupPage() {
       <MintNav />
       <div className="flex flex-col gap-4 md:flex-row">
         <div
-          className="h-100 hidden w-1/2 rounded-xl bg-cover bg-center md:block"
+          className="h-100 hidden w-[45%] rounded-xl bg-cover bg-center md:block"
           style={{
             backgroundImage:
               "url(/preview.gif)",

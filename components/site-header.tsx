@@ -34,7 +34,7 @@ export function SiteHeader() {
                   variant: "ghost",
                 })}
               >
-                <Icons.discord className="h-5 w-5" />
+                <Icons.discord className="h-5 w-7" />
                 <span className="sr-only">Discord</span>
               </div>
             </Link>
