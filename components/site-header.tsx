@@ -1,17 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
+// import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 import { siteConfig } from "@/config/site"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
-import dynamic from 'next/dynamic';
-const WalletMultiButtonDynamic = dynamic(
-  () => import('@solana/wallet-adapter-react-ui').then((mod) => mod.WalletMultiButton),
-  { ssr: false }  // This line is important. It disables server-side rendering for this component.
+import dynamic from "next/dynamic"
+
+const WalletMultiButton = dynamic(
+  () => import("@solana/wallet-adapter-react-ui").then((module) => module.WalletMultiButton),
+  { ssr: false }
 );
 
 export function SiteHeader() {
@@ -34,7 +35,7 @@ export function SiteHeader() {
                 })}
               >
                 <Icons.discord className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
+                <span className="sr-only">Discord</span>
               </div>
             </Link>
             <Link
@@ -53,7 +54,7 @@ export function SiteHeader() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>
-<WalletMultiButtonDynamic />
+            <WalletMultiButton />
             <ThemeToggle />
           </nav>
         </div>
