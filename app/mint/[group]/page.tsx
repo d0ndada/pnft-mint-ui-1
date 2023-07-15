@@ -4,10 +4,12 @@ import { useParams } from "next/navigation"
 
 import { MintCard } from "@/components/ui/mint-card"
 import { MintNav } from "@/components/mint-nav"
+import { NftSlide } from "@/components/ui/nftslide"
 
 export default function GroupPage() {
   const { group } = useParams()
   return (
+    <>
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       {/* <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
@@ -25,11 +27,13 @@ export default function GroupPage() {
           className="h-100 hidden w-1/2 rounded-xl bg-cover bg-center md:block"
           style={{
             backgroundImage:
-              "url(https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80)",
+              "url(/preview.gif)",
           }}
         />
         <MintCard group={group} className="w-full md:w-1/2" />
       </div>
     </section>
+      {/* <NftSlide /> */}
+      </>
   )
 }
