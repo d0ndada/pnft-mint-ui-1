@@ -10,6 +10,8 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import { SolanaWalletContext } from "../components/solana"
+import { MovingItems } from "@/components/ui/mvoingItems"
+import { NftSlide } from "@/components/ui/nftslide"
 
 export const metadata: Metadata = {
   title: {
@@ -47,8 +49,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <SolanaWalletContext>
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
-
-                <div className="flex-1">{children}</div>
+<MovingItems/>
+                <div className="flex-1">{children}
+                  </div>
               </div>
               <TailwindIndicator />
             </SolanaWalletContext>
