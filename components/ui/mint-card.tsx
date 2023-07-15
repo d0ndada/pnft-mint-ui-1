@@ -277,14 +277,14 @@ export function MintCard({ className, group, ...props }: CardProps) {
   return (
     <Card
       className={cn(
-        "w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-[500px] xl:h-[400px]",
+        "w-full sm:w-3/4 md:w-1/2 lg:w-1/3  xl:w-[650px]",
         className
       )}
       {...props}
     >
       <CardHeader>
-        <CardTitle>Mint</CardTitle>
-        <CardDescription>Mint description</CardDescription>
+        <CardTitle>Soljuice</CardTitle>
+        <CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         {startDate && !isLive ? (
