@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.background{
+  background-image: url("../public/nature.jpg");
+  background-size: cover;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

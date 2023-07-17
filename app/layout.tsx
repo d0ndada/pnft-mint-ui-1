@@ -41,16 +41,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "background min-h-screen font-sans antialiased",
             fontSans.variable
           )}
-        >
+          >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <SolanaWalletContext>
-              <div className="relative flex min-h-screen flex-col">
+              <div className="relative flex min-h-screen flex-col ">
                 <SiteHeader />
-<MovingItems/>
                 <div className="flex-1">{children}
+          <MovingItems/>
                   </div>
               </div>
               <TailwindIndicator />

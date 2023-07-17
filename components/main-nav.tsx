@@ -34,6 +34,7 @@ export function MainNav({ items }: MainNavProps) {
                 </Link>
               )
           )}
+          
         </nav>
       ) : null}
     </div>
