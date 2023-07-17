@@ -1,3 +1,5 @@
+"use client"
+
 import { WalletNav } from '@/components/wallet-page'
 import React from 'react'
 

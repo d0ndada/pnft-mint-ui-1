@@ -77,7 +77,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
     (disabled = false) => {
       setDisableMint(disabled)
     },
-    [disableMint]
+    []
   )
 
   const checkCandyMachine = useCallback(async () => {
@@ -267,7 +267,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
     if (remaining > 0) {
       setDisableMint(false)
     }
-  }, [candyMachine, guardToUse, candyGuard, group, connected, wallet])
+  }, [connected, publicKey, candyMachine, candyGuard?.groups, candyGuard?.guards, candyGuard.publicKey, umi, toast, group, cost.amount, connection])
 
   useEffect(() => {
     checkCandyMachine()
