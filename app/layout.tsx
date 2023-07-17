@@ -12,6 +12,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { SolanaWalletContext } from "../components/solana"
 import { MovingItems } from "@/components/ui/mvoingItems"
 import { NftSlide } from "@/components/ui/nftslide"
+import Head from "next/head"
 
 export const metadata: Metadata = {
   title: {
@@ -38,7 +39,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <Head>
+           <title>My page title</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          </Head>
         <body
           className={cn(
             "background min-h-screen font-sans antialiased",
