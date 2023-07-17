@@ -10,8 +10,8 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 const mintTiers = [
   {
     name: "Pre Mint",
-    label: "late",
-    href: "/mint/late",
+    label: "early",
+    href: "/mint/early",
   },
   {
     name: "Public Mint",
