@@ -22,6 +22,6 @@ export const useUmi = (): Umi => {
       .use(mplCandyMachine())
       .use(mplTokenMetadata())
     setUmi(umiInstance)
-  }, [wallet?.publicKey, connection])
+  }, [wallet?.publicKey, connection, wallet])
   return umi as Umi
 }
