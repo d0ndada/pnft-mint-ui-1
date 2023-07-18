@@ -32,10 +32,10 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import { Countdown } from "./countdown"
+import { Countdown } from "../countdown"
 import { MintButton } from "./mint-button"
 import { MintProgress } from "./mint-progress"
-import { useToast } from "./use-toast"
+import { useToast } from "../toast/use-toast"
 
 type CardProps = React.ComponentProps<typeof Card> & {
   group?: string

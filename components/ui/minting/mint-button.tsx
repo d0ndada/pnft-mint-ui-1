@@ -34,7 +34,7 @@ import { getAllowListByGuard } from "@/lib/mintsettings"
 import { useUmi } from "@/hooks/useUmi"
 import { Button } from "@/components/ui/button"
 
-import { useToast } from "./use-toast"
+import { useToast } from "../toast/use-toast"
 
 type MintButtonProps = React.ComponentProps<typeof Button> & {
   group?: string

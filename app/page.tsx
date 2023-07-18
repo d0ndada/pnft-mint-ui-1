@@ -1,4 +1,4 @@
-import { MintCard } from "@/components/ui/mint-card"
+import { MintCard } from "@/components/ui/minting/mint-card"
 import { MintNav } from "@/components/mint-nav"
 
 export default function IndexPage() {

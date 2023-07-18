@@ -2,9 +2,9 @@
 
 import { useParams } from "next/navigation"
 
-import { MintCard } from "@/components/ui/mint-card"
+import { MintCard } from "@/components/ui/minting/mint-card"
 import { MintNav } from "@/components/mint-nav"
-import { NftSlide } from "@/components/ui/nftslide"
+import { NftSlide } from "@/components/ui/dynamic/nftslide"
 import { WalletNav } from "@/components/wallet-page"
 // import { Wallet } from "lucide-react"
 
@@ -18,15 +18,15 @@ export default function GroupPage() {
           Beautifully designed components <br className="hidden sm:inline" />
           built with Radix UI and Tailwind CSS.
         </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
+        {/* <p className="max-w-[700px] text-lg text-muted-foreground">
           Accessible and customizable components that you can copy and paste
           into your apps. Free. Open Source. And Next.js 13 Ready.
-        </p>
+        </p> */}
       </div>
         <MintNav />
-      <div className="flex flex-col gap-4 md:flex-row">
+      <div className=" flex flex-col justify-between gap-4 md:flex-row ">
         <div
-          className="h-100 hidden w-[45%] rounded-xl bg-cover bg-center md:block"
+          className="h-100 hidden w-[36%] rounded-xl bg-cover bg-center md:block"
           style={{
             backgroundImage:
               "url(/preview.gif)",
