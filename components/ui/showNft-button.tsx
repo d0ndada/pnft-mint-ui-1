@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Button } from "./button"
 import { CandyMachine } from "@metaplex-foundation/mpl-candy-machine"
 // import { PublicKey } from "@solana/web3.js"
-import { fetchDigitalAsset } from "@metaplex-foundation/mpl-token-metadata"
+import { JsonMetadata, fetchDigitalAsset, fetchJsonMetadata } from "@metaplex-foundation/mpl-token-metadata"
 import { PublicKey,Umi } from "@metaplex-foundation/umi"
 let Metaplex
 
@@ -12,17 +12,22 @@ type ShowButtonProps = React.ComponentProps<typeof Button> & {
   candyMachine: CandyMachine
 //   metaplex: Metaplex
   wallet: PublicKey
+  umi: Umi
 }
 
 
 export function ShowButton({
     className,
     wallet,
-    candyMachine,
+  candyMachine,
+    umi,
     // metaplex,
     ...props
 }: ShowButtonProps) {
-  const [nftImages, setNftImages] = useState<string[]>([])
+  const [nftImages, setNftImages] = useState<JsonMetadata[]>([{
+    name: "Loading...",
+    image:""
+  }])
 
        const fetchNFTImage = async (nftUri: RequestInfo | URL) => {
     try {
@@ -56,18 +61,8 @@ export function ShowButton({
         }
 
         try {
-            //   setIsLoading(true)
-
-            //Button for user to se all of the mints he owns
-            // const usersNFTS = await metaplex
-            //     .nfts()
-            //     .findAllByOwner({ owner: metaplex.identity().publicKey })
-            // for (let nft of usersNFTS) {
-            //     await fetchNFTImage(nft.uri)
-            // }
-
-            // console.log(usersNFTS)
-            // console.log(usersNFTS[0].name)
+          const digitalAsset = await fetchDigitalAsset(umi, wallet)
+          const JsonMetadata = await fetchJsonMetadata(umi, digitalAsset.metadata.uri)
 
             // när knappen är tryckt visa ntf och lock eller unlock
         } catch (e: any) {
