@@ -17,7 +17,7 @@ export const useCandyMachine = (
   error: Error | null
 } => {
   const candyMachinePublicKey = publicKey(
-    process.env.NEXT_PUBLIC_CANDYMACHINE_PK || "57QJrVr3AGa47KZLLSh9mRqrPjFqYoJ5tnMMegCL4H4c"
+    process.env.NEXT_PUBLIC_CANDYMACHINE_PK || ""
   )
   const candyGuardMintAuthority = publicKey(
     process.env.NEXT_PUBLIC_CANDY_GUARD_MINT_AUTHORITY || ""
