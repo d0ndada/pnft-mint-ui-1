@@ -4,14 +4,14 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toast/toaster"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import { SolanaWalletContext } from "../components/solana"
-import { MovingItems } from "@/components/ui/mvoingItems"
-import { NftSlide } from "@/components/ui/nftslide"
+import { MovingItems } from "@/components/ui/dynamic/mvoingItems"
+import { NftSlide } from "@/components/ui/dynamic/nftslide"
 import Head from "next/head"
 
 export const metadata: Metadata = {
@@ -38,14 +38,14 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning className="size">
         <Head>
            <title>My page title</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
         <body
           className={cn(
-            "background min-h-screen font-sans antialiased",
+            "background  min-h-screen overflow-hidden font-sans antialiased",
             fontSans.variable
           )}
           >
