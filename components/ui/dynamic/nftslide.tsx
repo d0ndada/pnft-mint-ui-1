@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/globals.css"
+import "../../../styles/globals.css"
 
 export const NftSlide = () => {
     return (<>
@@ -11,7 +11,7 @@ export const NftSlide = () => {
                   <img
                     className='img1'
                     key={index}
-                    src={`../../public/assets/${index + 1}.png`}
+                    src={`/assets/${index + 1}.png`}
                     height={200}
                     width={200}
                     alt=""
@@ -28,7 +28,7 @@ export const NftSlide = () => {
                   <img
                     className='img2'
                     key={index}
-                    src={`../../public/assets/${index + 1}.png`}
+                    src={`/assets/${index + 1}.png`}
                     height={200}
                     width={200}
                     alt=""
