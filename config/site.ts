@@ -8,10 +8,30 @@ export const siteConfig = {
       title: "Home",
       href: "/",
     },
-    {
-      title: "Wallet(coming soon)",
-      href: "/wallet",
+   {
+      title: "About",
+      href: "#about",
     },
+      {
+      title: "Collection",
+      href: "#collection",
+    },   {
+      title: "Roadmap",
+      href: "#roadmap",
+    },
+         {
+      title: "Team",
+      href: "#team",
+    },
+            {
+      title: "FAQ",
+      href: "#faq",
+    },
+    // for owned nft later!
+    // {
+    //   title: "Your wallet(coming soon)",
+    //   href: "/wallet",
+    // },
   ],
   links: {
     twitter: "https://twitter.com/shadcn",
