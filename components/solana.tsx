@@ -12,6 +12,7 @@ import { clusterApiUrl } from "@solana/web3.js"
 // Default styles that can be overridden by your app
 import "@solana/wallet-adapter-react-ui/styles.css"
 import { UmiProvider } from "@/context/UmiContext"
+import { BackpackWalletAdapter, BraveWalletAdapter, CoinbaseWalletAdapter, CoinhubWalletAdapter, GlowWalletAdapter, LedgerWalletAdapter, MathWalletAdapter, PhantomWalletAdapter, SlopeWalletAdapter, SolflareWalletAdapter, SolletWalletAdapter, SpotWalletAdapter, TorusWalletAdapter } from "@solana/wallet-adapter-wallets"
 
 type Props = {
   children?: React.ReactNode
@@ -44,6 +45,19 @@ export const SolanaWalletContext: FC<Props> = ({ children }) => {
        * instantiate its legacy wallet adapter here. Common legacy adapters can be found
        * in the npm package `@solana/wallet-adapter-wallets`.
        */
+       new PhantomWalletAdapter(),
+      new BackpackWalletAdapter(),
+      new LedgerWalletAdapter(),
+      new GlowWalletAdapter(),
+      new BraveWalletAdapter(),
+      new MathWalletAdapter(),
+      new SpotWalletAdapter(),
+      new SlopeWalletAdapter(),
+      new TorusWalletAdapter(),
+      new SolletWalletAdapter(),
+      new CoinhubWalletAdapter(),
+      new CoinbaseWalletAdapter(),
+      new SolflareWalletAdapter({ network }),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [network]
