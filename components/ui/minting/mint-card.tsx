@@ -283,7 +283,17 @@ export function MintCard({ className, group, ...props }: CardProps) {
       {...props}
     >
       <CardHeader>
-        <CardTitle>Soljuice</CardTitle>
+       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <CardTitle>Soljuice</CardTitle>
+          <div className="mt-2 flex flex-col items-center gap-4 sm:mt-0 sm:flex-row">
+            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-primary p-2 text-lg font-semibold text-primary">
+              <p>{countTotal} unique soljuice</p>
+            </div>
+            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-primary p-2 text-lg font-semibold text-primary">
+              <p>1:1 NFT</p>
+            </div>
+          </div>
+        </div>
         <CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
@@ -296,7 +306,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
             </span>{" "}
           </div>
         )}
-        <div className=" flex items-center space-x-4 rounded-md border p-4">
+        <div className=" flex items-center space-x-4 rounded-md  border border-[#afa6a6] border-solid  p-4">
           <Calculator />
           <div className="flex-1 space-y-1">
             <p className="text-sm font-medium leading-none">
