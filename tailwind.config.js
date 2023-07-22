@@ -59,6 +59,23 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      height: {
+        "screen-100": "100vh",
+      },
+      scrollSnapType: {
+        x: "scroll-snap-type-x",
+        y: "scroll-snap-type-y",
+        mandatory: "scroll-snap-type-mandatory",
+        proximity: "scroll-snap-type-proximity",
+      },
+      scrollSnapAlign: {
+        start: "scroll-snap-align-start",
+        end: "scroll-snap-align-end",
+        center: "scroll-snap-align-center",
+      },
+      overflowY: {
+        scroll: "scroll",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
@@ -75,5 +92,24 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          // Add utilities for scroll snap type
+          ".scroll-snap-type-x": { scrollSnapType: "x mandatory" },
+          ".scroll-snap-type-y": { scrollSnapType: "y mandatory" },
+          ".scroll-snap-type-mandatory": { scrollSnapType: "mandatory" },
+          ".scroll-snap-type-proximity": { scrollSnapType: "proximity" },
+
+          // Add utilities for scroll snap align
+          ".scroll-snap-align-start": { scrollSnapAlign: "start" },
+          ".scroll-snap-align-end": { scrollSnapAlign: "end" },
+          ".scroll-snap-align-center": { scrollSnapAlign: "center" },
+        },
+        ["responsive"]
+      )
+    },
+  ],
 }
