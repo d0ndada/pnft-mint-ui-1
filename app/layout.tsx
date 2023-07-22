@@ -38,14 +38,14 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning className="size">
+      <html lang="en" suppressHydrationWarning className="overflow-y-scroll scroll-snap-type-y">
         <Head>
            <title>My page title</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
         <body
           className={cn(
-            "  min-h-screen  font-sans antialiased",
+            "  min-h-screen  font-sans antialiased ",
             fontSans.variable
           )}
           >
