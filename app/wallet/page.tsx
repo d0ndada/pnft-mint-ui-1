@@ -1,5 +1,6 @@
 "use client"
 
+import { ShowButton } from '@/components/ui/show-button'
 import { WalletNav } from '@/components/wallet-page'
 import React from 'react'
 
