@@ -1,11 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 
 .background{
   background-image: url("../public/andra.jpg");
   background-size: cover;
-}
+} */
 
 @layer base {
   :root {
