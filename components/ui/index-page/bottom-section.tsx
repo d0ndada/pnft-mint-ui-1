@@ -7,10 +7,10 @@ import { Icons } from '@/components/icons'
 const BottomSection = () => {
   return (
     <section
-      className="h-[25vh] bg-card  grid grid-cols-3 items-center p-4  p-4 scroll-snap-align-start" >
+      className="grid h-[25vh]  grid-cols-3 items-center bg-card p-4 scroll-snap-align-start" >
        <div></div> {/* This empty div is used to balance the space on the left */}
 
-      <div className='flex justify-center "'>
+      <div className='flex justify-center'>
         <Icons.logo className="h-12 w-12" />
 
       </div>

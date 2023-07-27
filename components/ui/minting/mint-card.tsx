@@ -306,7 +306,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
             </span>{" "}
           </div>
         )}
-        <div className=" flex items-center space-x-4 rounded-md  border border-[#afa6a6] border-solid  p-4">
+        <div className=" flex items-center space-x-4 rounded-md  border border-solid border-[#afa6a6]  p-4">
           <Calculator />
           <div className="flex-1 space-y-1">
             <p className="text-sm font-medium leading-none">

@@ -26,9 +26,9 @@ export const FaqSection = () => {
   
        return (
       <div className="mb-4">
-        <button className="text-lg font-bold cursor-pointer hover:text-blue-500 flex items-center" onClick={() => setIsOpen(!isOpen)}>
+        <button className="flex cursor-pointer items-center text-lg font-bold hover:text-blue-500" onClick={() => setIsOpen(!isOpen)}>
           {question}
-          <span className={`inline-block transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}>
+          <span className={`inline-block transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
             <Icons.down/>
           </span>
         </button>
@@ -40,9 +40,9 @@ export const FaqSection = () => {
   }
 
   return (
-      <section id="faq" className="h-[100vh] bg-secondary flex flex-col items-center justify-center scroll-snap-align-start p-8" >
+      <section id="faq" className="flex h-[100vh] flex-col items-center justify-center bg-secondary p-8 scroll-snap-align-start" >
       <h2 className="mb-8 mt-[-25%] text-3xl font-bold text-black">FAQ</h2>
-      <div className="flex flex-col items-start max-w-[45%] max-h-[71px]">
+      <div className="flex max-h-[71px] max-w-[45%] flex-col items-start">
       {faqs.map((faq, index) => (
         <FAQ key={index} question={faq.question} answer={faq.answer} />
       ))}
