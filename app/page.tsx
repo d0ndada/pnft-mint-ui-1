@@ -14,14 +14,21 @@ export default function IndexPage() {
     // md:py-10, pt-6, pl-[40%]
     <>
     <section className="background container  flex h-[100vh] flex-col items-center gap-6 pb-8 scroll-snap-align-start    ">
-      <div className="mt-[100px] flex max-w-[980px] flex-col items-start gap-2">
+        <div className="mt-[100px] flex max-w-[980px] flex-col items-start gap-2">
+          <div>
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+              Welcome To The Bored Apes Club
+            </h1>
+          </div>
+          <div>
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Mint Soljuice NFT
           <br className="hidden sm:inline" />
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground">
           clieck on the text to start minting
-        </p>
+            </p>
+            </div>
       </div>
       <MintNav />
       </section>

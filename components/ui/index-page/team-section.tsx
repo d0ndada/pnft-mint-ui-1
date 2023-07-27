@@ -23,7 +23,7 @@ export const TeamSection = () => {
 }
   return (
    
-    <section id="team" className="flex h-[100vh] flex-col items-center justify-evenly  space-y-8 bg-card scroll-snap-align-start">
+    <section id="team" className="flex h-[100vh] flex-col items-center justify-evenly  space-y-8  scroll-snap-align-start">
       <div>
   <h2 className="text-3xl font-bold text-white">Our Team</h2>
   </div>

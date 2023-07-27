@@ -11,21 +11,21 @@ export const RoadmapSection = () => {
     <div className="mb-10  flex">
       {/* Position */}
       <div className="mr-4 flex flex-col items-center">
-        <h3 className="mb-2 text-4xl font-bold text-black">{position}.</h3>
+        <h3 className="mb-2 text-4xl font-bold text-foreground">{position}.</h3>
         {/* Line */}
-{ position !=="3"    &&    <div className="mb-[-9vh] w-1 grow bg-black "></div>
+{ position !=="3"    &&    <div className="mb-[-9vh] w-1 grow bg-foreground "></div>
 }      </div>
       {/* Event details */}
-      <div className="flex flex-col items-start rounded-lg border-2 border-black p-4">
-        <h4 className="mb-2 text-2xl font-bold text-black">{title}</h4>
-        <p className="text-lg text-black">{description}</p>
+      <div className="flex flex-col items-start rounded-lg border-2 border-foreground p-4">
+        <h4 className="mb-2 text-2xl font-bold text-foreground">{title}</h4>
+        <p className="text-lg text-foreground">{description}</p>
       </div>
 
     </div>
   );
 }
   return (
-   <section id="roadmap" className="conntent-space grid h-[100vh] grid-cols-2 items-center justify-items-center bg-secondary px-10 scroll-snap-align-start" >
+   <section id="roadmap" className="conntent-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start" >
         <div className="flex flex-col" >
         <h2 className="col-start-1 mb-8 text-3xl font-bold text-foreground">Roadmap</h2>
     <p className="text-lg text-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium est deleniti magni odio. Numquam temporibus dicta doloremque sint, quisquam exercitationem velit nisi est quos odit nihil, nam, tenetur laborum?</p>

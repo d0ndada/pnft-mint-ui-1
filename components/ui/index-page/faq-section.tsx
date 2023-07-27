@@ -40,8 +40,8 @@ export const FaqSection = () => {
   }
 
   return (
-      <section id="faq" className="flex h-[100vh] flex-col items-center justify-center bg-secondary p-8 scroll-snap-align-start" >
-      <h2 className="mb-8 mt-[-25%] text-3xl font-bold text-black">FAQ</h2>
+      <section id="faq" className="flex h-[100vh] flex-col items-center justify-center  p-8 scroll-snap-align-start" >
+      <h2 className="mb-8 mt-[-25%] text-3xl font-bold text-foreground">FAQ</h2>
       <div className="flex max-h-[71px] max-w-[45%] flex-col items-start">
       {faqs.map((faq, index) => (
         <FAQ key={index} question={faq.question} answer={faq.answer} />
