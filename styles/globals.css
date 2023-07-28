@@ -9,8 +9,8 @@
 
 @layer base {
   :root {
-    --background: 240 11% 92%;
-    --foreground: 222.2 47.4% 11.2%;
+    --background: 0 0% 97%;
+    --foreground: 0 0% 50%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -24,13 +24,13 @@
     --card: 240 11% 92%;
     --card-foreground: 222.2 47.4% 11.2%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 180 50% 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 180 100% 30%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 16 100% 66%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 100% 50%;
@@ -346,8 +346,9 @@
 }
 
 .NftWrapper{
-position: relative;
-z-index: 99;
+/* position: relative; */
+/* z-index: 1; */
+background-color: black;
 }
 .marquee-wrapper1 {
   overflow: hidden;
@@ -356,7 +357,7 @@ z-index: 99;
 
 .marquee1 {
   display: flex;
-  animation-name: marquee;
+  animation-name: marquee1;
   animation-duration: 50s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
