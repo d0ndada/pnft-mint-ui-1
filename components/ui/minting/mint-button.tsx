@@ -46,6 +46,7 @@ type MintButtonProps = React.ComponentProps<typeof Button> & {
   onMintCallback?: (mint?: DigitalAsset, signature?: string) => void
   setMessageCallback?: (message?: string) => void
   setDisabledCallback?: (disabled?: boolean) => void
+  mintLimit?: number,
 }
 
 export function MintButton({
@@ -59,6 +60,7 @@ export function MintButton({
   nftGateMint,
   setDisabledCallback,
   setMessageCallback,
+  mintLimit,
   ...props
 }: MintButtonProps) {
   const { toast } = useToast()
@@ -296,7 +298,8 @@ export function MintButton({
           data-action="increment"
           className="h-full w-20 cursor-pointer rounded-r bg-gray-300 p-1 text-gray-600 hover:bg-gray-400 hover:text-gray-700"
           onClick={() =>
-            mintAmount < Number(candyMachine.data.itemsAvailable - candyMachine.itemsRedeemed) &&
+            mintAmount < Number(mintLimit) &&
+            // Todo make it so that it check minted nft contra limit 
             setMintAmount((prev) => prev + 1)
           }
         >
