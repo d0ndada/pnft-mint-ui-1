@@ -296,7 +296,7 @@ export function MintButton({
           data-action="increment"
           className="h-full w-20 cursor-pointer rounded-r bg-gray-300 p-1 text-gray-600 hover:bg-gray-400 hover:text-gray-700"
           onClick={() =>
-            mintAmount < Number(candyMachine.data.itemsAvailable) &&
+            mintAmount < Number(candyMachine.data.itemsAvailable - candyMachine.itemsRedeemed) &&
             setMintAmount((prev) => prev + 1)
           }
         >
