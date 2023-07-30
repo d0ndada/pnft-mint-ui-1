@@ -28,10 +28,10 @@ export const siteConfig = {
       href: "#faq",
     },
     // for owned nft later!
-    // {
-    //   title: "Your wallet(coming soon)",
-    //   href: "/wallet",
-    // },
+    {
+      title: "Your wallet(coming soon)",
+      href: "/wallet",
+    },
   ],
   links: {
     twitter: "https://twitter.com/shadcn",

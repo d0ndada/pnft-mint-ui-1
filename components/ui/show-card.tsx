@@ -44,11 +44,9 @@ export function ShowCard() {
     const { connection } = useConnection()
     const wallet = useWallet()
   // const [mintsCreated, setMintsCreated] = useState<PublicKey[]>([publicKey("11111111111111111111111111111111")]);
-
- 
         return (
             <>
-                {/* <ShowButton candyMachine={candyMachine} wallet={mintsCreated} umi={umi} /> */}
+                <ShowButton candyMachine={candyMachine} wallet={umi?.identity.publicKey} umi={umi} />
             </>
         )
 }

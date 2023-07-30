@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ScrollArea, ScrollBar } from './ui/scroll-area';
 import { Link } from 'lucide-react';
 import { cn } from '@/lib/utils';
-// import { ShowButton } from './ui/showNft-button';
+import { ShowCard } from './ui/show-card';
 
 interface MintNavProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -14,7 +14,7 @@ export function WalletNav({ className, ...props }: MintNavProps) {
          <div>
 
             <p>in development</p>
-            {/* <ShowButton/> */}
+            <ShowCard/>
     </div>
     )
 };
