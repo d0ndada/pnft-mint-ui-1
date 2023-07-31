@@ -302,7 +302,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
         ) : (
           <div className="flex">
             <span className="ml-2 inline-block rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs font-medium leading-none text-[#000000] no-underline group-hover:no-underline">
-              Live
+                Live    
             </span>{" "}
           </div>
         )}
@@ -327,6 +327,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
           disabled={disableMint}
           setDisabledCallback={setDisabledCallback}
           setMessageCallback={setMessage}
+          mintLimit={mintLimit}
         />
         {mintLimit ? (
           <div className=" flex items-center space-x-4 p-2">
