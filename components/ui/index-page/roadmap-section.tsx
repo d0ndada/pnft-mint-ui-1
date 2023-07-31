@@ -26,11 +26,12 @@ export const RoadmapSection = () => {
 }
   return (
    <section id="roadmap" className="conntent-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start" >
-        <div className="flex flex-col" >
+        <div className="mt-[-46%] flex flex-col" >
         <h2 className="col-start-1 mb-8 text-3xl font-bold text-foreground">Roadmap</h2>
     <p className="text-lg text-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium est deleniti magni odio. Numquam temporibus dicta doloremque sint, quisquam exercitationem velit nisi est quos odit nihil, nam, tenetur laborum?</p>
-</div>
-        <div className="col-start-2 ml-[-32%] flex flex-col gap-12">
+      </div>
+      {/* ml-[-32%] */}
+        <div className="col-start-2  flex flex-col gap-12">
     {/* Roadmap events */}
     <RoadmapEvent position="1" title="Lucky Buddha Launch" description="Now Available on Opensea" />
     <RoadmapEvent position="2" title="Foo Dogs" description="A FREE NFT for all Lucky Buddha owners" />

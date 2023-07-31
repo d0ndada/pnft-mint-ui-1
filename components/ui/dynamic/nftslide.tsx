@@ -2,8 +2,9 @@ import React from 'react'
 import "../../../styles/globals.css"
 
 export const NftSlide = () => {
-    return (<>
-    <div className='NftWrapper'>
+  return (<div className=''>
+      
+    <div className=' '>
             <div className="marquee-wrapper1">
               <div className="marquee1">
                 {[...Array(9)].map((item, index) => (
@@ -20,7 +21,7 @@ export const NftSlide = () => {
               </div>
             </div>
           </div>
-          <div className='NftWrapper2'>
+          <div className=''>
             <div className="marquee-wrapper2">
               <div className="marquee2">
                 {[...Array(9)].map((item, index) => (
@@ -36,6 +37,7 @@ export const NftSlide = () => {
                 ))}
               </div>
             </div>
-          </div></>
+    </div>
+  </div>
   )
 }

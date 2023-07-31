@@ -25,7 +25,7 @@ export const TeamSection = () => {
    
     <section id="team" className="flex h-[100vh] flex-col items-center justify-evenly  space-y-8  scroll-snap-align-start">
       <div>
-  <h2 className="text-3xl font-bold text-white">Our Team</h2>
+  <h2 className="text-3xl font-bold text-foreground">Our Team</h2>
   </div>
         <div className="grid grid-cols-2 gap-12">
     <TeamMember image="/assets/0.png" name="John Doe" role="CEO" />
