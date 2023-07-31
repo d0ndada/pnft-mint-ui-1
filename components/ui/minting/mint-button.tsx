@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   CandyGuard,
   CandyMachine,
@@ -15,6 +15,7 @@ import {
 import {
   DigitalAsset,
   TokenStandard,
+  fetchAllDigitalAssetByOwner,
   fetchDigitalAsset,
 } from "@metaplex-foundation/mpl-token-metadata"
 import { setComputeUnitLimit } from "@metaplex-foundation/mpl-toolbox"
@@ -65,8 +66,30 @@ export function MintButton({
 }: MintButtonProps) {
   const { toast } = useToast()
   const umi = useUmi()
+  const wallet = umi?.identity.publicKey
   const [loading, setLoading] = useState(false)
   const [mintAmount, setMintAmount] = useState(1)
+  const [mintedByYou, setMintedByYou] = useState(0)
+  
+  useEffect(() => {
+    const fetchNFTs = async () => {
+    if(umi && wallet){
+    const ownedNft = await fetchAllDigitalAssetByOwner(umi, wallet);
+
+    const ownOfCollection = ownedNft.filter(
+      (nft) =>
+        nft.metadata.collection.__option === "Some" &&
+        nft.metadata.collection.value.key === process.env.NEXT_PUBLIC_COLLECTION_MINT
+    );
+
+    console.log(ownOfCollection.length);
+      setMintedByYou(ownOfCollection.length);
+      // console.log(mintedByYou);
+      
+  };
+}
+   fetchNFTs();
+}, [umi, wallet]); // Empty dependency array means this effect runs once on mount
 
   const mintBtnHandler = async () => {
     if (!candyMachine) {
@@ -298,7 +321,7 @@ export function MintButton({
           data-action="increment"
           className="h-full w-20 cursor-pointer rounded-r bg-gray-300 p-1 text-gray-600 hover:bg-gray-400 hover:text-gray-700"
           onClick={() =>
-            mintAmount < Number(mintLimit) &&
+            mintAmount < Number(mintLimit) - Number(mintedByYou) &&
             // Todo make it so that it check minted nft contra limit 
             setMintAmount((prev) => prev + 1)
           }
