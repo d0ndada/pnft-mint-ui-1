@@ -95,6 +95,8 @@ export function MintButton({
     if (!candyMachine) {
       return
     }
+    const mintTransactions = []
+
     const nfts: PublicKey[] = [];
     for (let i = 0; i < mintAmount; i++) {
       try {
@@ -259,6 +261,7 @@ export function MintButton({
           group: group ? group : undefined,
           tokenStandard: TokenStandard.ProgrammableNonFungible,
         })
+      
 
         let tx = transactionBuilder()
           .add(setComputeUnitLimit(umi, { units: 600_000 }))
@@ -276,6 +279,8 @@ export function MintButton({
             skipPreflight: true,
           },
         })
+
+        
         //Todo move this logic
         nfts.push(nftSigner.publicKey)
         const nft = await fetchDigitalAsset(umi, nftSigner.publicKey).catch(
@@ -322,7 +327,6 @@ export function MintButton({
           className="h-full w-20 cursor-pointer rounded-r bg-gray-300 p-1 text-gray-600 hover:bg-gray-400 hover:text-gray-700"
           onClick={() =>
             mintAmount < Number(mintLimit) - Number(mintedByYou) &&
-            // Todo make it so that it check minted nft contra limit 
             setMintAmount((prev) => prev + 1)
           }
         >

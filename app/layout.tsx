@@ -2,7 +2,7 @@ import "@/styles/globals.css"
 import { Metadata } from "next"
 
 import { siteConfig } from "@/config/site"
-import { fontSans } from "@/lib/fonts"
+import { font } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toast/toaster"
 import { SiteHeader } from "@/components/site-header"
@@ -38,15 +38,16 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning className="overflow-y-scroll scroll-snap-type-y">
+      <html lang="en" suppressHydrationWarning className="overflow-y-scroll font-sans scroll-snap-type-y">
         <Head>
+          
            <title>My page title</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           </Head>
         <body
           className={cn(
             "  min-h-screen  font-sans antialiased ",
-            fontSans.variable
+            font.variable
           )}
           >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

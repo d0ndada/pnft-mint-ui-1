@@ -35,7 +35,7 @@ export function MintNav({ className, ...props }: MintNavProps) {
               href={example.href}
               key={example.href}
               className={cn(
-                "flex items-center px-4",
+                "flex items-center px-4 text-2xl hover:text-red-500",
                 pathname?.startsWith(example.href)
                   ? "font-bold text-primary"
                   : "font-medium text-muted-foreground"
