@@ -1,6 +1,7 @@
 "use client"
 import { Icons } from "@/components/icons";
 import { useState } from "react";
+import { useInView } from 'react-intersection-observer';
 
 interface FaqEventProps {
   question: string;
@@ -9,6 +10,9 @@ interface FaqEventProps {
 }
 
 export const FaqSection = () => {
+   const { ref, inView } = useInView({
+    triggerOnce: true, // Change this to false if you want the animation to trigger again whenever it comes in view
+  });
   const faqs = [
     {
       question: "I've never purchased an NFT before, tell me where to start?",
@@ -41,8 +45,8 @@ export const FaqSection = () => {
 
   return (
       <section id="faq" className="flex h-[100vh] flex-col items-center justify-center  p-8 scroll-snap-align-start" >
-      <h2 className="mb-8 mt-[-25%] text-3xl font-bold text-foreground">FAQ</h2>
-      <div className="flex max-h-[71px] max-w-[45%] flex-col items-start">
+      <h2 ref={ref}  className={`mb-8 mt-[-25%] text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}  `}>FAQ</h2>
+      <div ref={ref} className={`flex max-h-[71px] max-w-[45%] flex-col items-start ${inView ? 'animate-fade-in-up' : ''}`}>
       {faqs.map((faq, index) => (
         <FAQ key={index} question={faq.question} answer={faq.answer} />
       ))}

@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 import { buttonVariants } from '../button'
 import { Icons } from '@/components/icons'
+import { useInView } from 'react-intersection-observer';
+
 
 const BottomSection = () => {
   return (

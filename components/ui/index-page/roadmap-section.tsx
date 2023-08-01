@@ -1,3 +1,5 @@
+"use client"
+import { useInView } from 'react-intersection-observer';
 
 interface RoadmapEventProps {
   position: string;
@@ -6,12 +8,15 @@ interface RoadmapEventProps {
 }
 
 export const RoadmapSection = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Change this to false if you want the animation to trigger again whenever it comes in view
+  });
   function RoadmapEvent({ position, title, description }:RoadmapEventProps) {
   return (
-    <div className="mb-10  flex">
+    <div className={`mb-10  flex ${inView ? 'animate-fade-in-right' : ''}`}>
       {/* Position */}
       <div className="mr-4 flex flex-col items-center">
-        <h3 className="mb-2 text-4xl font-bold text-foreground">{position}.</h3>
+        <h3   className="mb-2 text-4xl font-bold text-foreground">{position}.</h3>
         {/* Line */}
 { position !=="3"    &&    <div className="mb-[-9vh] w-1 grow bg-foreground "></div>
 }      </div>
@@ -27,8 +32,8 @@ export const RoadmapSection = () => {
   return (
    <section id="roadmap" className="conntent-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start" >
         <div className="mt-[-46%] flex flex-col" >
-        <h2 className="col-start-1 mb-8 text-3xl font-bold text-foreground">Roadmap</h2>
-    <p className="text-lg text-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium est deleniti magni odio. Numquam temporibus dicta doloremque sint, quisquam exercitationem velit nisi est quos odit nihil, nam, tenetur laborum?</p>
+        <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''} `} >Roadmap</h2>
+    <p ref={ref} className={`text-lg text-foreground ${inView ? 'animate-fade-in-up' : ''} `}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium est deleniti magni odio. Numquam temporibus dicta doloremque sint, quisquam exercitationem velit nisi est quos odit nihil, nam, tenetur laborum?</p>
       </div>
       {/* ml-[-32%] */}
         <div className="col-start-2  flex flex-col gap-12">
