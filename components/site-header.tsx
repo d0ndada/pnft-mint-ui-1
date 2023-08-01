@@ -9,13 +9,27 @@ import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
 import dynamic from "next/dynamic"
+import { useEffect, useState } from "react"
+
+
 
 const WalletMultiButton = dynamic(
   () => import("@solana/wallet-adapter-react-ui").then((module) => module.WalletMultiButton),
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => (
+       <div className="inline-block px-4 bg-gray-200 py-2 animate-pulse border border-gray-300 rounded w-[166px] h-11">
+        
+      </div>
+    )
+  }
 );
 
+
+
 export function SiteHeader() {
+  
+  
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -54,7 +68,7 @@ export function SiteHeader() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>
-            <WalletMultiButton />
+         <WalletMultiButton />
             <ThemeToggle />
           </nav>
         </div>
