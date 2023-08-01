@@ -18,7 +18,7 @@ const WalletMultiButton = dynamic(
   {
     ssr: false,
     loading: () => (
-       <div className="inline-block px-4 bg-gray-200 py-2 animate-pulse border border-gray-300 rounded w-[166px] h-11">
+       <div className="inline-block h-11 w-[166px] animate-pulse rounded border border-gray-300 bg-gray-200 px-4 py-2">
         
       </div>
     )
