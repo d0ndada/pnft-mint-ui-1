@@ -3,7 +3,7 @@ import {
   TokenStandard,
   createNft,
 } from "@metaplex-foundation/mpl-token-metadata"
-import { generateSigner, percentAmount } from "@metaplex-foundation/umi"
+import { generateSigner, percentAmount, some } from "@metaplex-foundation/umi"
 
 // Create the collection
 const collectionUpdateAuthority = generateSigner(umi)
@@ -18,3 +18,26 @@ await createNft(umi, {
 }).sendAndConfirm(umi)
 
 // Create the Candy machine
+const candyMachine = generateSigner(umi)
+await create(umi, {
+  candyMachine,
+  collectionMint: collectionMint.publicKey,
+  collectionUpdateAuthority,
+  TokenStandard: TokenStandard.ProgrammableNonFungible,
+  sellerFeBasisPoints: percentAmount(9.99, 2),
+  itemsAvailable: 5000,
+  creators: [
+    {
+      address: umi.identity.publicKey,
+      verified: true,
+      percentageShare: 100,
+    },
+  ],
+  configLineSettings: some({
+    prefixName: "",
+    nameLength: 32,
+    prefixUri: "",
+    uriLength: 200,
+    isSequential: false,
+  }),
+}).sendAndConfirm(umi)
