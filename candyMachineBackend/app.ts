@@ -42,7 +42,6 @@ async function uploadImages(directoryPath: string): Promise<{ uri: string, name:
   // Array to store all URIs
   const nftData: { uri: string, name: string, description: string, attributes: any[], properties: any }[] = [];
 
-
   for (const fileName of fileNames) {
     const filePath = path.join(directoryPath, fileName);
 
