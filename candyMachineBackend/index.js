@@ -1,9 +1,16 @@
-import { create } from "@metaplex-foundation/mpl-candy-machine"
+import { create, mplCandyMachine } from "@metaplex-foundation/mpl-candy-machine"
 import {
   TokenStandard,
   createNft,
 } from "@metaplex-foundation/mpl-token-metadata"
 import { generateSigner, percentAmount, some } from "@metaplex-foundation/umi"
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
+
+// initialize umi
+
+const umi = createUmi(
+  "https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ"
+).use(mplCandyMachine())
 
 // Create the collection
 const collectionUpdateAuthority = generateSigner(umi)
