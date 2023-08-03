@@ -36,43 +36,49 @@ const CONFIG = {
 async function uploadImages(directoryPath: string): Promise<{ uri: string, name: string, description: string, attributes: any[], properties: any }[]> {
   console.log(`Step 1 - Uploading Images`);
 
-  // Get all files in the directory
-  const fileNames = fs.readdirSync(directoryPath);
+    try {
+        // Get all files in the directory
+        const fileNames = fs.readdirSync(directoryPath);
 
-  // Array to store all URIs
-  const nftData: { uri: string, name: string, description: string, attributes: any[], properties: any }[] = [];
+        // Array to store all URIs
+        const nftData: { uri: string, name: string, description: string, attributes: any[], properties: any }[] = [];
 
-  for (const fileName of fileNames) {
-    const filePath = path.join(directoryPath, fileName);
+        for (const fileName of fileNames) {
+            const filePath = path.join(directoryPath, fileName);
 
-     if (path.extname(fileName) === '.png') {
-        const imgBuffer = fs.readFileSync(filePath);
-        const imgMetaplexFile = toMetaplexFile(imgBuffer, fileName);
+            if (path.extname(fileName) === '.png') {
+                const imgBuffer = fs.readFileSync(filePath);
+                const imgMetaplexFile = toMetaplexFile(imgBuffer, fileName);
 
-        const imgUri = await METAPLEX.storage().upload(imgMetaplexFile);
-        console.log(`   Image URI:`, imgUri);
+                const imgUri = await METAPLEX.storage().upload(imgMetaplexFile);
+                console.log(`   Image URI:`, imgUri);
 
-        nftData.push({uri: imgUri, name: '', description: '', attributes: [], properties: {}});
+                nftData.push({ uri: imgUri, name: '', description: '', attributes: [], properties: {} });
+            }
+            // If the file is a JSON file, read the attributes
+            else if (path.extname(fileName) === '.json') {
+                const jsonContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+                // Find the corresponding entry in nftData and add the attributes
+                for (const data of nftData) {
+                    if (data.uri.includes(path.basename(fileName, '.json'))) {
+                        data.name = jsonContent.name;
+                        data.description = jsonContent.description;
+                        data.attributes = jsonContent.attributes;
+                        data.properties = jsonContent.properties;
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        return nftData;
     }
-    // If the file is a JSON file, read the attributes
-    else if (path.extname(fileName) === '.json') {
-        const jsonContent = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-
-        // Find the corresponding entry in nftData and add the attributes
-        for (const data of nftData) {
-            if (data.uri.includes(path.basename(fileName, '.json'))) {
-                data.name = jsonContent.name;
-                data.description = jsonContent.description;
-                data.attributes = jsonContent.attributes;
-                data.properties = jsonContent.properties;
-                break;
+    catch (error) {
+        console.error(`Error uploading images: ${error}`);
+        return [];
     }
-  }
-}
-
-  }
-
-  return nftData;
 }
 //upload meatadata
 async function uploadMetadata(data: { uri: string, name: string, description: string, attributes: any[], properties: any }) {
