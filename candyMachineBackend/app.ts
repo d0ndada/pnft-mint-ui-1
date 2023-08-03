@@ -4,18 +4,21 @@ import { Metaplex, keypairIdentity, bundlrStorage, toMetaplexFile, toBigNumber, 
 import secret from './keypair.json';
 import fs from 'fs';
 import path from 'path';
+require('dotenv').config();
 
-// if (!process.env.NEXT_PUBLIC_RPC_ENDPOINT) {
-//     throw new Error("NEXT_PUBLIC_RPC_ENDPOINT is not defined")
-// }
+const alchemyEndpoint = process.env.DEVNET_RPC_ENDPOINT || "";
+
+if (!alchemyEndpoint) {
+    throw new Error("NEXT_PUBLIC_RPC_ENDPOINT is not defined")
+}
 // if (!process.env.NEXT_SECRET) {
 //     throw new Error("NEXT_SECRET is not defined")
 // }
-const tpc = "https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ"
+
 
 const SESSION_HASH = 'QNDEMO' + Math.ceil(Math.random() * 1e9);
 const WALLET = Keypair.fromSecretKey(new Uint8Array(secret))
-const SOLANA_CONNECTION = new Connection(tpc, {
+const SOLANA_CONNECTION = new Connection(alchemyEndpoint, {
     commitment: "finalized", httpHeaders: {"x-session-hash": SESSION_HASH}
 })
 
@@ -135,13 +138,23 @@ async function main() {
         const nftData = await uploadImages("./assets");
 
         for (const data of nftData) {
+            try {
 
-            const metadataUri = await uploadMetadata(data)
-            console.log(`Minted NFT with URI ${data.uri} and metadata URI ${metadataUri}`);
+                const metadataUri = await uploadMetadata(data)
+                console.log(`Minted NFT with URI ${data.uri} and metadata URI ${metadataUri}`);
+            }
+            catch (error) {
+                console.error(`Error uploading metadata for NFT with URI ${data.uri}: ${error}`);
+
+            }
         }
-        //Upload the collection metadata and create the collection NFT
-        const collectionMetadata: any = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
-        await createCollectionNft(collectionMetadata)
+        try {
+            //Upload the collection metadata and create the collection NFT
+            const collectionMetadata: any = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
+            await createCollectionNft(collectionMetadata)
+        } catch (error) {
+            console.error(`Error creating collection NFT: ${error}`);
+        }
     } catch (error) {
         console.error(`Error in main fucntion: ${error}`)
     }
