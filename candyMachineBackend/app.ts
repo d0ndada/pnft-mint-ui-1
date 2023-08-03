@@ -124,7 +124,7 @@ async function createCollectionNft(collectionMetadata: CollectionMetadata) {
     try {
         const { nft: createCollectionNft } = await METAPLEX.nfts().create({
             name: collectionMetadata.name,
-            uri: collectionMetadata.uri,
+            uri: collectionMetadata.properties.files[0].uri,
             sellerFeeBasisPoints: 0,
             symbol: collectionMetadata.symbol,
             isCollection: true,
