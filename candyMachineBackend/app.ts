@@ -4,6 +4,7 @@ import { Metaplex, keypairIdentity, bundlrStorage, toMetaplexFile, toBigNumber, 
 import secret from './keypair.json';
 import fs from 'fs';
 import path from 'path';
+import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
 require('dotenv').config();
 
 const alchemyEndpoint = process.env.DEVNET_RPC_ENDPOINT || "";
@@ -132,10 +133,35 @@ async function createCollectionNft(collectionMetadata: CollectionMetadata) {
         });
         console.log(`✅ - Minted Collection NFT: ${createCollectionNft.address.toString()}`);
         console.log(`     https://explorer.solana.com/address/${createCollectionNft.address.toString()}?cluster=devnet`);
+        return createCollectionNft.address.toString()
     } catch (error) {
         console.error(`Error creating the colleciton NFT: ${error}`)
     }
 }
+//initate Candy MAchine
+async function generateCandyMachine(collectionAddress: string) {
+    const candyMachineSettings: CreateCandyMachineInput<DefaultCandyGuardSettings> = 
+    {
+        itemsAvailable: toBigNumber(10),
+        sellerFeeBasisPoints: 1000,
+        symbol: "DEMO",
+        maxEditionSupply: toBigNumber(0),
+        isMutable: true,
+        creators: [
+            { address: WALLET.publicKey, share:100}
+        ],
+        collection: {
+            address: new PublicKey(collectionAddress),// must replace with NFT or upload new
+            updateAuthority: WALLET,
+        },
+        // tokenstandard: TokenStandard.ProgrammableNonFungible,
+        
+    }
+    const { candyMachine } = await METAPLEX.candyMachines().create(candyMachineSettings);
+    console.log(`✅ - Created Candy Machine: ${candyMachine.address.toString()}`);
+    console.log(`     https://explorer.solana.com/address/${candyMachine.address.toString()}?cluster=devnet`);
+}
+
 
 //create 
 async function main() {
@@ -158,7 +184,11 @@ async function main() {
         try {
             //Upload the collection metadata and create the collection NFT
             const collectionMetadata: CollectionMetadata = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
-            await createCollectionNft(collectionMetadata)
+           const collectionAddress =  await createCollectionNft(collectionMetadata)
+            // const COLLECTION_NFT_MINT = ''; /// the mint id  
+            await generateCandyMachine(collectionAddress)
+
+
         } catch (error) {
             console.error(`Error creating collection NFT: ${error}`);
         }
