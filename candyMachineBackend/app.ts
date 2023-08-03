@@ -15,6 +15,13 @@ if (!alchemyEndpoint) {
 //     throw new Error("NEXT_SECRET is not defined")
 // }
 
+interface CollectionMetadata {
+    name: string;
+    uri: string;
+    symbol: string;
+    [key: string]: any; // Use this if there are other properties that you don't know ahead of time
+}
+
 
 const SESSION_HASH = 'QNDEMO' + Math.ceil(Math.random() * 1e9);
 const WALLET = Keypair.fromSecretKey(new Uint8Array(secret))
@@ -113,7 +120,7 @@ async function uploadMetadata(data: { uri: string, name: string, description: st
     }
 }
 // create collection
-async function createCollectionNft(collectionMetadata: any) {
+async function createCollectionNft(collectionMetadata: CollectionMetadata) {
     try {
         const { nft: createCollectionNft } = await METAPLEX.nfts().create({
             name: collectionMetadata.name,
@@ -150,7 +157,7 @@ async function main() {
         }
         try {
             //Upload the collection metadata and create the collection NFT
-            const collectionMetadata: any = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
+            const collectionMetadata: CollectionMetadata = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
             await createCollectionNft(collectionMetadata)
         } catch (error) {
             console.error(`Error creating collection NFT: ${error}`);
