@@ -5,6 +5,7 @@ import secret from './keypair.json';
 import fs from 'fs';
 import path from 'path';
 import { TokenStandard } from "@metaplex-foundation/mpl-token-metadata";
+import { DefaultDeserializer } from "v8";
 require('dotenv').config();
 
 const alchemyEndpoint = process.env.DEVNET_RPC_ENDPOINT || "";
@@ -160,8 +161,34 @@ async function generateCandyMachine(collectionAddress: string) {
     const { candyMachine } = await METAPLEX.candyMachines().create(candyMachineSettings);
     console.log(`✅ - Created Candy Machine: ${candyMachine.address.toString()}`);
     console.log(`     https://explorer.solana.com/address/${candyMachine.address.toString()}?cluster=devnet`);
+    return candyMachine;
 }
 
+// update candyamchine
+
+async function updateCandyMachine(candyMachineAddress: string) {
+    const candyMachine = await METAPLEX.candyMachines().findByAddress({ address: new PublicKey(candyMachineAddress) })
+    
+        const { response } = await METAPLEX.candyMachines().update({
+        candyMachine,
+        guards: {
+            startDate: { date: toDateTime("2022-10-17T16:00:00Z") },
+            mintLimit: {
+                id: 1,
+                limit: 2,
+            },
+            solPayment: {
+                amount: sol(0.1),
+                destination: METAPLEX.identity().publicKey,
+            },
+        }
+    })
+    
+    console.log(`✅ - Updated Candy Machine: ${candyMachineAddress}`);
+    console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
+
+    
+}
 
 //create 
 async function main() {
@@ -170,10 +197,14 @@ async function main() {
     try {
         const nftData = await uploadImages("./assets");
 
+        let metadataUris: string[] = [];
         for (const data of nftData) {
             try {
 
                 const metadataUri = await uploadMetadata(data)
+                if (metadataUri) {
+                    metadataUris.push(metadataUri)
+                }
                 console.log(`Minted NFT with URI ${data.uri} and metadata URI ${metadataUri}`);
             }
             catch (error) {
@@ -186,9 +217,29 @@ async function main() {
             const collectionMetadata: CollectionMetadata = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
            const collectionAddress =  await createCollectionNft(collectionMetadata)
             // const COLLECTION_NFT_MINT = ''; /// the mint id  
-            await generateCandyMachine(collectionAddress)
+            if (collectionAddress) {
+                const candyMachine = await generateCandyMachine(collectionAddress);
 
+                if (candyMachine) {
+                    const candyMachineAddress = candyMachine.address.toString()
+                    await updateCandyMachine(candyMachineAddress)
+                       const items = metadataUris.map((uri, index) => ({
+        name: `Your NFT Name #${index + 1}`, // replace with actual name
+        uri: uri,
+    }));
 
+    const { response } = await METAPLEX.candyMachines().insertItems({
+        candyMachine,
+        items: items,
+    }, {commitment: 'finalized'});
+
+    console.log(`✅ - Items added to Candy Machine: ${candyMachine.address.toString()}`);
+    console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
+
+                }
+            } else {
+                console.error(`Error: Collection address is undefined.`);
+            }
         } catch (error) {
             console.error(`Error creating collection NFT: ${error}`);
         }
