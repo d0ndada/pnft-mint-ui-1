@@ -84,53 +84,66 @@ async function uploadImages(directoryPath: string): Promise<{ uri: string, name:
 async function uploadMetadata(data: { uri: string, name: string, description: string, attributes: any[], properties: any }) {
     console.log(`Step 2 - Uploading Metadata`);
 
-    const { uri } = await METAPLEX
-    .nfts()
-    .uploadMetadata({
-        name: data.name,
-        description: data.description,
-        image: data.uri,
-        attributes: data.attributes,
-        properties: {
-            files: [
-                {
-                    type: data.properties.files[0].type,
-                    uri: data.uri,
-                },
-            ]
-        }
-    });
-    console.log('   Metadata URI:',uri);
-    return uri;  
+    try {
+        const { uri } = await METAPLEX
+            .nfts()
+            .uploadMetadata({
+                name: data.name,
+                description: data.description,
+                image: data.uri,
+                attributes: data.attributes,
+                properties: {
+                    files: [
+                        {
+                            type: data.properties.files[0].type,
+                            uri: data.uri,
+                        },
+                    ]
+                }
+            });
+        console.log('   Metadata URI:', uri);
+        return uri;
+    }
+    catch (error) {
+        console.error(`Error uploading metadata: ${error}`);
+        return null
+    }
 }
 // create collection
 async function createCollectionNft(collectionMetadata: any) {
-    const { nft: createCollectionNft } = await METAPLEX.nfts().create({
-        name: collectionMetadata.name,
-        uri: collectionMetadata.uri,
-        sellerFeeBasisPoints: 0,
-        symbol:collectionMetadata.symbol,
-        isCollection: true,
-        updateAuthority: WALLET,
-    });
-          console.log(`✅ - Minted Collection NFT: ${createCollectionNft.address.toString()}`);
-      console.log(`     https://explorer.solana.com/address/${createCollectionNft.address.toString()}?cluster=devnet`);
-
+    try {
+        const { nft: createCollectionNft } = await METAPLEX.nfts().create({
+            name: collectionMetadata.name,
+            uri: collectionMetadata.uri,
+            sellerFeeBasisPoints: 0,
+            symbol: collectionMetadata.symbol,
+            isCollection: true,
+            updateAuthority: WALLET,
+        });
+        console.log(`✅ - Minted Collection NFT: ${createCollectionNft.address.toString()}`);
+        console.log(`     https://explorer.solana.com/address/${createCollectionNft.address.toString()}?cluster=devnet`);
+    } catch (error) {
+        console.error(`Error creating the colleciton NFT: ${error}`)
+    }
 }
 
 //create 
 async function main() {
     console.log(`Minting NFT's to wallet  ${WALLET.publicKey.toBase58()}. `);
     
-    const nftData = await uploadImages("./assets");
+    try {
+        const nftData = await uploadImages("./assets");
 
-    for (const data of nftData) {
+        for (const data of nftData) {
 
-        const metadataUri = await uploadMetadata(data)
-        console.log(`Minted NFT with URI ${data.uri} and metadata URI ${metadataUri}`);
+            const metadataUri = await uploadMetadata(data)
+            console.log(`Minted NFT with URI ${data.uri} and metadata URI ${metadataUri}`);
+        }
+        //Upload the collection metadata and create the collection NFT
+        const collectionMetadata: any = JSON.parse(fs.readFileSync("./assets/collection.json", "utf-8"))
+        await createCollectionNft(collectionMetadata)
+    } catch (error) {
+        console.error(`Error in main fucntion: ${error}`)
     }
-    //Upload the collection metadata and create the collection NFT
-    const collectionMetadata:any = JSON.parse(fs.readFileSync("./assets/collection.json","utf-8"))
-    await createCollectionNft(collectionMetadata)
 }
 main()
