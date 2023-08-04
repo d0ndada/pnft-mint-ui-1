@@ -9,31 +9,31 @@ import {
 import { addConfigLines, create, createCandyMachineV2, fetchCandyMachine, mplCandyMachine } from "@metaplex-foundation/mpl-candy-machine";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
+import { nftStorageUploader } from "@metaplex-foundation/umi-uploader-nft-storage";
 
 import { createGenericFile, createNoopSigner, createSignerFromKeypair, generateSigner, none, percentAmount, publicKey, signerIdentity, some } from "@metaplex-foundation/umi";
 import fs from 'fs';
-// import { nftStorage, nftStorageUploader } from "@metaplex-foundation/umi-uploader-nft-storage";
-// import { nftStorage } from "@metaplex-foundation/umi-uploader-nft-storage";
-// nftStorageUploader
+
 import path from 'path';
 
 // 'https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ'
 
 const QUICKNODE_RPC ='https://api.devnet.solana.com' ; // 👈 Replace with your QuickNode Solana Devnet HTTP Endpointconst SESSION_HASH = 'QNDEMO'+Math.ceil(Math.random() * 1e9); // Random unique identifier for your session
 
-const umi = createUmi(QUICKNODE_RPC).use(mplCandyMachine());
 const keypairFIle = fs.readFileSync("./keypair.json");
 const WALLET = Keypair.fromSecretKey(Buffer.from(JSON.parse(keypairFIle.toString())));
 
 
 const umiKeypair = {
     publicKey: publicKey(WALLET.publicKey),
-  secretKey: WALLET.secretKey
+    secretKey: WALLET.secretKey
 };
 
+const umi = createUmi(QUICKNODE_RPC).use(mplCandyMachine());
 const signer = createSignerFromKeypair(umi,umiKeypair)
-umi.use(signerIdentity(signer))
-
+umi.use(signerIdentity(signer)).use(nftStorageUploader({
+     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDk5ZDZiOWUyNjY1ODQwNkI4YTEzODhDOTAyYTA2OGEyODVmRTBiM2YiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY5MTE2MTQ3NzAzNiwibmFtZSI6InRlc3RhcGkifQ.B3ES92b39DwkxFM8mWvtPhg7vY1Yb3B1v-7ZUag7VqQ"
+}))
 
 const NFT_METADATA = 'https://mfp2m2qzszjbowdjl2vofmto5aq6rtlfilkcqdtx2nskls2gnnsa.arweave.net/YV-mahmWUhdYaV6q4rJu6CHozWVC1CgOd9NkpctGa2Q'; 
 const candyMachine = generateSigner(umi);
@@ -44,6 +44,8 @@ const CANDY_MACHINE_ID = 'HzU8GpE8HaZHWbXHqAZJGF2ibfDjPZVCRfYvJJ89BfYA';
 
 
 async function insertingItems() {
+      console.log(`Step 3 - Uploading Images`);
+
     const CM3 = await fetchCandyMachine(umi, candyMachine.publicKey);
     // umi.use(nftStorage())
 
@@ -87,20 +89,47 @@ async function insertingItems() {
 
 
 async function createCollectionNft() {
+    console.log("----step 1 crateCollectionNft------");
+    
     console.log(umi.identity.publicKey);
+    
+    const collectionJsonBuffer = fs.readFileSync("./assets/collection.json")
+    const collectionJsonFile = createGenericFile(collectionJsonBuffer, "collection.json")
+    const collectionJson = JSON.parse(collectionJsonBuffer.toString());
+    console.log(collectionJson);
+
+
+    try {
+        const collectionJsonUri = await umi.uploader.uploadJson(collectionJson);
+        console.log(collectionJsonUri);
+    } catch (error) {
+        console.error('Error uploading JSON:', error);
+    }
+    
+    // Read and upload the collection.png file.
+    const collectionPngBuffer = fs.readFileSync('./assets/collection.png');
+    const collectionPngFile = createGenericFile(collectionPngBuffer, 'collection.png');
+    const [collectionPngUri] = await umi.uploader.upload([collectionPngFile]);
+
+    // Parse the JSON metadata.
+    const metadata = JSON.parse(collectionJsonBuffer.toString());
+
+    console.log("uploading...");
+    
     
     const nft = await createNft(umi, {
         mint: collectionMint,
         authority: collectionUpdateAuthority,
-        symbol: "GG",
-        name: "QuickNode Demo NFT Collection",
-        uri: NFT_METADATA,
+        symbol: metadata.symbol,
+        name: metadata.name,
+        uri: "",
         sellerFeeBasisPoints: percentAmount(9.99,2),
         isCollection: true,
+        
         // tokenStandard: TokenStandard.ProgrammableNonFungible,
       }).sendAndConfirm(umi)
 
-      console.log(`✅ - Minted Collection NFT: ${collectionMint}`);
+      console.log(`✅ - Minted Collection NFT: ${nft.result}`);
       console.log(`     https://explorer.solana.com/address/${umi.toString()}?cluster=devnet`);
 }
 
@@ -126,6 +155,8 @@ async function generateCandyMachine() {
             itemsAvailable: 500,
             maxEditionSupply: 0,
             isMutable: true,
+            ruleSet: publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9"),
+            symbol: "GG",
             hiddenSettings: none(),
             creators: [
                 {
@@ -138,7 +169,6 @@ async function generateCandyMachine() {
             configLineSettings, 
         })).sendAndConfirm(umi)
     
-    // const { candyMachine } = await METAPLEX.candyMachines().create(candyMachineSettings);
     console.log(`✅ - Created Candy Machine: ${candyMachine.publicKey.toString()}`);
     console.log(`     https://explorer.solana.com/address/${candyMachine.publicKey.toString()}?cluster=devnet`);
 }
@@ -186,4 +216,10 @@ async function generateCandyMachine() {
 // mintNft()
 
 
+async function main() {
+    await createCollectionNft()
+    await generateCandyMachine();
+    await insertingItems();
+}
 
+main().catch(console.error)
