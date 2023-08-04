@@ -12,16 +12,14 @@ import { mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
 
 import { createGenericFile, createNoopSigner, createSignerFromKeypair, generateSigner, none, percentAmount, publicKey, signerIdentity, some } from "@metaplex-foundation/umi";
 import fs from 'fs';
+// import { nftStorage, nftStorageUploader } from "@metaplex-foundation/umi-uploader-nft-storage";
 // import { nftStorage } from "@metaplex-foundation/umi-uploader-nft-storage";
-import { nftStorage } from "@metaplex-foundation/umi-uploader-nft-storage";
-
+// nftStorageUploader
 import path from 'path';
 
 // 'https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ'
 
-const QUICKNODE_RPC ='https://api.devnet.solana.com' ; // 👈 Replace with your QuickNode Solana Devnet HTTP Endpoint
-const SESSION_HASH = 'QNDEMO'+Math.ceil(Math.random() * 1e9); // Random unique identifier for your session
-const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC, { commitment: 'finalized', httpHeaders: { "x-session-hash": SESSION_HASH } });
+const QUICKNODE_RPC ='https://api.devnet.solana.com' ; // 👈 Replace with your QuickNode Solana Devnet HTTP Endpointconst SESSION_HASH = 'QNDEMO'+Math.ceil(Math.random() * 1e9); // Random unique identifier for your session
 
 const umi = createUmi(QUICKNODE_RPC).use(mplCandyMachine());
 const keypairFIle = fs.readFileSync("./keypair.json");
@@ -42,19 +40,19 @@ const candyMachine = generateSigner(umi);
 const collectionMint = generateSigner(umi)
 const collectionUpdateAuthority = generateSigner(umi);
 const CANDY_MACHINE_ID = 'HzU8GpE8HaZHWbXHqAZJGF2ibfDjPZVCRfYvJJ89BfYA';
-const CM3 = await fetchCandyMachine(umi, candyMachine.publicKey);
 
 
 
 async function insertingItems() {
-    umi.use(nftStorage())
+    const CM3 = await fetchCandyMachine(umi, candyMachine.publicKey);
+    // umi.use(nftStorage())
 
-//Upload the assets
+    //Upload the assets
     
     const nftAssets = fs.readdirSync("./assets").filter(file => /^\d+(png|json)$/.test(file));
 
     let configLines = [];
-
+    
     for (const asset of nftAssets) {
         const fileBuffer = fs.readFileSync(`./assets/${asset}`)
         const file = createGenericFile(fileBuffer, asset)
@@ -66,6 +64,8 @@ async function insertingItems() {
         const uri = fileUri;
         configLines.push({ name: name, uri: uri })
     }
+        console.log("Loading...");
+
     for (let configLine of configLines) {
 
     
@@ -79,8 +79,10 @@ async function insertingItems() {
         }).sendAndConfirm(umi)
   
     }
-    console.log(`✅ - Items added to Candy Machine: ${CANDY_MACHINE_ID}`);
-    console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
+        console.log("Loading complete.");
+
+    console.log(`✅ - Items added to Candy Machine: ${candyMachine}`);
+    // console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
 }
 
 
@@ -102,7 +104,7 @@ async function createCollectionNft() {
       console.log(`     https://explorer.solana.com/address/${umi.toString()}?cluster=devnet`);
 }
 
-};
+
 const configLineSettings = some({
     
     prefixName: "My NFT Project #$ID+1$",
