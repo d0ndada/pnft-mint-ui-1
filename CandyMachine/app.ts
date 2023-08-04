@@ -39,14 +39,17 @@ const NFT_METADATA = 'https://mfp2m2qzszjbowdjl2vofmto5aq6rtlfilkcqdtx2nskls2gnn
 const candyMachine = generateSigner(umi);
 const collectionMint = generateSigner(umi)
 const collectionUpdateAuthority = generateSigner(umi);
-const CANDY_MACHINE_ID = 'HzU8GpE8HaZHWbXHqAZJGF2ibfDjPZVCRfYvJJ89BfYA';
+console.log("outisde function candymachinePK", candyMachine.publicKey);
+console.log("outisde function2 collectionMintPK",  collectionMint.publicKey);
+
+
 
 
 
 async function insertingItems() {
       console.log(`Step 3 - Uploading Images`);
 
-    const CM3 = await fetchCandyMachine(umi, candyMachine.publicKey);
+    // const CM3 = await fetchCandyMachine(umi, candyMachine.publicKey);
     // umi.use(nftStorage())
 
     //Upload the assets
@@ -68,23 +71,22 @@ async function insertingItems() {
     }
         console.log("Loading...");
 
-    for (let configLine of configLines) {
-
-    
-        await addConfigLines(umi, {
-            candyMachine: candyMachine.publicKey,
-            index: CM3.itemsLoaded,
-            configLines: [
-                configLine
-            ]
-
-        }).sendAndConfirm(umi)
-  
-    }
+   for (let i = 0; i < configLines.length; i++) {
+    const configLine = configLines[i];
+    await addConfigLines(umi, {
+        candyMachine: candyMachine.publicKey,
+        index: i,
+        configLines: [
+            configLine
+        ]
+    }).sendAndConfirm(umi)
+}
         console.log("Loading complete.");
 
     console.log(`✅ - Items added to Candy Machine: ${candyMachine}`);
     // console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
+    console.log("working created nft insertion on candymachine")
+
 }
 
 
@@ -96,15 +98,9 @@ async function createCollectionNft() {
     const collectionJsonBuffer = fs.readFileSync("./assets/collection.json")
     const collectionJsonFile = createGenericFile(collectionJsonBuffer, "collection.json")
     const collectionJson = JSON.parse(collectionJsonBuffer.toString());
-    console.log(collectionJson);
 
 
-    try {
         const collectionJsonUri = await umi.uploader.uploadJson(collectionJson);
-        console.log(collectionJsonUri);
-    } catch (error) {
-        console.error('Error uploading JSON:', error);
-    }
     
     // Read and upload the collection.png file.
     const collectionPngBuffer = fs.readFileSync('./assets/collection.png');
@@ -130,7 +126,8 @@ async function createCollectionNft() {
       }).sendAndConfirm(umi)
 
       console.log(`✅ - Minted Collection NFT: ${nft.result}`);
-      console.log(`     https://explorer.solana.com/address/${umi.toString()}?cluster=devnet`);
+    console.log(`     https://explorer.solana.com/address/${umi.toString()}?cluster=devnet`);
+    console.log("working created collection")
 }
 
 
@@ -144,6 +141,7 @@ const configLineSettings = some({
 })
 async function generateCandyMachine() {
     
+    
 
     (await createCandyMachineV2(umi,
         {
@@ -152,7 +150,7 @@ async function generateCandyMachine() {
             collectionUpdateAuthority,
             tokenStandard: TokenStandard.ProgrammableNonFungible,
             sellerFeeBasisPoints: percentAmount(9.99, 2),
-            itemsAvailable: 500,
+            itemsAvailable: 6,
             maxEditionSupply: 0,
             isMutable: true,
             ruleSet: publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9"),
@@ -171,6 +169,8 @@ async function generateCandyMachine() {
     
     console.log(`✅ - Created Candy Machine: ${candyMachine.publicKey.toString()}`);
     console.log(`     https://explorer.solana.com/address/${candyMachine.publicKey.toString()}?cluster=devnet`);
+    console.log("working created candymachine")
+
 }
 // async function updateCandyMachine() {
 //     const candyMachine = await METAPLEX
