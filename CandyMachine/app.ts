@@ -10,11 +10,12 @@ import { addConfigLines, create, createCandyMachineV2, fetchCandyMachine, mplCan
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplTokenMetadata } from "@metaplex-foundation/mpl-token-metadata";
 
-import { createGenericFileFromBrowserFile, createNoopSigner, createSignerFromKeypair, generateSigner, none, percentAmount, publicKey, signerIdentity, some } from "@metaplex-foundation/umi";
+import { createGenericFile, createNoopSigner, createSignerFromKeypair, generateSigner, none, percentAmount, publicKey, signerIdentity, some } from "@metaplex-foundation/umi";
 import fs from 'fs';
 // import { nftStorage } from "@metaplex-foundation/umi-uploader-nft-storage";
 import { nftStorage } from "@metaplex-foundation/umi-uploader-nft-storage";
 
+import path from 'path';
 
 // 'https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ'
 
@@ -41,38 +42,43 @@ const candyMachine = generateSigner(umi);
 const collectionMint = generateSigner(umi)
 const collectionUpdateAuthority = generateSigner(umi);
 const CANDY_MACHINE_ID = 'HzU8GpE8HaZHWbXHqAZJGF2ibfDjPZVCRfYvJJ89BfYA';
-const candyM =  fetchCandyMachine(umi, candyMachine.publicKey);
+const CM3 = await fetchCandyMachine(umi, candyMachine.publicKey);
 
-// const METAPLEX = Metaplex.make(SOLANA_CONNECTION)
-//     .use(keypairIdentity(WALLET))
-//         .use(bundlrStorage({
-    //         address: 'https://devnet.bundlr.network',
-//         providerUrl: QUICKNODE_RPC,
-//         timeout: 60000,
-//         }))
+
+
 async function insertingItems() {
     umi.use(nftStorage())
 
 //Upload the assets
-    const file = await createGenericFileFromBrowserFile(event?.target.files[0])
-    const [fileUri] = await umi.uploader.upload([file])
-    //upload json metadata
-    const uri =  await umi.uploader.uploadJson({
-        name: "my nft",
-        description: "My description",
-        image: fileUri,
-    })
-    //Inserting the item into the Candy Machine
-    await addConfigLines(umi, {
-        candyMachine: candyMachine.publicKey,
-        index: (await candyM).itemsLoaded,
-        configLines: [
-            {name: "1", uri: uri},
-        ]
+    
+    const nftAssets = fs.readdirSync("./assets").filter(file => /^\d+(png|json)$/.test(file));
 
-    })
+    let configLines = [];
+
+    for (const asset of nftAssets) {
+        const fileBuffer = fs.readFileSync(`./assets/${asset}`)
+        const file = createGenericFile(fileBuffer, asset)
+        //upload json metadata
+        const [fileUri] = await umi.uploader.upload([file])
+        const metadata = JSON.parse(fileBuffer.toString())
+        //Inserting the item into the Candy Machine
+        const name = metadata.name
+        const uri = fileUri;
+        configLines.push({ name: name, uri: uri })
+    }
+    for (let configLine of configLines) {
+
+    
+        await addConfigLines(umi, {
+            candyMachine: candyMachine.publicKey,
+            index: CM3.itemsLoaded,
+            configLines: [
+                configLine
+            ]
+
+        }).sendAndConfirm(umi)
   
-
+    }
     console.log(`✅ - Items added to Candy Machine: ${CANDY_MACHINE_ID}`);
     console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
 }
@@ -95,12 +101,6 @@ async function createCollectionNft() {
       console.log(`✅ - Minted Collection NFT: ${collectionMint}`);
       console.log(`     https://explorer.solana.com/address/${umi.toString()}?cluster=devnet`);
 }
-// Pass the collection address and its authority in the settings.
-const candyMachineConfig = {
-  collectionMint: collectionMint.publicKey,
-    collectionUpdateAuthority,
-    itemsAvailable: 500,
-//  hiddenSettings: none(),
 
 };
 const configLineSettings = some({
