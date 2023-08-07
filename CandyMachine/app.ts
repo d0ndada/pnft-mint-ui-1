@@ -79,31 +79,91 @@ const collectionMint = generateSigner(umi)
 // console.log("outisde function candymachinePK", candyMachine.publicKey);
 console.log("outisde function2 collectionMintPK", collectionMint.publicKey)
 
-async function insertingItems() {
-  console.log(`Step 3 - Uploading Images`)
+interface Metadata {
+  name: string
+  symbol: string
+  description: string
+  image: string
+  attributes: Array<{
+    trait_type: string
+    value: string
+  }>
+  properties: {
+    files: Array<{
+      uri: string
+      type: string
+    }>
+  }
+}
 
-  //Upload the assets
+async function insertingItems() {
+  console.log(`Step 3 -Images`)
 
   const nftAssets = fs
     .readdirSync("./assets")
     .filter((file) => /^\d+(png|json)$/.test(file))
 
+  if (!nftAssets.length) {
+    console.error("No assets found matching the pattern.")
+    const allFiles = fs.readdirSync("./assets")
+    console.log(`All files in assets: ${allFiles}`)
+    return
+  }
+
+  console.log(`Found ${nftAssets.length} assets to process.`)
+
   let configLines = []
+  let metadataMap: { [key: string]: Metadata } = {}
+
+  console.log("Uploading images.... ")
 
   for (const asset of nftAssets) {
     const fileBuffer = fs.readFileSync(`./assets/${asset}`)
     const file = createGenericFile(fileBuffer, asset)
-    //upload json metadata
-    const [fileUri] = await umi.uploader.upload([file])
-    console.log(`Uploaded asset URI: ${fileUri}`)
 
-    const metadata = JSON.parse(fileBuffer.toString())
-    //Inserting the item into the Candy Machine
-    const name = metadata.name
-    const uri = fileUri
-    configLines.push({ name: name, uri: uri })
+    if (asset.endsWith(".json")) {
+      const metadata = JSON.parse(fileBuffer.toString())
+      metadataMap[metadata.name] = metadata
+      console.log(`Processed metadata for: ${metadata.name}`)
+    } else {
+      const [fileUri] = await umi.uploader.upload([file])
+      console.log(`Uploaded asset ${asset} with URI: ${fileUri}`)
+
+      const baseName = path.basename(asset, path.extname(asset))
+      const metadata = metadataMap[baseName]
+
+      if (!metadata) {
+        console.warn(`No metadata found for asset: ${baseName}`)
+        continue
+      }
+
+      metadata.image = fileUri
+
+      if (metadata.properties && metadata.properties.files) {
+        for (let file of metadata.properties.files) {
+          if (file.type === "image/png") {
+            file.uri = fileUri
+          }
+        }
+      }
+
+      const updatedMetadataUri = await umi.uploader.uploadJson(metadata)
+      console.log(
+        `Uploaded metadata for ${baseName} with URI: ${updatedMetadataUri}`
+      )
+
+      configLines.push({ name: metadata.name, uri: updatedMetadataUri })
+    }
   }
-  console.log("Loading...")
+
+  console.log(`Prepared ${configLines.length} config lines.`)
+
+  if (!configLines.length) {
+    console.warn("No config lines generated. Exiting.")
+    return
+  }
+
+  console.log("Beginning inserting...")
 
   for (let i = 0; i < configLines.length; i++) {
     const configLine = configLines[i]
@@ -112,14 +172,10 @@ async function insertingItems() {
       index: i,
       configLines: [configLine],
     }).sendAndConfirm(umi)
-    console.log(`Config line added with response: ${response}`)
+    console.log(`Config line #${i + 1} added with response: ${response}`)
   }
 
-  console.log("Loading complete.")
-  console.log(configLines)
-
-  // console.log(`✅ - Items added to Candy Machine: ${candyMachine}`)
-  // console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
+  console.log("Insertion completed.")
   console.log("working created nft insertion on candymachine")
 }
 
@@ -308,10 +364,10 @@ async function mintNft() {
 }
 
 async function main() {
-  await createCollectionNft()
+  // await createCollectionNft()
   // await generateCandyMachine()
-  // await insertingItems()
-  console.log("------ creating candyGuard----")
+  await insertingItems()
+  // console.log("------ creating candyGuard----")
   // await candy()
   // console.log("------ before minting----")
   // await mintNft()
