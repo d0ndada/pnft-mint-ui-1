@@ -95,6 +95,8 @@ async function insertingItems() {
     const file = createGenericFile(fileBuffer, asset)
     //upload json metadata
     const [fileUri] = await umi.uploader.upload([file])
+    console.log(`Uploaded asset URI: ${fileUri}`)
+
     const metadata = JSON.parse(fileBuffer.toString())
     //Inserting the item into the Candy Machine
     const name = metadata.name
@@ -105,13 +107,16 @@ async function insertingItems() {
 
   for (let i = 0; i < configLines.length; i++) {
     const configLine = configLines[i]
-    await addConfigLines(umi, {
+    const response = await addConfigLines(umi, {
       candyMachine: candyMachine.publicKey,
       index: i,
       configLines: [configLine],
     }).sendAndConfirm(umi)
+    console.log(`Config line added with response: ${response}`)
   }
+
   console.log("Loading complete.")
+  console.log(configLines)
 
   // console.log(`✅ - Items added to Candy Machine: ${candyMachine}`)
   // console.log(`     https://explorer.solana.com/tx/${response.signature}?cluster=devnet`);
@@ -140,6 +145,16 @@ async function createCollectionNft() {
   )
   const [collectionPngUri] = await umi.uploader.upload([collectionPngFile])
 
+  collectionJson.image = collectionPngUri
+  if (collectionJson.properties && collectionJson.properties.files) {
+    for (let file of collectionJson.properties.files) {
+      if (file.type === "image/png") {
+        file.uri = collectionPngUri
+      }
+    }
+  }
+  const updatedCollectionJsonUri = await umi.uploader.uploadJson(collectionJson)
+
   // Parse the JSON metadata.
   const metadata = JSON.parse(collectionJsonBuffer.toString())
 
@@ -150,10 +165,11 @@ async function createCollectionNft() {
     authority: umi.identity,
     symbol: metadata.symbol,
     name: metadata.name,
-    uri: collectionJsonUri,
+    uri: updatedCollectionJsonUri,
     sellerFeeBasisPoints: percentAmount(9.99, 2),
     isCollection: true,
   }).sendAndConfirm(umi)
+  console.log(`Collection JSON URI: ${collectionPngUri}`)
 
   console.log(`✅ - Minted Collection NFT: ${collectionMint.publicKey}`)
   console.log(
@@ -292,18 +308,18 @@ async function mintNft() {
 }
 
 async function main() {
-  // await createCollectionNft()
+  await createCollectionNft()
   // await generateCandyMachine()
   // await insertingItems()
-  // console.log("------ creating candyGuard----")
+  console.log("------ creating candyGuard----")
   // await candy()
   // console.log("------ before minting----")
   // await mintNft()
-  const candyMachinee = await fetchCandyMachine(
-    umi,
-    publicKey("4U6oxtWdBhJgCLAHhwW8ebLpjwDhyFXNtAJ7moPV7Pju")
-  )
-  console.log(candyMachinee.itemsLoaded)
+  // const candyMachinee = await fetchCandyMachine(
+  //   umi,
+  //   publicKey("4U6oxtWdBhJgCLAHhwW8ebLpjwDhyFXNtAJ7moPV7Pju")
+  // )
+  // console.log(candyMachinee.itemsLoaded)
 }
 
 main().catch(console.error)
