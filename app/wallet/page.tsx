@@ -19,7 +19,6 @@ export default function WalletPage ()  {
         </p>
       </div>
         <WalletNav/>
-     
       {/* </div> */}
     </section>
       {/* <NftSlide /> */}
