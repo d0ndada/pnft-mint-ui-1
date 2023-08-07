@@ -246,7 +246,10 @@ async function candy() {
 async function mintNft() {
   console.log("-------step 5 inside mintNft----------")
 
-  const candyMachinee = await fetchCandyMachine(umi, candyMachine.publicKey)
+  const candyMachinee = await fetchCandyMachine(
+    umi,
+    publicKey("4U6oxtWdBhJgCLAHhwW8ebLpjwDhyFXNtAJ7moPV7Pju")
+  )
   console.log(candyMachinee.authority)
   console.log("-------fecthing candymachine done-----")
 
@@ -268,7 +271,9 @@ async function mintNft() {
         minter: umi.identity,
         nftMint: nftSigner,
         // payer: umi.identity,
-        collectionMint: collectionMint.publicKey,
+        collectionMint: publicKey(
+          "G3uZn2QccD1KsqxTiDDc9RPr1sHkWgnJ3uzvV84vXSwb"
+        ),
         collectionUpdateAuthority: candyMachinee.authority,
         // candyGuard: CandyGuardSigner.publicKey,
         tokenStandard: TokenStandard.ProgrammableNonFungible,
@@ -291,16 +296,14 @@ async function main() {
   // await generateCandyMachine()
   // await insertingItems()
   // console.log("------ creating candyGuard----")
-
-  // // await candy()
+  // await candy()
   // console.log("------ before minting----")
-
   // await mintNft()
-  const cd = generateSigner(umi)
-  console.log("Candy Machine Created At:", cd.publicKey.toString())
-
-  const gg = await fetchCandyMachine(umi, cd.publicKey)
-  console.log("candymachine fetehc ", gg)
+  const candyMachinee = await fetchCandyMachine(
+    umi,
+    publicKey("4U6oxtWdBhJgCLAHhwW8ebLpjwDhyFXNtAJ7moPV7Pju")
+  )
+  console.log(candyMachinee.itemsLoaded)
 }
 
 main().catch(console.error)
