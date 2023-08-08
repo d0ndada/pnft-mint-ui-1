@@ -23,6 +23,7 @@ import {
   createCandyMachineV2,
   fetchCandyGuard,
   fetchCandyMachine,
+  initializeCandyMachineV2,
   mintV2,
   mplCandyMachine,
 } from "@metaplex-foundation/mpl-candy-machine"
@@ -39,6 +40,7 @@ import {
   createSignerFromKeypair,
   dateTime,
   generateSigner,
+  isSigner,
   none,
   percentAmount,
   publicKey,
@@ -68,13 +70,14 @@ const umi = createUmi(QUICKNODE_RPC).use(mplCandyMachine())
 const signer = createSignerFromKeypair(umi, umiKeypair)
 umi.use(signerIdentity(signer)).use(
   nftStorageUploader({
+    // endpoint: https://nftstorage.link/ipfs/ ,
     token:
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDk5ZDZiOWUyNjY1ODQwNkI4YTEzODhDOTAyYTA2OGEyODVmRTBiM2YiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY5MTE2MTQ3NzAzNiwibmFtZSI6InRlc3RhcGkifQ.B3ES92b39DwkxFM8mWvtPhg7vY1Yb3B1v-7ZUag7VqQ",
   })
 )
 
 const collectionUpdateAuthority = generateSigner(umi)
-let candyMachine = generateSigner(umi)
+const candyMachine = generateSigner(umi)
 const collectionMint = generateSigner(umi)
 // console.log("outisde function candymachinePK", candyMachine.publicKey);
 console.log("outisde function2 collectionMintPK", collectionMint.publicKey)
@@ -154,7 +157,7 @@ async function insertingItems() {
       )
       configLines.push({
         name: baseName,
-        uri: updatedMetadataUri.replace("https://ipfs.io/ipfs/", ""),
+        uri: updatedMetadataUri.replace("https://nftstorage.link/ipfs/", ""),
       })
     }
   }
@@ -170,8 +173,10 @@ async function insertingItems() {
 
   for (let i = 0; i < configLines.length; i++) {
     const configLine = configLines[i]
+    console.log(`Processing config line #${i + 1}:`, configLine)
+
     const response = await addConfigLines(umi, {
-      candyMachine: publicKey("91yACm6FwcNQQWxnxfwJ5GTjPHQce7Z5T4YZMkQUXPVG"),
+      candyMachine: publicKey("FfzJe5B2H4ZdECCeXVqrnsKksaPyh8TWdxuYvwDfLQ4C"),
       index: i,
       configLines: [configLine],
     }).sendAndConfirm(umi)
@@ -241,38 +246,45 @@ const configLineSettings = some({
   prefixName: "My #$ID+1$",
   nameLength: 11,
   prefixUri: "https://nftstorage.link/ipfs/",
-  uriLength: 52,
+  uriLength: 90,
   isSequential: false,
 })
 async function generateCandyMachine() {
   try {
     // const treasury = umi.identity.publicKey
     // const newcandy = generateSigner(umi)
+    console.log("Owner: ", umi.identity.publicKey)
+    const creator = generateSigner(umi)
+    console.log("creating transaciton of candymachine")
+    transactionBuilder()
+      .add(
+        await createCandyMachineV2(umi, {
+          candyMachine: candyMachine,
+          collectionMint: publicKey(
+            "7PnYhymNCH7jPLgaCaMdsMobPd4xomN6qZau1oVxkF8z"
+          ),
+          collectionUpdateAuthority: umi.identity,
+          tokenStandard: TokenStandard.ProgrammableNonFungible,
+          sellerFeeBasisPoints: percentAmount(9.99, 2),
+          itemsAvailable: 11,
 
-    ;(
-      await createCandyMachineV2(umi, {
-        candyMachine: candyMachine,
-        collectionMint: collectionMint.publicKey,
-        collectionUpdateAuthority: umi.identity,
-        tokenStandard: TokenStandard.ProgrammableNonFungible,
-        sellerFeeBasisPoints: percentAmount(9.99, 2),
-        itemsAvailable: 6,
-        maxEditionSupply: 0,
-        isMutable: true,
-        ruleSet: publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9"),
-        symbol: "GG",
-        hiddenSettings: none(),
-        creators: [
-          {
-            address: umi.identity.publicKey,
-            verified: true,
-            percentageShare: 100,
-          },
-        ],
+          maxEditionSupply: 0,
+          isMutable: true,
+          ruleSet: publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9"),
+          symbol: "GG",
+          hiddenSettings: none(),
+          creators: [
+            {
+              address: creator.publicKey,
+              verified: true,
+              percentageShare: 100,
+            },
+          ],
 
-        configLineSettings,
-      })
-    ).sendAndConfirm(umi)
+          configLineSettings,
+        })
+      )
+      .sendAndConfirm(umi)
 
     console.log(
       `✅ - Created Candy Machine: ${candyMachine.publicKey.toString()}`
@@ -348,18 +360,19 @@ async function mintNft() {
 async function main() {
   //First use these two then take candymachine publickey
   // await createCollectionNft()
-  await generateCandyMachine()
+  // await generateCandyMachine()
   // use with pubkey created from candy
-  // await insertingItems() // should go first to upload images
+  // await insertingItems()
+  // should go first to upload images
   // console.log("------ creating candyGuard----")
   // await candy()
   // console.log("------ before minting----")
   // await mintNft()
-  // const candyMachinee = await fetchCandyMachine(
-  //   umi,
-  //   publicKey("4U6oxtWdBhJgCLAHhwW8ebLpjwDhyFXNtAJ7moPV7Pju")
-  // )
-  // console.log(candyMachinee.itemsLoaded)
+  const candyMachinee = await fetchCandyMachine(
+    umi,
+    publicKey("FfzJe5B2H4ZdECCeXVqrnsKksaPyh8TWdxuYvwDfLQ4C")
+  )
+  console.log(candyMachinee.itemsLoaded)
 }
 
 main().catch(console.error)
