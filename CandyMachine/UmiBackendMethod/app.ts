@@ -26,6 +26,7 @@ import {
   initializeCandyMachineV2,
   mintV2,
   mplCandyMachine,
+  updateCandyGuard,
 } from "@metaplex-foundation/mpl-candy-machine"
 import {
   TokenStandard,
@@ -155,9 +156,15 @@ async function insertingItems() {
       console.log(
         `Uploaded metadata for ${baseName} with URI: ${updatedMetadataUri}`
       )
+      const nameFromMetadata = metadata.name
+
+      const prefix = "https://nftstorage.link/ipfs/" // replace with your prefix
+      const uniquePart = updatedMetadataUri.split("/ipfs/")[1]
+      const finalUri = prefix + uniquePart
+
       configLines.push({
-        name: baseName,
-        uri: updatedMetadataUri.replace("https://nftstorage.link/ipfs/", ""),
+        name: nameFromMetadata,
+        uri: finalUri,
       })
     }
   }
@@ -176,7 +183,7 @@ async function insertingItems() {
     console.log(`Processing config line #${i + 1}:`, configLine)
 
     const response = await addConfigLines(umi, {
-      candyMachine: publicKey("FfzJe5B2H4ZdECCeXVqrnsKksaPyh8TWdxuYvwDfLQ4C"),
+      candyMachine: candyMachine.publicKey,
       index: i,
       configLines: [configLine],
     }).sendAndConfirm(umi)
@@ -244,21 +251,19 @@ async function createCollectionNft() {
 
 const configLineSettings = some({
   prefixName: "My #$ID+1$",
-  nameLength: 11,
+  nameLength: 13,
   prefixUri: "https://nftstorage.link/ipfs/",
-  uriLength: 90,
+  uriLength: 90, // could test with 77
   isSequential: false,
 })
 async function generateCandyMachine() {
   try {
-    // const treasury = umi.identity.publicKey
-    // const newcandy = generateSigner(umi)
-    console.log("Owner: ", umi.identity.publicKey)
-    const creator = generateSigner(umi)
+    const treasury = umi.identity.publicKey
+
     console.log("creating transaciton of candymachine")
     transactionBuilder()
       .add(
-        await createCandyMachineV2(umi, {
+        await create(umi, {
           candyMachine: candyMachine,
           collectionMint: publicKey(
             "7PnYhymNCH7jPLgaCaMdsMobPd4xomN6qZau1oVxkF8z"
@@ -266,8 +271,7 @@ async function generateCandyMachine() {
           collectionUpdateAuthority: umi.identity,
           tokenStandard: TokenStandard.ProgrammableNonFungible,
           sellerFeeBasisPoints: percentAmount(9.99, 2),
-          itemsAvailable: 11,
-
+          itemsAvailable: 10,
           maxEditionSupply: 0,
           isMutable: true,
           ruleSet: publicKey("eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9"),
@@ -275,13 +279,62 @@ async function generateCandyMachine() {
           hiddenSettings: none(),
           creators: [
             {
-              address: creator.publicKey,
+              address: umi.identity.publicKey,
               verified: true,
               percentageShare: 100,
             },
           ],
 
           configLineSettings,
+          groups: [
+            {
+              label: "early",
+              guards: {
+                solPayment: some({
+                  lamports: {
+                    basisPoints: BigInt(1500000000), // This depends on the number of lamports you want to set
+                    identifier: "SOL" as "SOL",
+                    decimals: 9 as 9,
+                  },
+                  destination: treasury,
+                }),
+                startDate: some({ date: dateTime("2022-10-18T16:00:00Z") }),
+                endDate: some({ date: dateTime("2022-10-18T17:00:00Z") }),
+                botTax: some({
+                  lamports: {
+                    basisPoints: BigInt(1000), // This depends on the number of lamports you want to set
+                    identifier: "SOL" as "SOL",
+                    decimals: 9 as 9,
+                  },
+                  lastInstruction: true,
+                }),
+                mintLimit: some({ id: 1, limit: 2 }),
+              },
+            },
+            {
+              label: "public",
+              guards: {
+                solPayment: some({
+                  lamports: {
+                    basisPoints: BigInt(1500000000), // This depends on the number of lamports you want to set
+                    identifier: "SOL" as "SOL",
+                    decimals: 9 as 9,
+                  },
+                  destination: treasury,
+                }),
+                startDate: some({ date: dateTime("2022-10-18T17:00:00Z") }),
+                botTax: some({
+                  lamports: {
+                    basisPoints: BigInt(1000), // This depends on the number of lamports you want to set
+                    identifier: "SOL" as "SOL",
+                    decimals: 9 as 9,
+                  },
+                  lastInstruction: true,
+                }),
+                mintLimit: some({ id: 2, limit: 4 }),
+              },
+            },
+          ],
         })
       )
       .sendAndConfirm(umi)
@@ -297,18 +350,18 @@ async function generateCandyMachine() {
     console.error("An error occurred:", error)
   }
 }
-async function candy() {
-  const base = generateSigner(umi)
-  await createCandyGuard(umi, {
-    base: base,
-    authority: umi.identity.publicKey,
-  }).sendAndConfirm(umi)
+// async function updateCandyGuardd() {
+//   const base = generateSigner(umi)
+//   await updateCandyGuard(umi, {
+//     // base: base,
+//     // authority: umi.identity.publicKey,
+//   }).sendAndConfirm(umi)
 
-  console.log(`✅ - Updated Candy Machine: ${candyMachine.publicKey}`)
-  //   console.log(`Transaction signature: ${tx}`);
+//   console.log(`✅ - Updated Candy Machine: ${candyMachine.publicKey}`)
+//   //   console.log(`Transaction signature: ${tx}`);
 
-  //   console.log(`https://explorer.solana.com/tx/${tx}?cluster=devnet`);
-}
+//   //   console.log(`https://explorer.solana.com/tx/${tx}?cluster=devnet`);
+// }
 async function mintNft() {
   console.log("-------step 5 inside mintNft----------")
 
@@ -365,14 +418,9 @@ async function main() {
   // await insertingItems()
   // should go first to upload images
   // console.log("------ creating candyGuard----")
-  // await candy()
+  // await updateCandyGuard()
   // console.log("------ before minting----")
   // await mintNft()
-  const candyMachinee = await fetchCandyMachine(
-    umi,
-    publicKey("FfzJe5B2H4ZdECCeXVqrnsKksaPyh8TWdxuYvwDfLQ4C")
-  )
-  console.log(candyMachinee.itemsLoaded)
 }
 
 main().catch(console.error)
