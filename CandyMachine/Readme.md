@@ -3,7 +3,7 @@
 Welcome to the CandyMachine directory. Here, you'll find two distinct methods to set up your CandyMachine - one with Sugar and another using the Umi library.
 
 ## Directory Structure
-
+```
 CandyMachine/
 │
 ├── SugarMethod/
@@ -11,6 +11,7 @@ CandyMachine/
 │
 └── UmiBackendMethod/
 ├── ... (files and sub-directories related to the umi backend method)
+```
 ## 🍭 SugarMethod
 
 The SugarMethod provides a seamless way to create candies using the sugar approach.
