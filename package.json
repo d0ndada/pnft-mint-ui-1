@@ -14,12 +14,14 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
+    "@metaplex-foundation/js": "^0.19.4",
     "@metaplex-foundation/mpl-candy-machine": "^6.0.0-alpha.16",
     "@metaplex-foundation/mpl-token-metadata": "^3.0.0-alpha.24",
     "@metaplex-foundation/mpl-toolbox": "^0.8.0",
     "@metaplex-foundation/umi": "^0.8.2",
     "@metaplex-foundation/umi-bundle-defaults": "^0.8.2",
     "@metaplex-foundation/umi-signer-wallet-adapters": "^0.8.2",
+    "@metaplex-foundation/umi-uploader-nft-storage": "^0.8.7",
     "@metaplex-foundation/umi-web3js-adapters": "^0.8.2",
     "@radix-ui/react-progress": "^1.0.3",
     "@radix-ui/react-scroll-area": "^1.0.4",
@@ -30,7 +32,7 @@
     "@solana/wallet-adapter-react": "^0.15.32",
     "@solana/wallet-adapter-react-ui": "^0.9.31",
     "@solana/wallet-adapter-wallets": "^0.19.16",
-    "@solana/web3.js": "^1.77.3",
+    "@solana/web3.js": "^1.78.2",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "encoding": "^0.1.13",
