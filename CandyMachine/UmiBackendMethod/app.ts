@@ -53,6 +53,9 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
 import { nftStorageUploader } from "@metaplex-foundation/umi-uploader-nft-storage"
 import { Connection, Keypair, PublicKey } from "@solana/web3.js"
 
+import { allowlist } from "./allowlist"
+import { computeMerkleRoot } from "./merkleHelper"
+
 // 'https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ'
 
 const QUICKNODE_RPC = "https://api.devnet.solana.com" // 👈 Replace with your QuickNode Solana Devnet HTTP Endpointconst SESSION_HASH = 'QNDEMO'+Math.ceil(Math.random() * 1e9); // Random unique identifier for your session
@@ -309,6 +312,10 @@ async function generateCandyMachine() {
                   lastInstruction: true,
                 }),
                 mintLimit: some({ id: 1, limit: 2 }),
+                allowList: some({
+                  merkleRoot: computeMerkleRoot(allowlist),
+                }),
+                redeemedAmount: some({ maximum: 4 }),
               },
             },
             {
