@@ -8,7 +8,7 @@ export const allowListConfig: AllowListConfig = {
   default: [],
   early: [
     "7Jqg3JoEKBTqVzyt2PPWE3fYsYndYbCNLUo2Fz7XAHGS",
-      "6BnRx4VUeiLsq4eUpLq2sKfvVQdRQVchc4gQarDmrAdw",
+    "6BnRx4VUeiLsq4eUpLq2sKfvVQdRQVchc4gQarDmrAdw",
   ],
   public: [],
   allowList2: [],
