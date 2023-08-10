@@ -8,11 +8,13 @@ const CollectionSection = () => {
     triggerOnce: true, // Change this to false if you want the animation to trigger again whenever it comes in view
   });
   return (
-      <section id="collection" className="flex h-[100vh] flex-col items-stretch justify-evenly  scroll-snap-align-start " >
+      <section id="collection" className="flex h-[100vh]  flex-col items-stretch p justify-evenly  scroll-snap-align-start  " >
       <div ref={ref} className='flex flex-col items-center'>
         <h2  className={`text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`} >Featured soljuces</h2>
       </div>
-        <NftSlide/>
+      <NftSlide />
+          
+
       </section> 
 )
 }

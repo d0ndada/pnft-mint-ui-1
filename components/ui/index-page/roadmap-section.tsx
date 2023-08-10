@@ -33,7 +33,7 @@ export const RoadmapSection = () => {
    <section id="roadmap" className="conntent-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start" >
         <div className="mt-[-46%] flex flex-col" >
         <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''} `} >Roadmap</h2>
-    <p ref={ref} className={`text-lg text-foreground ${inView ? 'animate-fade-in-up' : ''} `}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium est deleniti magni odio. Numquam temporibus dicta doloremque sint, quisquam exercitationem velit nisi est quos odit nihil, nam, tenetur laborum?</p>
+    <p ref={ref} className={`text-lg text-ring ${inView ? 'animate-fade-in-up' : ''} `}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium est deleniti magni odio. Numquam temporibus dicta doloremque sint, quisquam exercitationem velit nisi est quos odit nihil, nam, tenetur laborum?</p>
       </div>
       {/* ml-[-32%] */}
         <div className="col-start-2  flex flex-col gap-12">

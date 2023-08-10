@@ -3,7 +3,7 @@ import "../../../styles/globals.css"
 
 export const NftSlide = () => {
   return (<div className=''>
-      
+       
     <div className=' '>
             <div className="marquee-wrapper1">
               <div className="marquee1">

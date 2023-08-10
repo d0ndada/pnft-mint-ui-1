@@ -58,7 +58,7 @@ import { computeMerkleRoot } from "./merkleHelper"
 
 // 'https://solana-devnet.g.alchemy.com/v2/8y5XaD-EI4DKbwLDBU4ywF3EnsCoS3kZ'
 
-const QUICKNODE_RPC = "https://api.devnet.solana.com" // 👈 Replace with your QuickNode Solana Devnet HTTP Endpointconst SESSION_HASH = 'QNDEMO'+Math.ceil(Math.random() * 1e9); // Random unique identifier for your session
+const ENDPOINT_RPC = "https://api.devnet.solana.com" // 👈 Replace with your QuickNode Solana Devnet HTTP Endpointconst SESSION_HASH = 'QNDEMO'+Math.ceil(Math.random() * 1e9); // Random unique identifier for your session
 
 const keypairFIle = fs.readFileSync("./keypair.json")
 const WALLET = Keypair.fromSecretKey(
@@ -70,7 +70,7 @@ const umiKeypair = {
   secretKey: WALLET.secretKey,
 }
 
-const umi = createUmi(QUICKNODE_RPC).use(mplCandyMachine())
+const umi = createUmi(ENDPOINT_RPC).use(mplCandyMachine())
 const signer = createSignerFromKeypair(umi, umiKeypair)
 umi.use(signerIdentity(signer)).use(
   nftStorageUploader({
@@ -268,9 +268,7 @@ async function generateCandyMachine() {
       .add(
         await create(umi, {
           candyMachine: candyMachine,
-          collectionMint: publicKey(
-            "7PnYhymNCH7jPLgaCaMdsMobPd4xomN6qZau1oVxkF8z"
-          ),
+          collectionMint: collectionMint.publicKey,
           collectionUpdateAuthority: umi.identity,
           tokenStandard: TokenStandard.ProgrammableNonFungible,
           sellerFeeBasisPoints: percentAmount(9.99, 2),
@@ -372,10 +370,7 @@ async function generateCandyMachine() {
 async function mintNft() {
   console.log("-------step 5 inside mintNft----------")
 
-  const candyMachinee = await fetchCandyMachine(
-    umi,
-    publicKey("4U6oxtWdBhJgCLAHhwW8ebLpjwDhyFXNtAJ7moPV7Pju")
-  )
+  const candyMachinee = await fetchCandyMachine(umi, candyMachine.publicKey)
   console.log(candyMachinee.authority)
   console.log("-------fecthing candymachine done-----")
 
@@ -397,9 +392,7 @@ async function mintNft() {
         minter: umi.identity,
         nftMint: nftSigner,
         // payer: umi.identity,
-        collectionMint: publicKey(
-          "G3uZn2QccD1KsqxTiDDc9RPr1sHkWgnJ3uzvV84vXSwb"
-        ),
+        collectionMint: collectionMint.publicKey,
         collectionUpdateAuthority: candyMachinee.authority,
         // candyGuard: CandyGuardSigner.publicKey,
         tokenStandard: TokenStandard.ProgrammableNonFungible,
@@ -428,6 +421,16 @@ async function main() {
   // await updateCandyGuard()
   // console.log("------ before minting----")
   // await mintNft()
+  const mintugard = await fetchCandyGuard(
+    umi,
+    publicKey("5wJRKc6SfNzgf9iqHSSVS8MPP2H79uqX5Nbvu5hAKhLh")
+  )
+  console.log(mintugard.authority)
+  const ca = await fetchCandyMachine(
+    umi,
+    publicKey("5wJRKc6SfNzgf9iqHSSVS8MPP2H79uqX5Nbvu5hAKhLh")
+  )
+  console.log(ca.mintAuthority)
 }
 
 main().catch(console.error)

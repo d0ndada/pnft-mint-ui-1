@@ -84,7 +84,163 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(to right, #FFF5E1,#FFDAB9 );
+    /* Dawn colors */
+  }
 
+  50% {
+    background: linear-gradient(to right, #B0E2FF, #1E90FF);
+    /* Daytime colors */
+  }
+
+  100% {
+    background: linear-gradient(to right, #4682B4, #6A5ACD);
+    /* Dusk colors */
+  }
+}
+/* //gives section some line  */
+/* @keyframes bgGlow {
+  0% {
+    box-shadow: 0 0 5px hsl(0, 0%, 97%), 0 0 10px hsl(0, 0%, 97%), 0 0 15px hsl(0, 0%, 97%), 0 0 20px hsl(0, 0%, 97%);
+  }
+
+  50% {
+    box-shadow: 0 0 10px hsl(0, 0%, 97%), 0 0 20px hsl(0, 0%, 97%), 0 0 30px hsl(0, 0%, 97%), 0 0 40px hsl(0, 0%, 97%);
+  }
+
+  100% {
+    box-shadow: 0 0 5px hsl(0, 0%, 97%), 0 0 10px hsl(0, 0%, 97%), 0 0 15px hsl(0, 0%, 97%), 0 0 20px hsl(0, 0%, 97%);
+  }
+}
+
+/*  movement on mintnav  */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  /* Position the tooltip above the icon */
+  left: 50%;
+  margin-left: -60px;
+  /* Use half of the width to center the tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.hover-move:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+.hover-shadow:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.hover-pulse:hover {
+  animation: pulse 1s infinite;
+}
+/* gives gloweffect */
+.emerald-green-glow {
+  text-shadow: 0 0 5px #50C878, 0 0 10px #50C878, 0 0 15px #50C878, 0 0 20px #50C878, 0 0 25px #50C878, 0 0 30px #50C878, 0 0 35px #50C878;
+}
+
+.turquoise-glow {
+  text-shadow: 0 0 5px #40E0D0, 0 0 10px #40E0D0, 0 0 15px #40E0D0, 0 0 20px #40E0D0, 0 0 25px #40E0D0, 0 0 30px #40E0D0, 0 0 35px #40E0D0;
+}
+
+.sky-blue-glow {
+  text-shadow: 0 0 5px #87CEEB, 0 0 10px #87CEEB, 0 0 15px #87CEEB, 0 0 20px #87CEEB, 0 0 25px #87CEEB, 0 0 30px #87CEEB, 0 0 35px #87CEEB;
+}
+/* gives shimmer effect  */
+/*  */
+.shimmer-effect {
+  background: linear-gradient(90deg, transparent, rgba(153, 15, 15, 0.5), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* animate title fade in zoom  */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.title {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+/* .background { */
+  /* animation: bgGlow 5s infinite; */
+/* } */ 
+@keyframes bgGlow {
+  0% {
+    background: hsl(0, 0%, 97%);
+  }
+
+  50% {
+    background: linear-gradient(45deg, hsl(0, 0%, 97%), hsl(0, 0%, 92%));
+  }
+
+  100% {
+    background: hsl(0, 0%, 97%);
+  }
+}
+
+/* .background {
+  animation: bgGlow 3s infinite alternate;
+}  */
+
+
+.collection-section {
+  animation: gradientShift 30s infinite alternate;
+  /* 30s duration, infinite loop, alternate direction */
+}
 .wallet-adapter-button-trigger {
   background-color: plum !important;
   border-radius: 0.5rem !important;
