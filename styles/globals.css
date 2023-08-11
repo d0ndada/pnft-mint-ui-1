@@ -518,9 +518,9 @@
 }
 
 .NftWrapper{
-/* position: relative; */
-/* z-index: 1; */
-background-color: black;
+position: relative;
+z-index: 1;
+/* background-color: black; */
 }
 .marquee-wrapper1 {
   overflow: hidden;
@@ -555,7 +555,7 @@ background-color: black;
 
 .NftWrapper2{
 position: relative;
-z-index: 99;}
+z-index: 2;}
 
 .marquee-wrapper2 {
   overflow: hidden;
@@ -588,3 +588,23 @@ z-index: 99;}
   }
 }
 
+
+/* Existing styles for img1 and img2 */
+.img1,
+.img2 {
+  /* ... your existing styles ... */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, brightness 0.3s ease, contrast 0.3s ease;
+}
+
+/* Hover state for img1 and img2 */
+.img1:hover,
+.img2:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  brightness: 1.2;
+  contrast: 1.2;
+}
+
+.paused .marquee1, .paused .marquee2{
+  animation-play-state: paused !important;
+}

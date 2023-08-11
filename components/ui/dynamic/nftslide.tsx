@@ -2,8 +2,15 @@ import React from 'react'
 import "../../../styles/globals.css"
 
 export const NftSlide = () => {
-  return (<div className=''>
-       
+      const [isHovered, setIsHovered] = React.useState(false);
+    const [isPaused, setIsPaused] = React.useState(false);
+
+  return (
+      <div 
+            onMouseEnter={() => setIsHovered(true)} 
+            onMouseLeave={() => setIsHovered(false)}
+            className={isHovered ? 'paused' : ''}
+        >
     <div className=' '>
             <div className="marquee-wrapper1">
               <div className="marquee1">
@@ -37,7 +44,8 @@ export const NftSlide = () => {
                 ))}
               </div>
             </div>
-    </div>
+      </div>
+
   </div>
   )
 }

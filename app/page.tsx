@@ -17,7 +17,7 @@ export default function IndexPage() {
     <section className="background container  flex h-[100vh] flex-col items-center gap-6 pb-8 scroll-snap-align-start  animate-bgGlow  ">
         <div className="mt-[100px] flex max-w-[100%] flex-col items-center gap-2 animate-fadeIn ">
           <div>
-            <h1 className=" text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl ">
+            <h1 className=" text-3xl font-extrabold leading-tight tracking-tighter mt-[5%] md:text-4xl ">
               Welcome to Soljuice: Harness the Power of Solar NFTs!
             </h1>
           </div>
