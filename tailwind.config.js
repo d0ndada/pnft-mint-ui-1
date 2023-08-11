@@ -116,6 +116,7 @@ module.exports = {
         fadeIn: "fadeIn 1s ease-in-out",
         "fade-in-up": "fade-in-up 1s ease-in-out",
         "fade-in-right": "fade-in-right 1s ease-in-out",
+        " pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
     },
   },

@@ -235,6 +235,22 @@
 /* .background {
   animation: bgGlow 3s infinite alternate;
 }  */
+.text-hover {
+  transition: color 0.3s;
+}
+
+.text-hover:hover {
+  color: #40E0D0;
+  /* This is a turquoise color, but you can replace it with any color you prefer */
+}
+.image-hover {
+  transition: transform 0.3s;
+}
+
+.image-hover:hover {
+  transform: scale(1.05);
+}
+
 
 
 .collection-section {
