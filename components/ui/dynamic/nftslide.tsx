@@ -4,13 +4,18 @@ import "../../../styles/globals.css"
 export const NftSlide = () => {
       const [isHovered, setIsHovered] = React.useState(false);
     const [isPaused, setIsPaused] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
+  const handleImageLoad = () => {
+        setIsLoading(false);
+    };
   return (
       <div 
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
             className={isHovered ? 'paused' : ''}
         >
+          
     <div className=' '>
             <div className="marquee-wrapper1">
               <div className="marquee1">
