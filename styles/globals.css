@@ -674,3 +674,18 @@ z-index: 2;}
   transform: scale(1.1);
   /* Slightly enlarge the number */
 }
+
+.progress-bar-container {
+  width: 4px;
+  height: 100%;
+  background-color: #E5E5E5;
+  /* Unfilled color */
+  position: absolute;
+  left: 0;
+}
+
+.progress-bar-filled {
+  background-color: #4CAF50;
+  /* Filled color */
+  width: 100%;
+}
