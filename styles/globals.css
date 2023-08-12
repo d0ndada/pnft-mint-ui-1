@@ -608,3 +608,69 @@ z-index: 2;}
 .paused .marquee1, .paused .marquee2{
   animation-play-state: paused !important;
 }
+
+
+/* roadmap */
+.roadmap-tooltip {
+  position: absolute;
+  top: 100%;
+  /* position it right below the hovered item */
+  left: 50%;
+  /* center it horizontally */
+  transform: translateX(-50%);
+  /* ensure it's centered */
+  z-index: 10;
+  /* place it above other elements */
+  padding: 8px;
+  background-color: #fff;
+  /* white background */
+  border: 1px solid #ccc;
+  /* gray border */
+  border-radius: 4px;
+  /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* subtle shadow */
+  max-width: 250px;
+  /* adjust this value as needed */
+  white-space: normal;
+  /* allow text to wrap */
+  overflow: visible;
+  /* show overflow */
+}
+.position-relative {
+  position: relative;
+}
+.roadmap-event {
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.roadmap-event::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  /* A subtle light gray background */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  /* Place it behind the content */
+}
+
+.roadmap-event:hover::before {
+  opacity: 1;
+}
+.roadmap-info:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  /* A subtle light gray background */
+}
+
+.roadmap-number:hover {
+  color: #40E0D0;
+  /* Change to any color you prefer */
+  transform: scale(1.1);
+  /* Slightly enlarge the number */
+}
