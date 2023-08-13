@@ -68,8 +68,13 @@ export function SiteHeader() {
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>
-         <WalletMultiButton />
-            <ThemeToggle />
+         
+<div className="hover:scale-105 transform transition-all ">
+    <WalletMultiButton  />
+</div>
+
+
+              <ThemeToggle />
           </nav>
         </div>
       </div>
