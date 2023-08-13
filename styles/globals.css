@@ -689,3 +689,11 @@ z-index: 2;}
   /* Filled color */
   width: 100%;
 }
+
+
+/* team */
+/* styles.css or your global stylesheet */
+.hidden-initially {
+  visibility: hidden;
+  opacity: 0;
+}
