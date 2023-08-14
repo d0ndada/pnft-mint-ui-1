@@ -7,16 +7,20 @@ import { faqs } from "./question";
 interface FaqEventProps {
   question: string;
   answer: string;
-
 }
 
+
+
 export const FaqSection = () => {
-   const { ref, inView } = useInView({
+  const { ref, inView } = useInView({
     triggerOnce: true, // Change this to false if you want the animation to trigger again whenever it comes in view
   });
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  
+  function FAQ({ question, answer,index }: FaqEventProps &{index:number}) {
+        const isOpen = openFaqIndex === index;
 
-  function FAQ({ question, answer }: FaqEventProps) {
-      const [isOpen, setIsOpen] = useState(false);
+      // const [isOpen, setIsOpen] = useState(false);
     // Close other FAQ items when one is opened
     useEffect(() => {
         if (isOpen) {
@@ -27,7 +31,13 @@ export const FaqSection = () => {
         <div className={`mb-4 p-4  md:w-[650px] lg:w-[700px] xl:w-[789px] 2xl:w-[786px] rounded-lg transition-colors shadow-md bg-card ${isOpen ? 'bg-popover' : 'hover:bg-popover'}`}>
          <button 
                 className={`flex cursor-pointer justify-between w-full items-center text-[1.3rem] font-bold hover:text-primary hover:underline transition-colors duration-300 `} 
-                onClick={() => setIsOpen(!isOpen)}
+             onClick={() => {
+               if (isOpen) {
+                    setOpenFaqIndex(null)
+               } else {
+                 setOpenFaqIndex(index)
+                  }
+                }}
             >{question}
           <span className={`inline-block ml-2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
             <Icons.down/>
@@ -45,7 +55,7 @@ export const FaqSection = () => {
       <h2 ref={ref}  className={`mb-8 mt-[-5%] text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}  `}>FAQ</h2>
       <div ref={ref} className={`flex  max-h-[42vh] max-w-[786px] w-[80%] flex-col items-start ${inView ? 'animate-fade-in-up' : ''}`}>
       {faqs.map((faq, index) => (
-        <FAQ key={index} question={faq.question} answer={faq.answer} />
+        <FAQ key={index} index={index} question={faq.question} answer={faq.answer} />
       ))}
         </div>
     </section>
