@@ -12,24 +12,28 @@ import logo from "public/logo.gif"
 const BottomSection = () => {
   return (
     <section
-      className="grid h-[25vh]  grid-cols-3 items-center  p-4 scroll-snap-align-start border-b bg-background" >
+      className="grid h-[25vh]  grid-cols-3 items-center  p-4 scroll-snap-align-start border-b bg-card" >
       <div className='flex flex-col items-center'>
        <h2>Contact Us</h2>
       <form  className="flex flex-col"  action="https://formspree.io/f/xeqbadvn" method="POST">
         <div className='text-sm pt-[7px]'>
           <label>
             Your email:
-            <input type="email" id='email' name="email" required placeholder='example@email.com' />
+            <input     className='border border-accent hover:bg-input hover:border-secondary focus:border-accent focus:ring-primary' 
+ type="email" id='email' name="email" required placeholder='example@email.com' />
           </label>
         </div>
         <div className='text-sm pt-[14px]'>
           <label>
             Your message:
-            <textarea name="message" id='message' required placeholder='Enter you message here..' ></textarea>
+              <input
+                className='border border-accent hover:bg-input hover:border-secondary focus:border-accent focus:ring-primary resize-y max-h-[20px]' 
+
+                name="message" id='message' required placeholder='Enter you message here..' ></input>
           </label>
         </div>
         {/* You can add more form fields here if needed */}
-        <Button type="submit">Send</Button>
+        <Button className='hover:scale-105 transform transition-all' type="submit">Send</Button>
       </form>
       
       </div> 
