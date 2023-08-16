@@ -5,7 +5,7 @@ import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import logo from "public/output-onlinegiftools (3).gif"
+import logo from "public/logo.gif"
 import Image from 'next/image';
 
 interface MainNavProps {
