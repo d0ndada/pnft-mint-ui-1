@@ -10,7 +10,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import { SolanaWalletContext } from "../components/solana"
-import { MovingItems } from "@/components/ui/dynamic/mvoingItems"
+// import { MovingItems } from "@/components/ui/dynamic/mvoingItems"
 import { NftSlide } from "@/components/ui/dynamic/nftslide"
 import Head from "next/head"
 
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <div className="relative flex min-h-screen flex-col ">
                 <SiteHeader />
                 <div className="flex-1">{children}
-          <MovingItems/>
+        
                   </div>
               </div>
               <TailwindIndicator />

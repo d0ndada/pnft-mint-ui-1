@@ -70,7 +70,7 @@ export const RoadmapSection = () => {
     );
 }
   return (
-    <section id="roadmap" className="content-space grid h-[100vh] grid-cols-2 items-center justify-items-center px-10 scroll-snap-align-start">
+    <section id="roadmap" className="content-space grid h-[100vh] grid-cols-2 items-center justify-items-center px-10 scroll-snap-align-start bg-card">
       <div className="mt-[-46%] flex flex-col">
         <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>Roadmap</h2>
         <p ref={ref} className={`text-lg text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>

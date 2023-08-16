@@ -31,7 +31,7 @@ export function SiteHeader() {
   
   
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-card">
+    <header className="sticky top-0 z-40 w-full border-b bg-card bg-opacity-90 shadow-md px-4 hidden md:block">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
@@ -40,7 +40,7 @@ export function SiteHeader() {
               href={siteConfig.links.discord}
               // target="_blank"
               // rel="noreferrer"
-              className="hidden md:block"
+              className="hidden md:block hover:scale-105 transform transition-all"
             >
               <div
                 className={buttonVariants({
@@ -56,7 +56,7 @@ export function SiteHeader() {
               href={siteConfig.links.twitter}
               // target="_blank"
               // rel="noreferrer"
-              className="hidden md:block"
+              className="hidden md:block hover:scale-105 transform transition-all "
             >
               <div
                 className={buttonVariants({
@@ -64,7 +64,7 @@ export function SiteHeader() {
                   variant: "ghost",
                 })}
               >
-                <Icons.twitter className="h-5 w-5 fill-current" />
+                <Icons.twitter className="h-5 w-5 fill-current " />
                 <span className="sr-only">Twitter</span>
               </div>
             </Link>

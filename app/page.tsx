@@ -14,7 +14,7 @@ export default function IndexPage() {
   return (
     // md:py-10, pt-6, pl-[40%]
     <>
-    <section className="background container  flex h-[100vh] flex-col items-center gap-6 pb-8 scroll-snap-align-start  animate-bgGlow  ">
+    <section className="bg-accent container  flex h-[100vh] flex-col items-center gap-6 pb-8 scroll-snap-align-start  animate-bgGlow  ">
         <div className="mt-[100px] flex max-w-[100%] flex-col items-center gap-2 animate-fadeIn ">
           <div>
             <h1 className=" text-3xl font-extrabold leading-tight tracking-tighter mt-[5%] md:text-4xl ">

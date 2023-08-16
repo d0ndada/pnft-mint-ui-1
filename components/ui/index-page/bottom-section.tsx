@@ -12,7 +12,7 @@ import logo from "public/logo.gif"
 const BottomSection = () => {
   return (
     <section
-      className="grid h-[25vh]  grid-cols-3 items-center  p-4 scroll-snap-align-start border-b bg-card" >
+      className="grid h-[25vh]  grid-cols-3 items-center  p-4 scroll-snap-align-start border-b bg-card shadow-md" >
       <div className='flex flex-col items-center'>
        <h2>Contact Us</h2>
       <form  className="flex flex-col"  action="https://formspree.io/f/xeqbadvn" method="POST">
