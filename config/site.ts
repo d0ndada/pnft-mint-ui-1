@@ -4,26 +4,27 @@ export const siteConfig = {
   name: "Soljuice",
   description: "MintUI with Radix UI and Tailwind CSS.",
   mainNav: [
-    // {
-    //   title: "Home",
-    //   href: "/",
-    // },
-   {
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
       title: "About",
       href: "#about",
     },
-      {
+    {
       title: "Collection",
       href: "#collection",
-    },   {
+    },
+    {
       title: "Roadmap",
       href: "#roadmap",
     },
-         {
+    {
       title: "Team",
       href: "#team",
     },
-            {
+    {
       title: "FAQ",
       href: "#faq",
     },
