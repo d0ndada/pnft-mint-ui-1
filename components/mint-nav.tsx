@@ -47,9 +47,9 @@ export function MintNav({ className, ...props }: MintNavProps) {
               href={example.href}
               key={example.href}
               className={cn(
-                "flex items-center px-4 text-2xl hover:text-primary hover:scale-105 transform transition-all duration-300 hover-pulse",
+                "hover-pulse flex items-center px-4 text-2xl transition-all duration-300 hover:scale-105 hover:text-buttonHover",
                 pathname?.startsWith(example.href)
-                  ? "font-bold text-primary"
+                  ? "font-bold text-buttonHover"
                   : "font-medium text-muted-foreground"
               )}
             >
