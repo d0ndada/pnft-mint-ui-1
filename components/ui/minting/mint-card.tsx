@@ -294,7 +294,8 @@ export function MintCard({ className, group, ...props }: CardProps) {
             </div>
           </div>
         </div>
-        <CardDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</CardDescription>
+        <CardDescription>Welcome to Soljuice, a unique NFT collection that embodies the vibrant spirit of the Solana blockchain. Each piece in our collection is a digital testament to creativity and innovation, designed with passion and precision. Dive into the world of Soljuice and discover a new dimension of digital artistry
+        </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         {startDate && !isLive ? (

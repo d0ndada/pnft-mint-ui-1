@@ -12,73 +12,58 @@ import logo from "public/logo.gif"
 const BottomSection = () => {
   return (
     <section
-      className="grid h-[25vh]  grid-cols-3 items-center  p-4 scroll-snap-align-start border-b bg-card shadow-md" >
+      className="grid h-[25vh]  grid-cols-3 items-center  border-b bg-card p-4 pl-[2rem] pr-[2rem] shadow-md scroll-snap-align-start  " >
       <div className='flex flex-col items-center'>
-       <h2>Contact Us</h2>
+       {/* <h2>Contact Us</h2>
       <form  className="flex flex-col"  action="https://formspree.io/f/xeqbadvn" method="POST">
-        <div className='text-sm pt-[7px]'>
+        <div className='pt-[7px] text-sm'>
           <label>
             Your email:
-            <input     className='border border-accent hover:bg-input hover:border-secondary focus:border-accent focus:ring-primary' 
+            <input     className='border border-accent hover:border-secondary hover:bg-input focus:border-accent focus:ring-primary' 
  type="email" id='email' name="email" required placeholder='example@email.com' />
           </label>
         </div>
-        <div className='text-sm pt-[14px]'>
+        <div className='pt-[14px] text-sm'>
           <label>
             Your message:
               <input
-                className='border border-accent hover:bg-input hover:border-secondary focus:border-accent focus:ring-primary resize-y max-h-[20px]' 
+                className='max-h-[20px] resize-y border border-accent hover:border-secondary hover:bg-input focus:border-accent focus:ring-primary' 
 
                 name="message" id='message' required placeholder='Enter you message here..' ></input>
           </label>
         </div>
         {/* You can add more form fields here if needed */}
-        <Button className='hover:scale-105 transform transition-all' type="submit">Send</Button>
-      </form>
+        {/* <Button className='transition-all hover:scale-105' type="submit">Send</Button> */}
+      {/* </form> */} 
       
       </div> 
-      <div className='flex items-center justify-center space-x-4'>
-          <Image src={logo} alt="SolJuice Logo" width={48} height={48} />
-
-  <span className="text-2xl font-bold">SolJuice</span>
-
+    <div className='flex items-center justify-center space-x-4'>
+        <Image src={logo} alt="SolJuice Logo" width={48} height={48} />
+        <span className="text-2xl font-bold">SolJuice</span>
       </div>
-      <div className="flex justify-end space-x-4">
-        <Link
-              href={siteConfig.links.discord}
-              // target="_blank"
-              // rel="noreferrer"
-              className="hidden md:block"
-            >
-              <div
-                className={buttonVariants({
-                  size: "sm",
-                  variant: "ghost",
-                })}
-              >
-                <Icons.discord className="h-5 w-7" />
-                <span className="sr-only">Discord</span>
-              </div>
-            </Link>
-            <Link
-              href={siteConfig.links.twitter}
-              // target="_blank"
-              // rel="noreferrer"
-              className="hidden md:block"
-            >
-              <div
-                className={buttonVariants({
-                  size: "sm",
-                  variant: "ghost",
-                })}
-              >
-                <Icons.twitter className="h-5 w-5 fill-current" />
-                <span className="sr-only">Twitter</span>
-              </div>
-            </Link>
-         </div>
-        
-      </section>
+
+      <div className="flex flex-col justify-end items-end space-y-4 pr-[2rem]">
+        <div className="flex space-x-4">
+          <Link href={siteConfig.links.discord} className="hidden md:block">
+            <div className={buttonVariants({ size: "sm", variant: "ghost" })}>
+              <Icons.discord className="h-5 w-7" />
+              <span className="sr-only">Discord</span>
+            </div>
+          </Link>
+
+          <Link href={siteConfig.links.twitter} className="hidden md:block">
+            <div className={buttonVariants({ size: "sm", variant: "ghost" })}>
+              <Icons.twitter className="h-5 w-5 fill-current" />
+              <span className="sr-only">Twitter</span>
+            </div>
+          </Link>
+        </div>
+
+        <Link href="/terms-and-condition">
+          <span className='cursor-pointer text-sm underline text-primary hover:text-accent'>SoJu Terms & Conditions</span>
+        </Link>
+      </div>
+    </section>
   )
 }
 
