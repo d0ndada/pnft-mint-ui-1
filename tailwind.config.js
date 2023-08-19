@@ -47,6 +47,26 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        header: {
+          DEFAULT: "hsl(var(--header))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        footer: {
+          DEFAULT: "hsl(var(--footer))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        main: {
+          DEFAULT: "hsl(var(--main))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        buttonHover: {
+          DEFAULT: "hsl(var(--buttonHover))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        textColor: {
+          DEFAULT: "hsl(var(--textColor))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
       fontSize: {
         custom: "2.125rem",

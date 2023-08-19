@@ -9,8 +9,8 @@
 
 @layer base {
   :root {
-    --background: 210 40% 96.1%;
-    --foreground: 0 0% 50%;
+    --background: 50 40% 96.1%;
+    --foreground: 20 10% 30%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -23,8 +23,19 @@
 
     --card: 240 11% 92%;
     --card-foreground: 222.2 47.4% 11.2%;
+/* hover colors */
+    /* brown */
+    /* 30 50% 40% */
+    --primary: 24 80% 65%; 
+    /* sunset orange */
+    /* --hover: 24 80% 65%; */
+    /* solar flare */
+/* 8 70% 60%; */
+--buttonHover: 16 90% 55%;
 
-    --primary: 180 50% 50%;
+--main: 24 80% 75%;
+  --textColor: 30 50% 20%;
+
     --primary-foreground: 210 40% 98%;
 
     --secondary: 180 100% 30%;
@@ -35,6 +46,10 @@
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
+
+    --header: 50 40% 88%;;
+      --footer: 50 40% 88%;
+
 
     --ring: 215 20.2% 65.1%;
 
