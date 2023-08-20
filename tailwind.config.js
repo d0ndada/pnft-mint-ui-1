@@ -67,6 +67,64 @@ module.exports = {
           DEFAULT: "hsl(var(--textColor))",
           foreground: "hsl(var(--card-foreground))",
         },
+        teamBg: {
+          DEFAULT: "hsl(var(--teamBg))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        gradientStart: {
+          DEFAULT: "hsl(var(--gradientStart))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        gradientEnd: {
+          DEFAULT: "hsl(var(--gradientEnd))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        collectionHeader: {
+          DEFAULT: "hsl(var(--collectionHeader))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        paragraphGray: {
+          DEFAULT: "hsl(var(--paragraphGray))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        mintingBg: {
+          DEFAULT: "hsl(var(--mintingBg))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        mintingBg2: {
+          DEFAULT: "hsl(var(--mintingBg2))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        cardTitle: {
+          DEFAULT: "hsl(var(--cardTitle))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        teal: {
+          DEFAULT: "hsl(var(--teal))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        minted: {
+          DEFAULT: "hsl(var(--minted))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        progress: {
+          DEFAULT: "hsl(var(--progress))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        mintButton: {
+          bg: "hsl(var(--mintButton-bg))",
+          text: "hsl(var(--mintButton-text))",
+          hover: "hsl(var(--mintButton-hover))",
+          active: "hsl(var(--mintButton-active))",
+          disabled: "hsl(var(--mintButton-disabled))",
+        },
+        "inc-dec": {
+          bg: "hsl(var(--inc-dec-bg))",
+          hover: "hsl(var(--inc-dec-hover))",
+          text: "hsl(var(--inc-dec-text))",
+          textHover: "hsl(var(--inc-dec-textHover))",
+          border: "hsl(var(--inc-dec-border))",
+        },
       },
       fontSize: {
         custom: "2.125rem",

@@ -6,10 +6,13 @@
   background-image: url("../public/andra.jpg");
   background-size: cover;
 } */
+.minting-section {
+  background: linear-gradient(to bottom, hsl(50, 40%, 92%), hsl(50, 40%, 85%));
+}
 
 @layer base {
   :root {
-    --background: 50 40% 96.1%;
+    --background: 50 40% 92%;
     --foreground: 20 10% 30%;
 
     --muted: 210 40% 96.1%;
@@ -21,7 +24,7 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
 
-    --card: 240 11% 92%;
+    --card: 40 20% 98%;
     --card-foreground: 222.2 47.4% 11.2%;
 /* hover colors */
     /* brown */
@@ -35,11 +38,34 @@
 
 --main: 24 80% 75%;
   --textColor: 30 50% 20%;
+  --teamBg: 30 20% 90%;
+--gradientStart: 16 90% 55%;
+--gradientEnd: 24 80% 75%;
 
     --primary-foreground: 210 40% 98%;
 
+    --mintingBg: 40 50% 90%;
+    --mintingBg2: 40 40% 95%;
+
+    --cardTitle: 20 10% 30%;
+    --teal: 180 50% 50%;
     --secondary: 180 100% 30%;
     --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --minted: 180 80% 50%;
+    --progress:180 50% 80%;
+    
+    --mintButton-bg: 180 80% 50%;
+      --mintButton-text: 0 0% 100%;
+      --mintButton-hover: 180 80% 40%;
+      --mintButton-active: 180 80% 30%;
+      --mintButton-disabled: 180 30% 70%;
+
+  --inc-dec-bg: 220 10% 88%; 
+    --inc-dec-hover: 220 15% 83%;
+    --inc-dec-text: 220 20% 20%; 
+    --inc-dec-textHover: 220 25% 15%;
+    --inc-dec-border: 220 15% 85%;
 
     --accent: 16 100% 66%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -50,6 +76,8 @@
     --header: 50 40% 88%;;
       --footer: 50 40% 88%;
 
+      --collectionHeader: 0 0% 20%;
+        --paragraphGray: 0 0% 35%;
 
     --ring: 215 20.2% 65.1%;
 
