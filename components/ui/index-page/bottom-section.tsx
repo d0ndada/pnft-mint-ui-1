@@ -12,7 +12,7 @@ import logo from "public/logo.gif"
 const BottomSection = () => {
   return (
     <section
-      className="grid h-[25vh]  grid-cols-3 items-center  border-b bg-footer p-4 pl-[2rem] pr-[2rem] shadow-md scroll-snap-align-start  " >
+      className="grid h-[25vh]  grid-cols-3 items-center  border-b bg-footer p-4 px-[2rem] shadow-md scroll-snap-align-start" >
       <div className='flex flex-col items-center'>
        {/* <h2>Contact Us</h2>
       <form  className="flex flex-col"  action="https://formspree.io/f/xeqbadvn" method="POST">
@@ -39,10 +39,10 @@ const BottomSection = () => {
       </div> 
     <div className='flex items-center justify-center space-x-4'>
         <Image src={logo} alt="SolJuice Logo" width={48} height={48} />
-        <span className="text-2xl font-bold">SolJuice</span>
+        <span className="text-2xl font-bold">{siteConfig.name}</span>
       </div>
 
-      <div className="flex flex-col justify-end items-end space-y-4 pr-[2rem]">
+      <div className="flex flex-col items-end justify-end space-y-4 pr-[2rem]">
         <div className="flex space-x-4">
           <Link href={siteConfig.links.discord} className="hidden md:block">
             <div className={buttonVariants({ size: "sm", variant: "ghost" })}>
@@ -60,7 +60,7 @@ const BottomSection = () => {
         </div>
 
         <Link href="/terms-and-condition">
-          <span className='cursor-pointer text-sm underline text-primary hover:text-accent'>SoJu Terms & Conditions</span>
+          <span className='cursor-pointer text-sm text-primary underline hover:text-accent'>SoJu Terms & Conditions</span>
         </Link>
       </div>
     </section>

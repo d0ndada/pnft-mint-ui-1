@@ -42,7 +42,7 @@ function TeamMember({ image, name, role, description }: TeamMemberProps) {
  <section id="team" className="flex flex-col items-center space-y-8  bg-teamBg px-4 py-12 scroll-snap-align-start">
         <h2 ref={ref} className={`mt-[5%] text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>Our Team</h2>
         
-        <div className="flex w-[80%] max-w-6xl flex-col items-center space-y-8"> {/* This is the flex container */}
+        <div className={`flex w-[80%] max-w-6xl flex-col items-center space-y-8  ${inView ? 'animate-fade-in-up' : ''}`}> {/* This is the flex container */}
             <div className=" flex w-[80%] gap-[7rem]">
                 <TeamMember image="/assets/0.png" name="John Doe" role="Lead Developer" description="The technical brain behind [Project Name]. Responsible for all technical aspects, from setting up the CandyMachine to crafting the user interface." />
                 <TeamMember image="/assets/2.png" name="Jane Doe" role="Lead Artist" description="The creative genius behind our unique NFT images. Crafted each piece with a keen eye for detail and a passion for [specific art style or theme]." />

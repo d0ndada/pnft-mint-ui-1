@@ -1,19 +1,17 @@
 import React from 'react'
 import "../../../styles/globals.css"
-
-export const NftSlide = () => {
+type NftSlideProps = {
+  inView: boolean;
+};
+export const NftSlide = ({ inView}: NftSlideProps) => {
       const [isHovered, setIsHovered] = React.useState(false);
-    const [isPaused, setIsPaused] = React.useState(false);
-    const [isLoading, setIsLoading] = React.useState(true);
 
-  const handleImageLoad = () => {
-        setIsLoading(false);
-    };
+
   return (
       <div 
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
-            className={isHovered ? 'paused' : ''}
+            className={`{isHovered ? 'paused' : ''} ${inView ? 'animate-fade-in-up' : ''}`}
         >
           
     <div className=' '>
@@ -22,7 +20,7 @@ export const NftSlide = () => {
                 {[...Array(9)].map((item, index) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    className='img1'
+                    className={`img1 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : ''}`}
                     key={index}
                     src={`/assets/${index + 1}.png`}
                     height={200}
@@ -39,7 +37,7 @@ export const NftSlide = () => {
                 {[...Array(9)].map((item, index) => (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    className='img2'
+                    className={`img2 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : ''}`}
                     key={index}
                     src={`/assets/${index + 1}.png`}
                     height={200}

@@ -71,7 +71,7 @@ export const RoadmapSection = () => {
 }
   return (
     <section id="roadmap" className="content-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start">
-      <div className="mt-[-46%] flex flex-col">
+      <div className="mt-[-26%] flex flex-col pl-[4rem]">
         <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>Roadmap</h2>
         <p ref={ref} className={`text-lg text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>
           Our roadmap outlines the journey of [Project Name] and the milestones we aim to achieve. 
@@ -81,7 +81,7 @@ export const RoadmapSection = () => {
           we&apos;re making [Project Name] even better!
         </p>
       </div>
-      <div className="col-start-2 flex flex-col gap-12">
+      <div className="col-start-2 flex flex-col gap-12 ">
         <RoadmapEvent 
           position="1" 
           title="Pre-Mint" 
