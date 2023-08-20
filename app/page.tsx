@@ -5,7 +5,6 @@ import { RoadmapSection } from "@/components/ui/index-page/roadmap-section";
 import CollectionSection from "@/components/ui/index-page/collection-section";
 import { TeamSection } from "@/components/ui/index-page/team-section";
 import { FaqSection } from "@/components/ui/index-page/faq-section";
-import BottomSection from "@/components/ui/index-page/bottom-section"
 import "../styles/globals.css"
 
 
@@ -40,13 +39,7 @@ Ready to Mint Your Solar NFT?              <br className="hidden sm:inline" />
       <RoadmapSection />
       <TeamSection />
       <FaqSection />
-      <BottomSection/>
-<footer></footer>
 
-      
-     
-     
-      
       </>
   )
 }

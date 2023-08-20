@@ -11,7 +11,7 @@ import logo from "public/logo.gif"
 
 const BottomSection = () => {
   return (
-    <section
+    <footer
       className="grid h-[25vh]  grid-cols-3 items-center  border-b bg-footer p-4 px-[2rem] shadow-md scroll-snap-align-start" >
       <div className='flex flex-col items-center'>
        {/* <h2>Contact Us</h2>
@@ -63,7 +63,7 @@ const BottomSection = () => {
           <span className='cursor-pointer text-sm text-primary underline hover:text-accent'>SoJu Terms & Conditions</span>
         </Link>
       </div>
-    </section>
+    </footer>
   )
 }
 
