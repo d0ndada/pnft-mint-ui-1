@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Soljuice",
+  name: "SolJuice",
   description: "MintUI with Radix UI and Tailwind CSS.",
   mainNav: [
     {
