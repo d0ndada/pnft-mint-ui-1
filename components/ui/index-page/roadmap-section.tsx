@@ -44,7 +44,7 @@ export const RoadmapSection = () => {
     return (
         <div
           
-            className={`mb-10 flex position-relative  ${inView ? 'animate-fade-in-right' : ''}`}
+            className={`position-relative mb-10 flex  ${inView ? 'animate-fade-in-right' : ''}`}
         >
             <div className="mr-4 flex flex-col items-center">
                 <h3 className={`roadmap-number mb-2 text-4xl font-bold text-foreground ${getStatusColor()} ${getStatusStyles()}`}>{position}.</h3>
@@ -54,7 +54,7 @@ export const RoadmapSection = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}className={`flex flex-col items-start rounded-lg border-2 border-foreground p-4 ${getStatusColor()}  roadmap-info`}>
                 <h4 className={`mb-2 text-2xl font-bold text-foreground ${status === 'completed' ? 'line-through' : ''}`}>
-                    {status === 'completed' && <span className="text-green-500 mr-2">✓</span>}
+                    {status === 'completed' && <span className="mr-2 text-green-500">✓</span>}
                     {title}
                 </h4>
                 <p className={`text-lg text-foreground ${status === 'completed' ? 'line-through' : ''}`}>{description}</p>
@@ -70,7 +70,7 @@ export const RoadmapSection = () => {
     );
 }
   return (
-    <section id="roadmap" className="content-space grid h-[100vh] grid-cols-2 items-center justify-items-center px-10 scroll-snap-align-start bg-card">
+    <section id="roadmap" className="content-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start">
       <div className="mt-[-46%] flex flex-col">
         <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>Roadmap</h2>
         <p ref={ref} className={`text-lg text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>

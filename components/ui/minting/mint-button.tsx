@@ -310,21 +310,21 @@ export function MintButton({
       <div className="relative mt-1 flex h-10 w-32 flex-row rounded-lg bg-transparent">
         <Button
           data-action="decrement"
-          className=" h-full w-20 cursor-pointer rounded-l bg-gray-300 p-1 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700"
+  className="h-full w-20 cursor-pointer rounded-l bg-inc-dec-bg text-inc-dec-text border-inc-dec-border hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
           onClick={() => mintAmount > 1 && setMintAmount((prev) => prev - 1)}
         >
           -
         </Button>
         <input
           type="text"
-          className="text-md md:text-basecursor-default flex w-full items-center rounded bg-gray-300 p-1 text-center  font-semibold text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none"
+  className="text-md md:text-base cursor-default flex w-full items-center rounded bg-inc-dec-bg text-inc-dec-text border-inc-dec-border text-center font-semibold hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
           name="custom-input-number"
           value={mintAmount}
           readOnly
         />
         <Button
           data-action="increment"
-          className="h-full w-20 cursor-pointer rounded-r bg-gray-300 p-1 text-gray-600 hover:bg-gray-400 hover:text-gray-700"
+  className="h-full w-20 cursor-pointer rounded-r bg-inc-dec-bg text-inc-dec-text border-inc-dec-border hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
           onClick={() =>
             mintAmount < Number(mintLimit) - Number(mintedByYou) &&
             setMintAmount((prev) => prev + 1)
@@ -334,7 +334,7 @@ export function MintButton({
         </Button>
       </div>
       <Button
-        className={`${className} ml-3`}
+        className={`${className} ml-3 bg-mintButton-bg text-mintButton-text  hover:bg-mintButton-hover active:bg-mintButton-active disabled:bg-mintButton-disabled`}
         onClick={mintBtnHandler}
         {...props}
       >

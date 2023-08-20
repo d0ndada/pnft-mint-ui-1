@@ -31,7 +31,7 @@ export function SiteHeader() {
   
   
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-opacity-90  bg-header shadow-md px-4 hidden md:block">
+    <header className="sticky top-0 z-40 hidden w-full border-b  bg-header  px-4 shadow-md md:block">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
@@ -40,7 +40,7 @@ export function SiteHeader() {
               href={siteConfig.links.discord}
               // target="_blank"
               // rel="noreferrer"
-              className="hidden md:block hover:scale-105 transform transition-all"
+              className="hidden transition-all hover:scale-105 md:block"
             >
               <div
                 className={buttonVariants({
@@ -56,7 +56,7 @@ export function SiteHeader() {
               href={siteConfig.links.twitter}
               // target="_blank"
               // rel="noreferrer"
-              className="hidden md:block hover:scale-105 transform transition-all "
+              className="hidden transition-all hover:scale-105 md:block"
             >
               <div
                 className={buttonVariants({
@@ -69,7 +69,7 @@ export function SiteHeader() {
               </div>
             </Link>
          
-<div className="hover:scale-105 transform transition-all ">
+<div className="transition-all hover:scale-105">
     <WalletMultiButton  />
 </div>
 

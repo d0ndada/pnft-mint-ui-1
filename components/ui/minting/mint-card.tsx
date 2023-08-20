@@ -286,10 +286,10 @@ export function MintCard({ className, group, ...props }: CardProps) {
        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <CardTitle>Soljuice</CardTitle>
           <div className="mt-2 flex flex-col items-center gap-4 sm:mt-0 sm:flex-row">
-            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-primary p-2 text-lg font-semibold text-primary">
+            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-teal p-2 text-lg font-semibold text-teal">
               <p>{countTotal} unique soljuice</p>
             </div>
-            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-primary p-2 text-lg font-semibold text-primary">
+            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-teal p-2 text-lg font-semibold text-teal">
               <p>1:1 NFT</p>
             </div>
           </div>
