@@ -1,7 +1,7 @@
 import { siteConfig } from '@/config/site'
 import Link from 'next/link'
 import React from 'react'
-import { Button, buttonVariants } from '../button'
+import { Button, buttonVariants } from './ui/button'
 import { Icons } from '@/components/icons'
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
@@ -9,7 +9,7 @@ import Image from 'next/image';
 import logo from "public/logo.gif"
 
 
-const BottomSection = () => {
+const Footer = () => {
   return (
     <footer
       className="grid h-[25vh]  grid-cols-3 items-center  border-b bg-footer p-4 px-[2rem] shadow-md scroll-snap-align-start" >
@@ -67,4 +67,4 @@ const BottomSection = () => {
   )
 }
 
-export default BottomSection
+export default Footer;

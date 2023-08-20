@@ -13,7 +13,7 @@ import { SolanaWalletContext } from "../components/solana"
 // import { MovingItems } from "@/components/ui/dynamic/mvoingItems"
 import { NftSlide } from "@/components/ui/dynamic/nftslide"
 import Head from "next/head"
-import BottomSection from "@/components/ui/index-page/bottom-section"
+import Footer from "@/components/footer"
 
 export const metadata: Metadata = {
   title: {
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <div className="flex-1">{children}
         
                 </div>
-      <BottomSection/>
+      <Footer/>
                 
               </div>
               <TailwindIndicator />
