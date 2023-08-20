@@ -3,12 +3,12 @@ import React from 'react';
 const TermsAndConditions = () => {
     return (
         <div className="min-h-screen bg-gray-100 p-8">
-            <h1 className="mb-8 text-center text-4xl font-bold">SolJuice Terms and Conditions</h1>
+            <h1 className="mb-8 text-center text-4xl font-bold scroll-snap-align-start">SolJuice Terms and Conditions</h1>
             <div className="rounded-lg bg-white p-8 shadow-md">
                 <p className="mb-6"> 
-                    Welcome to SolJuice. These Terms and Conditions (&quot;Terms&quot;) govern your use of the SolJuice platform and the purchase of NFTs from us. By using our platform, you agree to these Terms.
+                    Welcome to SolJuice. These Terms and Conditions (&quot;Terms&quot;) govern your use of the SolJuice platform and the purchase of NFTs from us. By using our platform, you agree to these Terms. Please read them carefully and reach out if you have any questions.
                 </p>
-                <div className="space-y-4">
+                <div className="space-y-6">
                     <section>
                         <h2 className="text-xl font-semibold">1. Limitation of Liability</h2>
                         <p>
@@ -18,8 +18,14 @@ const TermsAndConditions = () => {
                     <section>
                         <h2 className="text-xl font-semibold">2. NFT Ownership</h2>
                         <p>
-                            Upon successful purchase of an NFT from SolJuice, the ownership of the NFT is transferred to the buyer&apos;s designated wallet. The buyer has full ownership and can use, sell, or trade the NFT as they see fit.
+                    Upon successful purchase of an NFT from SolJuice, the ownership of the NFT is transferred to the buyer&apos;s designated wallet. The buyer has full ownership and can use, sell, or trade the NFT as they see fit. Each NFT purchased from SolJuice is a unique digital asset on the Solana blockchain. When you purchase an NFT, you own the underlying digital asset completely. Ownership of the NFT is mediated entirely by the Smart Contract and the Solana Network: at no point may we seize, freeze, or otherwise modify the ownership of any NFT.
                         </p>
+                         <p>
+                    Subject to your continued compliance with these Terms, SolJuice grants you a worldwide, royalty-free license to use, copy, and display the purchased NFT, along with any extensions that you choose to create or use, for personal, non-commercial use, or as part of a marketplace that permits the purchase and sale of your NFT.
+                </p>
+                <p>
+                    For Commercial Use: Subject to your continued compliance with these Terms, SolJuice grants you an unlimited, worldwide license to use, copy, and display the purchased NFT for the purpose of creating derivative works based upon the NFT.
+                </p>
                     </section>
                      <section>
                         <h2 className="text-xl font-semibold">3. No Refunds</h2>
@@ -61,6 +67,55 @@ A royalty fee of 10% (subject to change) will be applied to secondary sales of t
                             All NFTs sold on SolJuice are guaranteed to be unique and authentic. They are verified on the Solana network as part of our collection, ensuring their provenance and legitimacy.
                         </p>
                     </section>
+                     <section>
+                <h2 className="text-xl font-semibold">10. Your Obligations and Conduct</h2>
+                <p>
+                    You are solely responsible for your conduct while accessing or using SolJuice. You agree to use SolJuice only for legal, proper purposes and in accordance with these Terms and any applicable laws or regulations. Engaging in unauthorized or malicious activities may result in suspension or termination of your access to SolJuice. You may not impersonate another person, distribute viruses, or engage in illegal activities using our platform.
+                </p>
+            </section>
+
+            <section>
+                <h2 className="text-xl font-semibold">11. Fees, Payments, and Transactions</h2>
+                <p>
+                    All financial transactions on SolJuice will be conducted solely through the Solana network. We have no insight into or control over these payments or transactions, nor do we have the ability to reverse any transactions. Transaction fees may apply for every transaction that occurs on the Solana network. Users are responsible for all transaction fees associated with the purchase and sale of NFTs on SolJuice.
+                </p>
+            </section>
+
+            <section>
+                <h2 className="text-xl font-semibold">12. Disclaimers and Risks</h2>
+                <p>
+                    SolJuice and its connected services are provided “as is” without warranty of any kind. By using SolJuice, you are accepting sole responsibility for any and all transactions involving our digital collectibles. You accept and acknowledge the inherent risks associated with online transactions, digital assets, and blockchain technology. This includes, but is not limited to, the volatile nature of digital assets, potential security risks, and regulatory uncertainties.
+                </p>
+            </section>
+
+            <section>
+                <h2 className="text-xl font-semibold">13. Changes to the Terms and Conditions</h2>
+                <p>
+                    SolJuice reserves the right to modify or replace these Terms at any time. Changes to the Terms will apply on the date they are made. Your continued use of SolJuice after any changes to the Terms indicates your acceptance of the updated terms.
+                </p>
+                    </section>
+                     <section>
+                <h2 className="text-xl font-semibold">14. Risk Assumption
+</h2>
+                <p>
+You understand that NFTs, blockchain technology, and other associated and related technologies are new and untested and outside of SolJuice&apos;s exclusive control and adverse changes in market forces or the technology, broadly construed, will excuse SolJuice&apos;s performance under this agreement.
+                </p>
+                    </section>
+                         <section>
+                <h2 className="text-xl font-semibold">15. Intellectual Property
+
+</h2>
+                <p>
+SolJuice retains all rights, title, and interest in all of our intellectual property, including inventions, discoveries, processes, marks, methods, compositions, formulae, techniques, information, and data, whether or not patentable, copyrightable, or protectable in trademark, and any trademarks, copyrights, or patents based thereon. You may not use any of our intellectual property for any reason, except with our express, prior, written consent.
+                </p>
+            </section>     <section>
+                <h2 className="text-xl font-semibold">18. Entire Agreement
+
+</h2>
+                <p>
+These Terms constitute the entire agreement between you and SolJuice regarding our platform, and supersede and replace any prior agreements we might have had between us regarding the platform.
+                </p>
+            </section>
                 </div>
             </div>
         </div>
