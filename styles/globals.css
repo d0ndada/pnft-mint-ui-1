@@ -44,7 +44,7 @@
 
     --primary-foreground: 210 40% 98%;
 
-    --mintingBg: 40 50% 90%;
+    --mintingBg: 40 50% 88%;
     --mintingBg2: 40 40% 95%;
 
     --cardTitle: 20 10% 30%;
@@ -52,17 +52,18 @@
     --secondary: 180 100% 30%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --minted: 180 80% 50%;
-    --progress:180 50% 80%;
+    --minted: 180 85% 45%;
+    --progress:180 40% 85%;
+    --borderMutedTeal: 180 30% 85%;
     
-    --mintButton-bg: 180 80% 50%;
+    --mintButton-bg: 180 80% 45%;
       --mintButton-text: 0 0% 100%;
-      --mintButton-hover: 180 80% 40%;
-      --mintButton-active: 180 80% 30%;
+      --mintButton-hover: 180 80% 55%;
+      --mintButton-active: 180 80% 35%;
       --mintButton-disabled: 180 30% 70%;
 
-  --inc-dec-bg: 220 10% 88%; 
-    --inc-dec-hover: 220 15% 83%;
+  --inc-dec-bg: 220 10% 85%; 
+    --inc-dec-hover: 220 15% 80%;
     --inc-dec-text: 220 20% 20%; 
     --inc-dec-textHover: 220 25% 15%;
     --inc-dec-border: 220 15% 85%;
@@ -739,4 +740,18 @@ z-index: 2;}
 .hidden-initially {
   visibility: hidden;
   opacity: 0;
+}
+
+/* dealy scroll */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }

@@ -107,6 +107,10 @@ module.exports = {
           DEFAULT: "hsl(var(--minted))",
           foreground: "hsl(var(--card-foreground))",
         },
+        borderMutedTeal: {
+          DEFAULT: "hsl(var(--borderMutedTeal))",
+          foreground: "hsl(var(--card-foreground))",
+        },
         progress: {
           DEFAULT: "hsl(var(--progress))",
           foreground: "hsl(var(--card-foreground))",
