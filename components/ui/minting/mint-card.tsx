@@ -36,6 +36,8 @@ import { Countdown } from "../countdown"
 import { MintButton } from "./mint-button"
 import { MintProgress } from "./mint-progress"
 import { useToast } from "../toast/use-toast"
+import Image from 'next/image';
+
 
 type CardProps = React.ComponentProps<typeof Card> & {
   group?: string
@@ -66,6 +68,7 @@ export function MintCard({ className, group, ...props }: CardProps) {
   const [guardToUse, setGuardToUse] = useState<DefaultGuardSet>(
     candyGuard?.guards
   )
+  const [isLoading, setIsLoading] = useState(true);
   const onMint = async (nft?: DigitalAsset, signature?: string) => {
     if (nft) {
       setNftMint(nft)
@@ -214,13 +217,12 @@ export function MintCard({ className, group, ...props }: CardProps) {
         !tokenAccount ||
         (tokenAccount.value &&
           (tokenAccount.value?.uiAmount ?? 0) <
-            Number(tokenPaymentGuard.amount))
+          Number(tokenPaymentGuard.amount))
       ) {
         toast({
           title: "Insufficient Balance",
-          description: `You need at least ${tokenPaymentGuard.amount} ${
-            meta?.name || "token"
-          } to mint this NFT.`,
+          description: `You need at least ${tokenPaymentGuard.amount} ${meta?.name || "token"
+            } to mint this NFT.`,
           duration: 5000,
         })
         setDisableMint(true)
@@ -254,9 +256,8 @@ export function MintCard({ className, group, ...props }: CardProps) {
       if (!tokenAccount) {
         toast({
           title: "Insufficient Balance",
-          description: `You need at least ${token2022PaymentGuard.amount} ${
-            meta?.name || "token"
-          } to mint this NFT.`,
+          description: `You need at least ${token2022PaymentGuard.amount} ${meta?.name || "token"
+            } to mint this NFT.`,
           duration: 5000,
         })
         setDisableMint(true)
@@ -270,83 +271,95 @@ export function MintCard({ className, group, ...props }: CardProps) {
   }, [connected, publicKey, candyMachine, candyGuard?.groups, candyGuard?.guards, candyGuard?.publicKey, umi, toast, group, cost.amount, connection])
 
   useEffect(() => {
-    checkCandyMachine()
+    setIsLoading(true);
+
+    checkCandyMachine().then(() => {
+      setIsLoading(false);
+
+    })
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [candyMachine, candyGuard, wallet, connected])
 
   return (
-    <Card
-      className={cn(
-        "w-full sm:w-3/4 md:w-1/2 lg:w-1/3  xl:w-[650px]",
-        className
-      )}
-      {...props}
-    >
-      <CardHeader>
-       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <CardTitle>Soljuice</CardTitle>
-          <div className="mt-2 flex flex-col items-center gap-4 sm:mt-0 sm:flex-row">
-            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-teal p-2 text-lg font-semibold text-teal">
-              <p>{countTotal} unique soljuice</p>
-            </div>
-            <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-teal p-2 text-lg font-semibold text-teal">
-              <p>1:1 NFT</p>
-            </div>
-          </div>
-        </div>
-        <CardDescription>Welcome to Soljuice, a unique NFT collection that embodies the vibrant spirit of the Solana blockchain. Each piece in our collection is a digital testament to creativity and innovation, designed with passion and precision. Dive into the world of Soljuice and discover a new dimension of digital artistry
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        {startDate && !isLive ? (
-          <Countdown targetDate={startDate} hideOnComplete />
-        ) : (
-          <div className="flex">
-            <span className="ml-2 inline-block rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs font-medium leading-none text-[#000000] no-underline group-hover:no-underline">
-                Live    
-            </span>{" "}
-          </div>
+    isLoading ? (
+       <div className=" mr-[24%] flex h-[66vh] flex-col items-center justify-center ">
+    <Image src="/loader.gif" width={100} height={100} alt="Loading..." />
+  </div>
+    ) : (
+      <Card
+        className={cn(
+          "w-full transition-shadow duration-300 hover:shadow-lg  sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-[650px]",
+          className
         )}
-        <div className=" flex items-center space-x-4 rounded-md  border border-solid border-[#afa6a6]  p-4">
-          <Calculator />
-          <div className="flex-1 space-y-1">
-            <p className="text-sm font-medium leading-none">
-              Cost: {cost.amount} {cost.name}
-            </p>
+        {...props}
+      >
+        <CardHeader>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <CardTitle>SolJuice</CardTitle>
+            <div className="mt-2 flex flex-col items-center gap-4 sm:mt-0 sm:flex-row">
+              <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-teal p-2 text-lg font-semibold text-teal">
+                <p>{countTotal} unique SolJuice</p>
+              </div>
+              <div className="text-uppercase flex flex-row items-start gap-2 rounded border-2 border-teal p-2 text-lg font-semibold text-teal">
+                <p>1:1 NFT</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </CardContent>
-      <CardFooter className="grid gap-2">
-        <MintProgress minted={countMinted} total={countTotal} />
-        <MintButton
-          className="w-full"
-          candyGuard={candyGuard}
-          candyMachine={candyMachine}
-          group={group}
-          guardToUse={guardToUse}
-          onMintCallback={onMint}
-          disabled={disableMint}
-          setDisabledCallback={setDisabledCallback}
-          setMessageCallback={setMessage}
-          mintLimit={mintLimit}
-        />
-        {mintLimit ? (
-          <div className=" flex items-center space-x-4 p-2">
+          <CardDescription>Welcome to Soljuice, a unique NFT collection that embodies the vibrant spirit of the Solana blockchain. Each piece in our collection is a digital testament to creativity and innovation, designed with passion and precision. Dive into the world of Soljuice and discover a new dimension of digital artistry
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          {startDate && !isLive ? (
+            <Countdown targetDate={startDate} hideOnComplete />
+          ) : (
+            <div className="flex">
+              <span className="ml-2 inline-block rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs font-medium leading-none text-[#000000] no-underline group-hover:no-underline">
+                Live
+              </span>{" "}
+            </div>
+          )}
+          <div className=" flex items-center space-x-4 rounded-md  border border-solid border-[#afa6a6]  p-4">
+            <Calculator />
             <div className="flex-1 space-y-1">
               <p className="text-sm font-medium leading-none">
-                Limit {mintLimit} per wallet
+                Cost: {cost.amount} {cost.name}
               </p>
             </div>
           </div>
-        ) : null}
-        {message ? (
-          <div className=" flex items-center space-x-4 p-2">
-            <div className="flex-1 space-y-1">
-              <p className="text-sm font-medium leading-none">{message}</p>
+        </CardContent>
+        <CardFooter className="grid gap-2">
+          <MintProgress minted={countMinted} total={countTotal} />
+          <MintButton
+            className="w-full"
+            candyGuard={candyGuard}
+            candyMachine={candyMachine}
+            group={group}
+            guardToUse={guardToUse}
+            onMintCallback={onMint}
+            disabled={disableMint}
+            setDisabledCallback={setDisabledCallback}
+            setMessageCallback={setMessage}
+            mintLimit={mintLimit}
+          />
+          {mintLimit ? (
+            <div className=" flex items-center space-x-4 p-2">
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium leading-none">
+                  Limit {mintLimit} per wallet
+                </p>
+              </div>
             </div>
-          </div>
-        ) : null}
-      </CardFooter>
-    </Card>
+          ) : null}
+          {message ? (
+            <div className=" flex items-center space-x-4 p-2">
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium leading-none">{message}</p>
+              </div>
+            </div>
+          ) : null}
+        </CardFooter>
+      </Card>
+        
+    )
   )
 }

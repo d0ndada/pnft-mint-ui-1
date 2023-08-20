@@ -307,24 +307,24 @@ export function MintButton({
 
   return (
     <div className="flex items-center justify-end">
-      <div className="relative mt-1 flex h-10 w-32 flex-row rounded-lg bg-transparent">
+      <div className="relative  flex h-10 w-32 flex-row rounded-lg bg-transparent">
         <Button
           data-action="decrement"
-  className="h-full w-20 cursor-pointer rounded-l bg-inc-dec-bg text-inc-dec-text border-inc-dec-border hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
+  className="h-full w-20 cursor-pointer rounded-l border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
           onClick={() => mintAmount > 1 && setMintAmount((prev) => prev - 1)}
         >
           -
         </Button>
         <input
           type="text"
-  className="text-md md:text-base cursor-default flex w-full items-center rounded bg-inc-dec-bg text-inc-dec-text border-inc-dec-border text-center font-semibold hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
+  className="text-md flex w-full cursor-default items-center rounded border-inc-dec-border bg-inc-dec-bg text-center font-semibold text-inc-dec-text hover:bg-inc-dec-hover hover:text-inc-dec-textHover md:text-base"
           name="custom-input-number"
           value={mintAmount}
           readOnly
         />
         <Button
           data-action="increment"
-  className="h-full w-20 cursor-pointer rounded-r bg-inc-dec-bg text-inc-dec-text border-inc-dec-border hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
+  className="h-full w-20 cursor-pointer rounded-r  border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
           onClick={() =>
             mintAmount < Number(mintLimit) - Number(mintedByYou) &&
             setMintAmount((prev) => prev + 1)
@@ -334,7 +334,7 @@ export function MintButton({
         </Button>
       </div>
       <Button
-        className={`${className} ml-3 bg-mintButton-bg text-mintButton-text  hover:bg-mintButton-hover active:bg-mintButton-active disabled:bg-mintButton-disabled`}
+        className={`${className} ml-3 bg-mintButton-bg text-mintButton-text transition-all  duration-300 ease-in-out hover:scale-105 hover:bg-mintButton-hover active:bg-mintButton-active disabled:bg-mintButton-disabled`}
         onClick={mintBtnHandler}
         {...props}
       >
