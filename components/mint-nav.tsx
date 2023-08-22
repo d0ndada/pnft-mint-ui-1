@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../styles/globals.css"
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { useState } from "react"
+import Image from "next/image"
 
 
 const mintTiers = [
@@ -35,39 +37,47 @@ interface MintNavProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function MintNav({ className, ...props }: MintNavProps) {
   const pathname = usePathname()
+ const [loading, setLoading] = useState(false);
+const [clickedLink, setClickedLink] = useState<string | null>(null);
 
   return (
     <div className="relative">
       <ScrollArea className="max-w-[600px] lg:max-w-none">
         <div className={cn("mb-4 flex items-center", className)} {...props}>
           {mintTiers.map((example) => (
-                        <div className="flex items-center gap-2">
-
-            <Link
-              href={example.href}
-              key={example.href}
-              className={cn(
-                "hover-pulse flex items-center px-4 text-2xl transition-all duration-300 hover:scale-105 hover:text-buttonHover",
-                pathname?.startsWith(example.href)
-                  ? "font-bold text-buttonHover"
-                  : "font-medium text-muted-foreground"
+            <div className="flex items-center gap-2">
+              {loading && clickedLink === example.name ? (
+                <div className="flex items-center justify-center">
+                  <Image src="/loader.gif" width={100} height={100} alt="Loading..." />
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href={example.href}
+                    key={example.href}
+                    onClick={() => {
+                      setLoading(true);
+                      setClickedLink(example.name);
+                    }}
+                    className={cn(
+                      "hover-pulse flex items-center px-4 text-2xl transition-all duration-300 hover:scale-105 hover:text-buttonHover",
+                      pathname?.startsWith(example.href)
+                        ? "font-bold text-buttonHover"
+                        : "font-medium text-muted-foreground"
+                    )}
+                  >
+                    {example.name}
+                  </Link>
+                  <Tippy content={example.tooltipText}>
+                    <span>🛈</span>
+                  </Tippy>
+                </>
               )}
-            >
-              {/* <img src={example.gif} alt={example.name} className={`mr-2 ${example.label === 'public' ? 'w-[4rem] h-[4rem]' : 'w-12 mt-[-0.75rem] h-12'}`} /> */}
-
-
-              {example.name}
-            </Link>
-              <Tippy content={example.tooltipText}>
-                <span>🛈</span>
-              </Tippy>
             </div>
           ))}
-          
         </div>
-        
         <ScrollBar orientation="horizontal" className="invisible" />
       </ScrollArea>
     </div>
-  )
+  );
 }

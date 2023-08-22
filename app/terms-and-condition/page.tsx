@@ -1,9 +1,12 @@
 import React from 'react';
+import RootLayout from '../layout';
+import Footer from '@/components/footer';
 
 const TermsAndConditions = () => {
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
-            <h1 className="mb-8 text-center text-4xl font-bold scroll-snap-align-start">SolJuice Terms and Conditions</h1>
+<>
+        <div className="min-h-screen bg-gray-100 p-8 overflow-y-auto ">
+            <h1 className="mb-8 text-center text-4xl font-bold ">SolJuice Terms and Conditions</h1>
             <div className="rounded-lg bg-white p-8 shadow-md">
                 <p className="mb-6"> 
                     Welcome to SolJuice. These Terms and Conditions (&quot;Terms&quot;) govern your use of the SolJuice platform and the purchase of NFTs from us. By using our platform, you agree to these Terms. Please read them carefully and reach out if you have any questions.
@@ -118,7 +121,10 @@ These Terms constitute the entire agreement between you and SolJuice regarding o
             </section>
                 </div>
             </div>
-        </div>
+            </div>
+            <Footer enableScrollSnap={false} />
+            </>
+
     );
 }
 

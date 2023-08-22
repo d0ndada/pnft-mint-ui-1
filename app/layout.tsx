@@ -32,11 +32,13 @@ export const metadata: Metadata = {
   },
 }
 
+
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
+  enableScrollSnap?: boolean;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children,enableScrollSnap = false}: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning className="overflow-y-scroll font-sans scroll-snap-type-y">
@@ -58,7 +60,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <div className="flex-1">{children}
         
                 </div>
-      <Footer/>
                 
               </div>
               <TailwindIndicator />
