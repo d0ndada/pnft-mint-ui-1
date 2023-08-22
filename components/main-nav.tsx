@@ -13,6 +13,13 @@ interface MainNavProps {
 }
 
 export function MainNav({ items }: MainNavProps) {
+ const handleScroll =  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+  e.preventDefault();
+    const element = document.getElementById(href.replace("/#", ""));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="flex items-center space-x-2">
@@ -29,9 +36,11 @@ export function MainNav({ items }: MainNavProps) {
               item.href && (
                 <Link
                   key={index}
-                  href={item.href}
+                  href={item.href || "#"}
+                                    onClick={(e) => handleScroll(e, item.href)}
+
                   className={cn(
-                    "flex items-center text-sm font-medium text-muted-foreground  hover:text-primary hover:scale-105 transform transition-transform",
+                    "flex items-center text-sm font-medium text-muted-foreground  transition-transform hover:scale-105 hover:text-primary",
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >
