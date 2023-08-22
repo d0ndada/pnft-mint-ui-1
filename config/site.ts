@@ -10,23 +10,23 @@ export const siteConfig = {
     },
     {
       title: "About",
-      href: "#about",
+      href: "/#about",
     },
     {
       title: "Collection",
-      href: "#collection",
+      href: "/#collection",
     },
     {
       title: "Roadmap",
-      href: "#roadmap",
+      href: "/#roadmap",
     },
     {
       title: "Team",
-      href: "#team",
+      href: "/#team",
     },
     {
       title: "FAQ",
-      href: "#faq",
+      href: "/#faq",
     },
     // for owned nft later!
     {
