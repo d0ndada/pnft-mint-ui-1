@@ -13,13 +13,15 @@ interface MainNavProps {
 }
 
 export function MainNav({ items }: MainNavProps) {
- const handleScroll =  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
-  e.preventDefault();
+ const handleScroll =  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
+   e.preventDefault();
+   if(href){
     const element = document.getElementById(href.replace("/#", ""));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+   }
+ }
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="flex items-center space-x-2">
