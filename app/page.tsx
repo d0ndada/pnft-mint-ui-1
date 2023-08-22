@@ -41,7 +41,7 @@ Ready to Mint Your Solar NFT?              <br className="hidden sm:inline" />
       <RoadmapSection />
       <TeamSection />
       <FaqSection />
-      <Footer enableScrollSnap={false}/>
+      <Footer enableScrollSnap={true}/>
 
       </>
   )
