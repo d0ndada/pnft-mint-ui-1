@@ -15,7 +15,7 @@ export default function IndexPage() {
   return (
     // md:py-10, pt-6, pl-[40%]
     <>
-    <section  className=" container  flex h-[100vh] flex-col items-center gap-6 bg-main px-4  pb-8 scroll-snap-align-start ">
+    <section  className="flex  h-[100vh] flex-col items-center gap-6 bg-main px-4 pb-8  scroll-snap-align-start custom-container ">
         <div className="mt-[100px] flex max-w-[100%] animate-fadeIn flex-col items-center gap-2 ">
           <div>
             <h1 className=" mt-[5%] text-3xl font-extrabold leading-tight tracking-tighter text-textColor md:text-4xl ">
