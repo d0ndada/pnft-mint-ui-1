@@ -1,3 +1,4 @@
+"use client"
 import { MintCard } from "@/components/ui/minting/mint-card"
 import { MintNav } from "@/components/mint-nav"
 import { AboutSection } from "@/components/ui/index-page/about-section";
@@ -7,11 +8,24 @@ import { TeamSection } from "@/components/ui/index-page/team-section";
 import { FaqSection } from "@/components/ui/index-page/faq-section";
 import "../styles/globals.css"
 import Footer from "@/components/footer";
+import { useEffect } from "react";
 
 
 
 export default function IndexPage() {
   
+   useEffect(() => {
+    // This function will run whenever the route changes
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1); // remove the '#'
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Adjust the delay as needed
+    }
+  }, []);
   return (
     // md:py-10, pt-6, pl-[40%]
     <>

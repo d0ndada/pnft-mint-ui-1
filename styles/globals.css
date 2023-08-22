@@ -6,10 +6,40 @@
   background-image: url("../public/andra.jpg");
   background-size: cover;
 } */
-.minting-section {
-  background: linear-gradient(to bottom, hsl(50, 40%, 92%), hsl(50, 40%, 85%));
+
+.custom-container {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+@media (min-width: 1024px) {
+
+  /* lg breakpoint */
+  .custom-container {
+    max-width: 100%;
+    margin-right: auto;
+      margin-left: auto;
+      padding-right: 2rem;
+      padding-left: 2rem;
+    /* or whatever max-width you prefer for lg screens */
+  }
+}
+
+@media (min-width: 1536px) {
+
+  /* 2xl breakpoint */
+  .custom-container {
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    /* This will make it full width on 2xl screens */
+  }
+}
 @layer base {
   :root {
     --background: 50 40% 92%;

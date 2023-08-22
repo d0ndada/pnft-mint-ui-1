@@ -38,10 +38,10 @@ interface RootLayoutProps {
   enableScrollSnap?: boolean;
 }
 
-export default function RootLayout({ children,enableScrollSnap = false}: RootLayoutProps) {
+export default function RootLayout({ children}: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning className="overflow-y-scroll font-sans scroll-snap-type-y scroll-behavior-smooth">
+      <html lang="en" suppressHydrationWarning className="scroll-behavior-smooth overflow-y-scroll font-sans scroll-snap-type-y">
         <Head>
           
            <title>My page title</title>

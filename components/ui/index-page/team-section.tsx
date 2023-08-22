@@ -39,7 +39,7 @@ function TeamMember({ image, name, role, description }: TeamMemberProps) {
 }
 
   return (
- <section id="team" className="flex flex-col items-center space-y-8  bg-teamBg px-4 py-12 scroll-snap-align-start">
+ <section id="team" className="flex flex-col h-[100vh]  items-center space-y-8  bg-teamBg px-4 py-12 scroll-snap-align-start">
         <h2 ref={ref} className={`mt-[5%] text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>Our Team</h2>
         
         <div className={`flex w-[80%] max-w-6xl flex-col items-center space-y-8  ${inView ? 'animate-fade-in-up' : ''}`}> {/* This is the flex container */}

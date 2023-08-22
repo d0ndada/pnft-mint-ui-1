@@ -14,7 +14,7 @@ interface MainNavProps {
 
 export function MainNav({ items }: MainNavProps) {
  const handleScroll =  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
-   e.preventDefault();
+  //  e.preventDefault();
    if(href){
     const element = document.getElementById(href.replace("/#", ""));
     if (element) {
@@ -24,13 +24,13 @@ export function MainNav({ items }: MainNavProps) {
  }
   return (
     <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="flex items-center space-x-2">
+      <div  className="flex items-center space-x-2">
         {/* <Icons.logo className="h-6 w-6" />
          */}
           <Image src={logo} alt="SolJuice Logo" width={48} height={48} />
         
         <span className="inline-block font-bold">{siteConfig.name}</span>
-      </Link>
+      </div>
       {items?.length ? (
         <nav className="flex gap-6">
           {items?.map(
@@ -39,7 +39,8 @@ export function MainNav({ items }: MainNavProps) {
                 <Link
                   key={index}
                   href={item.href || "#"}
-                                    onClick={(e) => handleScroll(e, item.href)}
+                  // onClick={(e) => handleScroll(e, item.href)}
+                  // scroll={false}
 
                   className={cn(
                     "flex items-center text-sm font-medium text-muted-foreground  transition-transform hover:scale-105 hover:text-primary",
