@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 import logo from "public/logo.gif"
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 
 interface MainNavProps {
@@ -15,16 +15,21 @@ interface MainNavProps {
 }
 
 export function MainNav({ items }: MainNavProps) {
-   const router = useRouter();
+  //  const router = useRouter();
 
   const handleScroll = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
   
    
    e.preventDefault();
     if (href) {
-         if (router.pathname !== '/') {
-        await router.push('/');
-      }
+       if (typeof window !== "undefined" && window.location.pathname !== '/') {
+      // Navigate to home page
+      window.location.assign('/');
+      // After navigating, you might need a mechanism to scroll to the desired section once the page loads.
+      // You can use local storage or session storage to store the desired section and then scroll to it once the page loads.
+      return;
+    }
+
     const element = document.getElementById(href.replace("/#", ""));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
