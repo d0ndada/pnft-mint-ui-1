@@ -18,18 +18,18 @@ export default function IndexPage() {
     // This function will run whenever the route changes
     if (window.location.hash) {
       const id = window.location.hash.substring(1); // remove the '#'
-      setTimeout(() => {
+      // setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100); // Adjust the delay as needed
+      // }, 10); // Adjust the delay as needed
     }
   }, []);
   return (
     // md:py-10, pt-6, pl-[40%]
     <>
-    <section  className="flex  h-[100vh] flex-col items-center gap-6 bg-main px-4 pb-8  scroll-snap-align-start custom-container ">
+    <section  className="custom-container  flex h-[100vh] flex-col items-center gap-6 bg-main px-4  pb-8 scroll-snap-align-start ">
         <div className="mt-[100px] flex max-w-[100%] animate-fadeIn flex-col items-center gap-2 ">
           <div>
             <h1 className=" mt-[5%] text-3xl font-extrabold leading-tight tracking-tighter text-textColor md:text-4xl ">
