@@ -36,6 +36,19 @@ export function MainNav({ items }: MainNavProps) {
     }
    }
  }
+ React.useEffect(() => {
+  if (typeof window !== "undefined") {
+    const sectionId = localStorage.getItem('scrollToSection');
+    if (sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Clear the section ID from local storage
+      localStorage.removeItem('scrollToSection');
+    }
+  }
+}, []);
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href={"/"}  className="flex items-center space-x-2">
