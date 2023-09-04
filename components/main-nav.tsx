@@ -21,12 +21,13 @@ export function MainNav({ items }: MainNavProps) {
   
    
    e.preventDefault();
-    if (href) {
+     if (href) {
     const sectionId = href.replace("/#", "");
     if (window.location.pathname !== '/') {
-      // Navigate to home page with a hash for the desired section
-      window.location.href = `/#${sectionId}`;
-        setTimeout(() => {
+      // Navigate to home page without hash
+      window.location.href = `/`;
+      // After a short delay, scroll to the desired section
+      setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
