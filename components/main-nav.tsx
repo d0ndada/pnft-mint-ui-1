@@ -7,17 +7,24 @@ import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 import logo from "public/logo.gif"
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
 
 interface MainNavProps {
   items?: NavItem[]
 }
 
 export function MainNav({ items }: MainNavProps) {
- const handleScroll =  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
+   const router = useRouter();
+
+  const handleScroll = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
   
    
    e.preventDefault();
-   if(href){
+    if (href) {
+         if (router.pathname !== '/') {
+        await router.push('/');
+      }
     const element = document.getElementById(href.replace("/#", ""));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
