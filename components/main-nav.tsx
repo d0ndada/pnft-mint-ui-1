@@ -22,20 +22,18 @@ export function MainNav({ items }: MainNavProps) {
    
    e.preventDefault();
     if (href) {
-       if (typeof window !== "undefined" && window.location.pathname !== '/') {
-      // Navigate to home page
-      window.location.assign('/');
-      // After navigating, you might need a mechanism to scroll to the desired section once the page loads.
-      // You can use local storage or session storage to store the desired section and then scroll to it once the page loads.
+    const sectionId = href.replace("/#", "");
+    if (window.location.pathname !== '/') {
+      // Navigate to home page with a hash for the desired section
+      window.location.href = `/#${sectionId}`;
       return;
     }
-
-    const element = document.getElementById(href.replace("/#", ""));
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-   }
- }
+  }
+}
  React.useEffect(() => {
   if (typeof window !== "undefined") {
     const sectionId = localStorage.getItem('scrollToSection');
