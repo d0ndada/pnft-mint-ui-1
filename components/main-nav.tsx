@@ -16,7 +16,7 @@ export function MainNav({ items }: MainNavProps) {
  const handleScroll =  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
   
    
-  //  e.preventDefault();
+   e.preventDefault();
    if(href){
     const element = document.getElementById(href.replace("/#", ""));
     if (element) {
@@ -38,11 +38,11 @@ export function MainNav({ items }: MainNavProps) {
           {items?.map(
             (item, index) =>
               item.href && (
-                <Link
+                <a
                   key={index}
                   href={item.href || "#"}
                   onClick={(e) => handleScroll(e, item.href)}
-                  scroll={false}
+                  // scroll={false}
 
                   className={cn(
                     "flex items-center text-sm font-medium text-muted-foreground  transition-transform hover:scale-105 hover:text-primary",
@@ -50,7 +50,7 @@ export function MainNav({ items }: MainNavProps) {
                   )}
                 >
                   {item.title}
-                </Link>
+                </a>
               )
           )}
           
