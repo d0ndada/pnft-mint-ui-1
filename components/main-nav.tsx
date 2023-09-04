@@ -26,6 +26,12 @@ export function MainNav({ items }: MainNavProps) {
     if (window.location.pathname !== '/') {
       // Navigate to home page with a hash for the desired section
       window.location.href = `/#${sectionId}`;
+        setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);  // 100ms delay, adjust as needed
       return;
     }
     const element = document.getElementById(sectionId);
