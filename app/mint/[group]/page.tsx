@@ -26,8 +26,8 @@ export default function GroupPage() {
   }, []);
 
   return (
-      <div className="flex flex-col min-h-screen">
-      <div className="flex-grow bg-gradient-to-b from-mintingBg to-mintingBg2">
+      <div className="flex min-h-screen flex-col">
+      <div className="grow bg-gradient-to-b from-mintingBg to-mintingBg2">
         {isLoading ? (
           <div className="mt-[20%] flex h-full w-full items-center justify-center">
             <Image src="/loader.gif" width={100} height={100} alt="Loading..." />

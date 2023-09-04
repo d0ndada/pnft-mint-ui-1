@@ -5,7 +5,7 @@ import Footer from '@/components/footer';
 const TermsAndConditions = () => {
     return (
 <>
-        <div className="min-h-screen bg-gray-100 p-8 overflow-y-auto ">
+        <div className="min-h-screen overflow-y-auto bg-gray-100 p-8 ">
             <h1 className="mb-8 text-center text-4xl font-bold ">SolJuice Terms and Conditions</h1>
             <div className="rounded-lg bg-white p-8 shadow-md">
                 <p className="mb-6"> 
