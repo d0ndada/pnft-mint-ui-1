@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 983",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "983.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Scratchy Red"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "British Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Dirty Sci-Fi Wall"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "983.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

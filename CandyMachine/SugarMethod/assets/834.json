@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 834",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "834.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Automatic Sci-Fi Door"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Scandinavian Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Tilted Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "A Space Oddesy"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "834.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

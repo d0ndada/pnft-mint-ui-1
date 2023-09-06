@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 886",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "886.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Rusty Blue"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "British Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Polycrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Generic Treebark Wall"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "886.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

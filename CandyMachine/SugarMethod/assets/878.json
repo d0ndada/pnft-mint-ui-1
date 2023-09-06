@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 878",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "878.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Cobbelstone"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "SNOWY CAR MARKS"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Tilted Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Worn Sci-Fi Wall"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "878.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

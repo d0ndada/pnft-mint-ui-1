@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 818",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "818.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Street Art"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "France Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Tilted Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Dirty Sci-Fi Wall"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "818.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}
