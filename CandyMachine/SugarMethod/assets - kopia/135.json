@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 135",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "135.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Used Sci-Fi Chip "
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Stone Dirt Path"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Polycrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Patchy Painted"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "135.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

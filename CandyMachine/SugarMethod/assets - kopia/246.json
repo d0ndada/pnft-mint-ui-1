@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 246",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "246.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Scratchy Bronze"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Scratchy Concrete"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Polycrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Spaceship Sci-Fi "
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "246.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

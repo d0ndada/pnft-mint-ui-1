@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 575",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "575.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "NIRVANA"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Auto Bahn"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Sci-Fi Polycrastaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Polkadot"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "575.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

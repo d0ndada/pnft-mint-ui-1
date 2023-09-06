@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 1320",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "1320.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Rusty Combination"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "American Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Sci-Fi Polycrastaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Worn Sci-Fi Wall"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "1320.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}
