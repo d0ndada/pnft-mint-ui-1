@@ -37,7 +37,7 @@ export default function GroupPage() {
             <MintNav />
             <div className="flex flex-col justify-between gap-4 md:flex-row">
               <div
-                className="h-100 hidden w-[36%] rounded-xl bg-cover bg-center md:block"
+                className="h-100 hidden w-[36%] rounded-xl bg-cover bg-center shadow-md md:block"
                 style={{ backgroundImage: "url(/preview.gif)" }}
               />
               <MintCard group={groupString} className="w-full md:w-1/2" />
