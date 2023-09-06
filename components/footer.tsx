@@ -16,7 +16,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({enableScrollSnap = false}) => {
   return (
     <footer
-      className={`grid h-[25vh] grid-cols-3 items-center border-b bg-footer p-4 px-[2rem] shadow-md ${enableScrollSnap ? "scroll-snap-align-start" : ""}`}>
+      className={`grid h-[20vh] grid-cols-3 items-center border-b bg-footer p-4 px-[2rem] shadow-md ${enableScrollSnap ? "scroll-snap-align-start" : ""}`}>
       <div className='flex flex-col items-center'>
        {/* <h2>Contact Us</h2>
       <form  className="flex flex-col"  action="https://formspree.io/f/xeqbadvn" method="POST">

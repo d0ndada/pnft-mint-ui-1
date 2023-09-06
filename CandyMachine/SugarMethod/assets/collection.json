@@ -1,6 +1,6 @@
 {
   "name": "Numbers Collection",
-  "symbol": "NB",
+  "symbol": "SOL",
   "description": "Collection of 10 numbers on the blockchain.",
   "image": "collection.png",
   "attributes": [],
@@ -10,7 +10,6 @@
         "uri": "collection.png",
         "type": "image/png"
       }
-    ],
-    "category": "image"
+    ]
   }
 }

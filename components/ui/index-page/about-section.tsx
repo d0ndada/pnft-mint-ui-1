@@ -24,7 +24,7 @@ export const AboutSection = () => {
         <div className="flex flex-col justify-center gap-5">
           <div className={`relative ml-[12%] rounded bg-gray-200 p-2${inView ? 'animate-fade-in-up' : ''}`}>
             <div className="duration-990 animate-pulse rounded-lg bg-gray-200 p-2 shadow-lg transition-transform ">
-              <Image src="/assets/4.png" width={300} height={300} alt="Image description" loading="lazy" />
+              <Image src="/assets/1.png" width={300} height={300} alt="Image description" loading="lazy" />
               </div>
           
                       <p className="mt-2 text-center text-gray-600 ">Caption: A representation of Solar NFT</p> {/* This is the caption */}

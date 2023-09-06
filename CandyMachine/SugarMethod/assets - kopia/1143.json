@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 1143",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "1143.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Scratchy Fake Gold"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "France Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Polycrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Scratched Concrete"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "1143.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

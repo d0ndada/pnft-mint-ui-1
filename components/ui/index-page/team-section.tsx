@@ -25,7 +25,7 @@ export const TeamSection = () => {
 
 function TeamMember({ image, name, role, description }: TeamMemberProps) {
   return (
-        <div className={`border-#E0E0E0 flex w-[80%] flex-col items-center border-2 transition-transform hover:scale-105${inView ? 'animate-fade-in-up' : ''}`}>
+        <div className={`border-#E0E0E0 flex w-[80%] flex-col items-center border-2 transition-transform hover:scale-105`}>
       <div className="transistion-shadow flex h-[250px] w-full items-center justify-center bg-[#F4F4F4] hover:shadow-lg "> 
         <Image className="border-#E0E0E0 rounded-full border-4" width={250} height={250} src={image} alt={name} />
       </div>

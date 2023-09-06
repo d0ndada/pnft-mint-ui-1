@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 1044",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "1044.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Boat Chip"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Scandinavian Woods"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Tilted Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Torn Red Metal Plate"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "1044.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

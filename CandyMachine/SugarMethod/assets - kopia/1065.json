@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 1065",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "1065.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Plane Chip"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Blue Cloath"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "A Space Oddesy"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "1065.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

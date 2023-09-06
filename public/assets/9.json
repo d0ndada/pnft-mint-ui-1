@@ -1,20 +1,41 @@
 {
-  "name": "Number #0010",
-  "symbol": "NB",
-  "description": "Collection of 10 numbers on the blockchain. This is the number 10/10.",
+  "name": "Solar Juice 9",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
   "image": "9.png",
+  "animation_url": "",
+  "external_url": "",
   "attributes": [
     {
-      "trait_type": "Number",
-      "value": "10"
+      "trait_type": "Background",
+      "value": "Used Sci-Fi Chip "
+    },
+    {
+      "trait_type": "Ground",
+      "value": "Illusion"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Tilted Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Granny's Wall"
     }
   ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
   "properties": {
     "files": [
       {
         "uri": "9.png",
         "type": "image/png"
       }
-    ]
+    ],
+    "category": "",
+    "creators": []
   }
 }

@@ -11,8 +11,8 @@ export const NftSlide = ({ inView}: NftSlideProps) => {
       <div 
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
-            className={`{isHovered ? 'paused' : ''} ${inView ? 'animate-fade-in-up' : ''}`}
-        >
+        className={`${isHovered ? 'paused' : ''} ${inView ? 'animate-fade-in-up' : ''}`}
+>
           
     <div className=' '>
             <div className="marquee-wrapper1">

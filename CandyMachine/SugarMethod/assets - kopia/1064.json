@@ -1,0 +1,41 @@
+{
+  "name": "Solar Juice 1064",
+  "symbol": "SOL",
+  "description": "Solar Juice",
+  "seller_fee_basis_points": null,
+  "image": "1064.png",
+  "animation_url": "",
+  "external_url": "",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Cobbelstone"
+    },
+    {
+      "trait_type": "Ground",
+      "value": "YOU'RE ON THIN ICE"
+    },
+    {
+      "trait_type": "Solar Panel",
+      "value": "Monocrystaline Solar Panel"
+    },
+    {
+      "trait_type": "Wall",
+      "value": "Torn Red Metal Plate"
+    }
+  ],
+  "collection": {
+    "name": "",
+    "family": ""
+  },
+  "properties": {
+    "files": [
+      {
+        "uri": "1064.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "",
+    "creators": []
+  }
+}

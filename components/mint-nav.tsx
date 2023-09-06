@@ -45,7 +45,7 @@ const [clickedLink, setClickedLink] = useState<string | null>(null);
       <ScrollArea className="max-w-[600px] lg:max-w-none">
         <div className={cn("mb-4 flex items-center", className)} {...props}>
           {mintTiers.map((example) => (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" key={example.href}>
               {loading && clickedLink === example.name ? (
                 <div className="flex items-center justify-center">
                   <Image src="/loader.gif" width={100} height={100} alt="Loading..." />
@@ -54,7 +54,7 @@ const [clickedLink, setClickedLink] = useState<string | null>(null);
                 <>
                   <Link
                     href={example.href}
-                    key={example.href}
+                    
                     onClick={() => {
                       setLoading(true);
                       setClickedLink(example.name);
