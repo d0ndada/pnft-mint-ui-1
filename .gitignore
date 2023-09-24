@@ -4,6 +4,14 @@
 node_modules
 .pnp
 .pnp.js
+andy
+assets
+Candymachine/SugarMethod/assets/
+Candymachine/SugarMethod/attributeCounts.json
+Candymachine/SugarMethod/rarityData.json
+Candymachine/SugarMethod/createRarity.js
+Candymachine/SugarMethod/txt.txt
+
 
 # testing
 coverage
