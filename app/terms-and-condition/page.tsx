@@ -5,9 +5,9 @@ import Footer from '@/components/footer';
 const TermsAndConditions = () => {
     return (
 <>
-        <div className="min-h-screen overflow-y-auto bg-gray-100 p-8 ">
+        <div className="bg-card-foreground-100 min-h-screen overflow-y-auto p-8 ">
             <h1 className="mb-8 text-center text-4xl font-bold ">SolJuice Terms and Conditions</h1>
-            <div className="rounded-lg bg-white p-8 shadow-md">
+            <div className="rounded-lg bg-card p-8 shadow-md">
                 <p className="mb-6"> 
                     Welcome to SolJuice. These Terms and Conditions (&quot;Terms&quot;) govern your use of the SolJuice platform and the purchase of NFTs from us. By using our platform, you agree to these Terms. Please read them carefully and reach out if you have any questions.
                 </p>

@@ -116,36 +116,114 @@
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
-
-    --muted: 223 47% 11%;
-    --muted-foreground: 215.4 16.3% 56.9%;
-
-    --accent: 216 34% 17%;
-    --accent-foreground: 210 40% 98%;
-
-    --popover: 224 71% 4%;
-    --popover-foreground: 215 20.2% 65.1%;
-
-    --border: 216 34% 17%;
-    --input: 216 34% 17%;
-
-    --card: 224 71% 4%;
-    --card-foreground: 213 31% 91%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 1.2%;
-
-    --secondary: 222.2 47.4% 11.2%;
-    --secondary-foreground: 210 40% 98%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --ring: 216 34% 17%;
-
-    --radius: 0.5rem;
+    --main: 0 0% 15%;
+    --background: 0 0% 10%;
+      /* Almost black background */
+      --foreground: 0 0% 70%;
+      /* Light gray for foreground text */
+    
+      --muted: 0 0% 30%;
+      /* Dark gray for muted elements */
+      --muted-foreground: 0 0% 60%;
+      /* Lighter gray for text on muted elements */
+    
+      --popover: 0 0% 15%;
+      /* Slightly lighter than the background for popovers */
+      --popover-foreground: 0 0% 70%;
+      /* Light gray for text on popovers */
+    
+      --border: 0 0% 25%;
+      /* Dark gray for borders */
+      --input: 0 0% 20%;
+      /* Slightly darker input fields */
+    
+      --card: 0 0% 15%;
+      /* Cards slightly lighter than the background */
+      --card-foreground: 0 0% 70%;
+      /* Light gray for text on cards */
+    
+      --primary: 24 80% 50%;
+      /* Adjusted primary color for dark mode */
+      --primary-foreground: 0 0% 80%;
+      /* Light gray for primary text */
+    
+      --secondary: 180 50% 30%;
+      /* Adjusted secondary color for dark mode */
+      --secondary-foreground: 0 0% 70%;
+      /* Light gray for secondary text */
+    
+      --destructive: 0 100% 40%;
+      /* Adjusted destructive color for dark mode */
+      --destructive-foreground: 0 0% 80%;
+      /* Light gray for destructive text */
+    
+      --ring: 0 0% 30%;
+      /* Dark gray for rings */
+    
+      --buttonHover: 16 70% 35%;
+      /* Darker shade for button hover in dark mode */
+      --textColor: 0 0% 70%;
+      /* Light gray for general text */
+      --teamBg: 0 0% 15%;
+      /* Slightly lighter background for team section */
+      --gradientStart: 21.2% 27.1% 31%;
+        /* Dark grey start for the gradient in dark mode */
+      
+      --gradientEnd: 9.8% 9.8% 43.9%;
+      
+      /* Darker gradient end */
+      --mintingBg: 0 0% 20%;
+      /* Darker minting background */
+      --mintingBg2: 0 0% 18%;
+      /* Even darker minting background */
+      --cardTitle: 0 0% 75%;
+      /* Light gray for card titles */
+      --teal: 180 50% 30%;
+      /* Darker teal for dark mode */
+      --minted: 180 50% 40%;
+      /* Darker minted color */
+      --progress: 180 50% 35%;
+      /* Darker progress color */
+      --borderMutedTeal: 180 30% 30%;
+      /* Darker border color */
+      --mintButton-bg: 180 50% 35%;
+      /* Darker mint button background */
+      --mintButton-text: 0 0% 80%;
+      /* Light gray for mint button text */
+      --mintButton-hover: 180 50% 40%;
+      /* Slightly lighter mint button on hover */
+      --mintButton-active: 180 50% 30%;
+      /* Darker mint button when active */
+      --mintButton-disabled: 0 0% 30%;
+      /* Dark gray for disabled mint button */
+    
+      --inc-dec-bg: 0 0% 20%;
+      /* Darker increment/decrement background */
+      --inc-dec-hover: 0 0% 25%;
+      /* Slightly lighter on hover */
+      --inc-dec-text: 0 0% 70%;
+      /* Light gray for increment/decrement text */
+      --inc-dec-textHover: 0 0% 75%;
+      /* Slightly lighter text on hover */
+      --inc-dec-border: 0 0% 25%;
+      /* Dark gray border for increment/decrement buttons */
+    
+      --accent: 16 70% 35%;
+      /* Darker accent color */
+      --accent-foreground: 0 0% 70%;
+      /* Light gray for accent text */
+    
+      --header: 0 0% 15%;
+      /* Darker header */
+      --footer: 0 0% 15%;
+      /* Darker footer */
+      --collectionHeader: 0 0% 70%;
+      /* Light gray for collection header */
+      --paragraphGray: 0 0% 60%;
+      /* Light gray for paragraphs */
+    
+      --radius: 0.5rem;
+    
   }
 }
 
