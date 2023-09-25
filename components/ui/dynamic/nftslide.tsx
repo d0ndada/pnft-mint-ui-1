@@ -5,6 +5,19 @@ type NftSlideProps = {
 };
 export const NftSlide = ({ inView}: NftSlideProps) => {
       const [isHovered, setIsHovered] = React.useState(false);
+const renderImages = () => (
+    [...Array(35)].map((item, index) => (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        className={`img1 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : ''}`}
+        key={index}
+        src={`/assets/${index + 1}.png`}
+        height={200}
+        width={200}
+        alt=""
+      />
+    ))
+  );
 
 
   return (
@@ -17,34 +30,18 @@ export const NftSlide = ({ inView}: NftSlideProps) => {
     <div className=' '>
             <div className="marquee-wrapper1">
               <div className="marquee1">
-                {[...Array(9)].map((item, index) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    className={`img1 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : ''}`}
-                    key={index}
-                    src={`/assets/${index + 1}.png`}
-                    height={200}
-                    width={200}
-                    alt=""
-                  />
-                ))}
+                        {renderImages()}
+            {renderImages()}
+
               </div>
             </div>
           </div>
           <div className=''>
             <div className="marquee-wrapper2">
               <div className="marquee2">
-                {[...Array(9)].map((item, index) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    className={`img2 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : ''}`}
-                    key={index}
-                    src={`/assets/${index + 1}.png`}
-                    height={200}
-                    width={200}
-                    alt=""
-                  />
-                ))}
+                         {renderImages()}
+            {renderImages()}
+
               </div>
             </div>
       </div>
