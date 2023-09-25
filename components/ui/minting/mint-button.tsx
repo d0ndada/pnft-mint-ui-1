@@ -261,31 +261,22 @@ export function MintButton({
 
         const tx = transactionBuilder().add(
           mintV2(umi, {
-          candyMachine: candyMachine.publicKey,
-          collectionMint: candyMachine.collectionMint,
-          collectionUpdateAuthority: candyMachine.authority,
-          nftMint: nftSigner,
-          minter: umi.identity,
-          candyGuard: candyGuard?.publicKey,
-          mintArgs: mintArgs,
-          group: group ? group : undefined,
-          tokenStandard: TokenStandard.ProgrammableNonFungible,
+            candyMachine: candyMachine.publicKey,
+            collectionMint: candyMachine.collectionMint,
+            collectionUpdateAuthority: candyMachine.authority,
+            nftMint: nftSigner,
+            minter: umi.identity,
+            candyGuard: candyGuard?.publicKey,
+            mintArgs: mintArgs,
+            group: group ? group : undefined,
+            tokenStandard: TokenStandard.ProgrammableNonFungible,
           })
         )
-        .prepend(setComputeUnitLimit(umi,{units: 800_000}))
-      const builtTransaction = await tx.buildWithLatestBlockhash(umi);
-        const signedTransaction = await nftSigner.signTransaction(builtTransaction);
-        txArray.push(signedTransaction);
+          .prepend(setComputeUnitLimit(umi, { units: 800_000 }))
+        const builtTransaction = await tx.buildWithLatestBlockhash(umi);
+        txArray.push(builtTransaction);
     
 
-   const signedTxs = await umi.identity.signAllTransactions(txArray);
-    for (let signedTx of signedTxs) {
-        lastSignature = await umi.rpc.sendTransaction(signedTx);
-    }
-
-    if (!lastSignature) {
-        throw new Error("no tx was created");
-    }
         //Todo move this logic
         // nfts.push(nftSigner.publicKey)
         // const nft = await fetchDigitalAsset(umi, nftSigner.publicKey).catch(
@@ -308,6 +299,15 @@ export function MintButton({
         setLoading(false)
       }
     }
+    // Sign and send all transactions together
+const signedTxs = await umi.identity.signAllTransactions(txArray);
+for (let signedTx of signedTxs) {
+  const signature = await umi.rpc.sendTransaction(signedTx);
+  if (!signature) {
+    throw new Error("no tx was created");
+  }
+  }
+
   }
 
   return (
