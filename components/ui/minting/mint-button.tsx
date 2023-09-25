@@ -22,6 +22,7 @@ import { setComputeUnitLimit } from "@metaplex-foundation/mpl-toolbox"
 import {
   KeypairSigner,
   PublicKey,
+  Transaction,
   TransactionBuilder,
   generateSigner,
   none,
@@ -36,6 +37,7 @@ import { useUmi } from "@/hooks/useUmi"
 import { Button } from "@/components/ui/button"
 
 import { useToast } from "../toast/use-toast"
+import { toWeb3JsTransaction } from "@metaplex-foundation/umi-web3js-adapters"
 
 type MintButtonProps = React.ComponentProps<typeof Button> & {
   group?: string
@@ -96,6 +98,11 @@ export function MintButton({
       return
     }
     const mintTransactions = []
+
+    const nftMintArr: KeypairSigner[] = [];
+
+    let txArray: Transaction[] = [];
+    let lastSignature: Uint8Array | undefined;
 
     const nfts: PublicKey[] = [];
     for (let i = 0; i < mintAmount; i++) {
@@ -250,7 +257,10 @@ export function MintButton({
         }
         //Todo: for multimint, probably move these to their own txns
         const nftSigner = generateSigner(umi)
-        const mintV2Builder = mintV2(umi, {
+        nftMintArr.push(nftSigner);
+
+        const tx = transactionBuilder().add(
+          mintV2(umi, {
           candyMachine: candyMachine.publicKey,
           collectionMint: candyMachine.collectionMint,
           collectionUpdateAuthority: candyMachine.authority,
@@ -260,43 +270,38 @@ export function MintButton({
           mintArgs: mintArgs,
           group: group ? group : undefined,
           tokenStandard: TokenStandard.ProgrammableNonFungible,
-        })
-      
-
-        let tx = transactionBuilder()
-          .add(setComputeUnitLimit(umi, { units: 600_000 }))
-          .add(mintV2Builder)
-        if (routeBuilder) {
-          //Make sure route ix comes first
-          tx = routeBuilder
-            .add(setComputeUnitLimit(umi, { units: 600_000 }))
-            .add(mintV2Builder)
-        }
-        //TODO figure out who to sign multiple txns with umi... should be building up multiple txns then sending them outside the loop
-        const { signature } = await tx.sendAndConfirm(umi, {
-          confirm: { commitment: "finalized" },
-          send: {
-            skipPreflight: true,
-          },
-        })
-
-        
-        //Todo move this logic
-        nfts.push(nftSigner.publicKey)
-        const nft = await fetchDigitalAsset(umi, nftSigner.publicKey).catch(
-          (err) => {
-            console.log(err)
-            return undefined
-          }
-        )
-        onMintCallback &&
-          onMintCallback(nft, base58.deserialize(signature).toString())
-        if (nft) {
-          toast({
-            title: "Minted!",
-            description: `You minted ${nft?.metadata?.name}!`,
           })
-        }
+        )
+        .prepend(setComputeUnitLimit(umi,{units: 800_000}))
+      const builtTransaction = await tx.buildWithLatestBlockhash(umi);
+        const signedTransaction = await nftSigner.signTransaction(builtTransaction);
+        txArray.push(signedTransaction);
+    
+
+   const signedTxs = await umi.identity.signAllTransactions(txArray);
+    for (let signedTx of signedTxs) {
+        lastSignature = await umi.rpc.sendTransaction(signedTx);
+    }
+
+    if (!lastSignature) {
+        throw new Error("no tx was created");
+    }
+        //Todo move this logic
+        // nfts.push(nftSigner.publicKey)
+        // const nft = await fetchDigitalAsset(umi, nftSigner.publicKey).catch(
+        //   (err) => {
+        //     console.log(err)
+        //     return undefined
+        //   }
+        // )
+        // onMintCallback &&
+        //   onMintCallback(nft, base58.deserialize(signature).toString())
+        // if (nft) {
+        //   toast({
+        //     title: "Minted!",
+        //     description: `You minted ${nft?.metadata?.name}!`,
+        //   })
+        // }
       } catch (err: any) {
         console.error(err)
       } finally {
