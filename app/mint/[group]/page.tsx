@@ -22,7 +22,7 @@ export default function GroupPage() {
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds delay
+    }, 2000); 
   }, []);
 
   return (
