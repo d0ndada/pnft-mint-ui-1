@@ -16,15 +16,8 @@ import Image from "next/image"
 
 const mintTiers = [
   {
-    gif: "/sunrise.gif",
-    name: "Pre Mint",
-    label: "early",
-    href: "/mint/early",
-    tooltipText: "Early access for our first supporters."
-  },
-  {
-    gif: "/sun.gif",
-    name: "Public Mint",
+    // gif: "/sun.gif",
+    name: "Mint",
     label: "public",
     href: "/mint/public",
     tooltipText: "Join the green revolution today."

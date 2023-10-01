@@ -14,18 +14,16 @@ interface FaqEventProps {
 
 export const FaqSection = () => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Change this to false if you want the animation to trigger again whenever it comes in view
+    triggerOnce: true, 
   });
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   
   function FAQ({ question, answer,index }: FaqEventProps &{index:number}) {
         const isOpen = openFaqIndex === index;
 
-      // const [isOpen, setIsOpen] = useState(false);
-    // Close other FAQ items when one is opened
     useEffect(() => {
         if (isOpen) {
-            // Close other FAQ items logic here
+           
         }
     }, [isOpen]);
        return (
@@ -54,15 +52,8 @@ export const FaqSection = () => {
 
   return (
     <section id="faq" className="flex h-[100vh] flex-col items-center justify-center  p-8 scroll-snap-align-start" >
-         {/* <video 
-        autoPlay 
-        loop 
-        muted 
-        className="absolute left-0 top-0 z-[-1] h-full w-full object-cover"
-        src="/gg.mp4" // Directly reference the video from the public directory
-      ></video> */}
-      <h2 ref={ref}  className={`mb-8 mt-[-5%] text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}  `}>FAQ</h2>
-      <div ref={ref} className={`flex  max-h-[42vh] w-[80%] max-w-[786px] flex-col items-start ${inView ? 'animate-fade-in-up' : ''}`}>
+      <h2 ref={ref}  className={`mb-8 mt-[-5%] text-3xl font-bold text-foreground ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}  `}>FAQ</h2>
+      <div ref={ref} className={`flex  max-h-[42vh] w-[80%] max-w-[786px] flex-col items-start ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}`}>
       {faqs.map((faq, index) => (
         <FAQ key={index} index={index} question={faq.question} answer={faq.answer} />
       ))}

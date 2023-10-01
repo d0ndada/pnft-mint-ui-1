@@ -44,7 +44,7 @@ export const RoadmapSection = () => {
     return (
         <div
           
-            className={`position-relative mb-10 flex  ${inView ? 'animate-fade-in-right' : ''}`}
+            className={`position-relative mb-10 flex  ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}`}
         >
             <div className="mr-4 flex flex-col items-center">
                 <h3 className={`roadmap-number mb-2 text-4xl font-bold text-foreground ${getStatusColor()} ${getStatusStyles()}`}>{position}.</h3>
@@ -72,8 +72,8 @@ export const RoadmapSection = () => {
   return (
     <section id="roadmap" className="content-space grid h-[100vh] grid-cols-2 items-center justify-items-center  px-10 scroll-snap-align-start">
       <div className="mt-[-26%] flex flex-col pl-[4rem]">
-        <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>Roadmap</h2>
-        <p ref={ref} className={`text-lg text-foreground ${inView ? 'animate-fade-in-up' : ''}`}>
+        <h2 ref={ref} className={`col-start-1 mb-8 text-3xl font-bold text-foreground ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}`}>Roadmap</h2>
+        <p ref={ref} className={`text-lg text-foreground ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}`}>
           Our roadmap outlines the journey of [Project Name] and the milestones we aim to achieve. 
           As we progress, we&apos;re committed to keeping our community informed and involved. Each step 
           on this roadmap not only represents our goals but also underscores our dedication to creating 

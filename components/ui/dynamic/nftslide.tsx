@@ -8,8 +8,8 @@ export const NftSlide = ({ inView}: NftSlideProps) => {
 const renderImages = () => (
     [...Array(35)].map((item, index) => (
       // eslint-disable-next-line @next/next/no-img-element
-      <img
-        className={`img1 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : ''}`}
+      <img 
+        className={`img1 ${inView ? `delay- animate-fade-in-up${index * 100}ms` : 'translate-y-5 opacity-0'}`}
         key={index}
         src={`/assets/${index + 1}.png`}
         height={200}
@@ -24,7 +24,7 @@ const renderImages = () => (
       <div 
             onMouseEnter={() => setIsHovered(true)} 
             onMouseLeave={() => setIsHovered(false)}
-        className={`${isHovered ? 'paused' : ''} ${inView ? 'animate-fade-in-up' : ''}`}
+        className={`${isHovered ? 'paused' : ''} ${inView ? 'animate-fade-in-up' : 'translate-y-5 opacity-0'}`}
 >
           
     <div className=' '>

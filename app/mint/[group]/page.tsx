@@ -7,16 +7,17 @@ import { useEffect, useState } from "react"
 import Image from 'next/image';
 import Footer from "@/components/footer"
 
-// import { NftSlide } from "@/components/ui/dynamic/nftslide"
-// import { WalletNav } from "@/components/wallet-page"
-// import { Wallet } from "lucide-react"
 import "@/styles/globals.css"
+import { useInView } from "react-intersection-observer"
 
 export default function GroupPage() {
   const { group } = useParams()
   const groupString = Array.isArray(group) ? group[0] : group;
   const [isLoading, setIsLoading] = useState(true);
-
+   const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
   useEffect(() => {
       window.scrollTo(0, 0);
 
@@ -27,7 +28,7 @@ export default function GroupPage() {
 
   return (
       <div className="flex min-h-screen flex-col">
-      <div className="grow bg-gradient-to-b from-mintingBg to-mintingBg2">
+      <div ref={ref} className={`grow bg-gradient-to-b from-mintingBg to-mintingBg2 ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'} `}>
         {isLoading ? (
           <div className="mt-[20%] flex h-full w-full items-center justify-center">
             <Image src="/loader.gif" width={100} height={100} alt="Loading..." />

@@ -1,13 +1,19 @@
+"use client"
+
 import React from 'react';
-import RootLayout from '../layout';
 import Footer from '@/components/footer';
+import { useInView } from 'react-intersection-observer';
 
 const TermsAndConditions = () => {
+    const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
     return (
 <>
-        <div className="bg-card-foreground-100 min-h-screen overflow-y-auto p-8 ">
-            <h1 className="mb-8 text-center text-4xl font-bold ">SolJuice Terms and Conditions</h1>
-            <div className="rounded-lg bg-card p-8 shadow-md">
+        <div ref={ref} className={`bg-card-foreground-100 min-h-screen overflow-y-auto p-8 ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'} `}>
+            <h1 className="text-center font-bold  xl:mb-8 xl:text-4xl xl:leading-[6rem] 2xl:mb-8 2xl:text-6xl 2xl:leading-[12rem]">SolJuice Terms and Conditions</h1>
+            <div className="rounded-lg bg-card p-[5%] shadow-md">
                 <p className="mb-6"> 
                     Welcome to SolJuice. These Terms and Conditions (&quot;Terms&quot;) govern your use of the SolJuice platform and the purchase of NFTs from us. By using our platform, you agree to these Terms. Please read them carefully and reach out if you have any questions.
                 </p>
