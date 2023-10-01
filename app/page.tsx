@@ -34,7 +34,7 @@ export default function IndexPage() {
     // md:py-10, pt-6, pl-[40%]
     <>
     <section  className="custom-container  flex h-[100vh] flex-col items-center gap-6 bg-main px-4  pb-8 scroll-snap-align-start ">
-        <div ref={ref} className={`mt-[100px] flex max-w-[100%] animate-fadeIn flex-col items-center gap-2 ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}`}>
+        <div ref={ref} className={`mt-[100px] flex max-w-[100%]  flex-col items-center gap-2 ${!inView ? 'translate-y-5 opacity-0' : 'animate-fade-in-up'}`}>
           <div>
             <h1 className=" mt-[5%] text-3xl font-extrabold leading-tight tracking-tighter text-textColor md:text-4xl ">
               Welcome to SolJuice: Harness the Power of Solar NFTs!
