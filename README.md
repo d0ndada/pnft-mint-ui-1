@@ -2,8 +2,8 @@
 
 A Next.js 13 template for hosting mints using CMV3 and PNFTs.
 
-**Warning**
-This is a work in progress there are probably plenty of bugs. If you want to contribute feel free to open a PR! 
+<!-- **Warning**
+This is a work in progress there are probably plenty of bugs. If you want to contribute feel free to open a PR!  -->
 
 ## Usage
 

@@ -6,9 +6,9 @@ export type AllowListConfig = {
 //Default would be outside of guard groups so keep it if all groups are using the same allowlist.
 export const allowListConfig: AllowListConfig = {
   default: [],
-  late: [
-    "Ht5tqGiAf5tF8nRVDnpdvj7B9vNot6ijzykEDtQypxYC",
-    "3i9BRMtNwi8jFi5hEd3gAwJjhA87Ub8U1sAjbg8J4xjL",
+  early: [
+    "7Jqg3JoEKBTqVzyt2PPWE3fYsYndYbCNLUo2Fz7XAHGS",
+    "6BnRx4VUeiLsq4eUpLq2sKfvVQdRQVchc4gQarDmrAdw",
   ],
   public: [],
   allowList2: [],

@@ -49,7 +49,7 @@ export const useCandyMachine = (
         }
       }
     },
-    [candyMachinePublicKey]
+    [candyGuardMintAuthority, candyMachinePublicKey]
   )
 
   useEffect(() => {

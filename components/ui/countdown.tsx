@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react"
 import { Timer } from "lucide-react"
 
@@ -45,19 +47,19 @@ export const Countdown = ({
           <p className="text-sm">Days</p>
         </div>
         <div className="text-center">
-          <div className="rounded-md border p-2">
+          <div className="rounded-md border p-2 transition-all duration-300">
             <p className="text-lg font-bold">{remaining.hours}</p>
           </div>
           <p className="text-sm">Hours</p>
         </div>
         <div className="text-center">
-          <div className="rounded-md border p-2">
+          <div className="rounded-md border p-2 transition-all duration-300">
             <p className="text-lg font-bold">{remaining.minutes}</p>
           </div>
           <p className="text-sm">Minutes</p>
         </div>
         <div className="text-center">
-          <div className="rounded-md border p-2">
+          <div className="rounded-md border p-2 transition-all duration-300">
             <p className="text-lg font-bold">{remaining.seconds}</p>
           </div>
           <p className="text-sm">Seconds</p>
