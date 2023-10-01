@@ -35,8 +35,8 @@ export const siteConfig = {
     // },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    discord: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "",
+    discord: "",
+    docs: "",
   },
 }
