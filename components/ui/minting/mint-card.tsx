@@ -343,10 +343,11 @@ export function MintCard({ className, group, ...props }: CardProps) {
           />
           {mintLimit ? (
             <div className=" flex items-center space-x-4 p-2">
-              <div className="flex-1 space-y-1">
-                <p className="text-sm font-medium leading-none">
+                <div className="flex-1 space-y-1">
+                  {/* Only on mintLimit show if in candy */}
+                {/* <p className="text-sm font-medium leading-none">
                   Limit {mintLimit} per wallet
-                </p>
+                </p> */}
               </div>
             </div>
           ) : null}

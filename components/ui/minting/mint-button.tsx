@@ -293,8 +293,8 @@ const mintBtnHandler = async () => {
       if (signedTxs) {
      
         toast({
-          title: "Mint successful!",
-          description: `You minted ${mintAmount} NFTs.`,
+          title: `Minted ${mintAmount} NFTs!`,
+          description: `Click below to view`,
           action: (
               <a href={getExplorerUrl(nftSigner.publicKey, "address")}>
                 <ToastAction altText="View NFT">View</ToastAction>
@@ -345,9 +345,9 @@ const mintBtnHandler = async () => {
           data-action="increment"
   className="h-full w-20 cursor-pointer rounded-r  border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
             onClick={() => {
-    if (mintLimit === undefined || mintLimit === null) {
-      setMintAmount((prev) => prev + 1);
-    } else if (mintAmount < Number(mintLimit) - Number(mintedByYou)) {
+    // if (mintLimit === undefined || mintLimit === null) {
+    //   setMintAmount((prev) => prev + 1);
+     if (mintAmount < Number(mintLimit) - Number(mintedByYou)) {
       setMintAmount((prev) => prev + 1);
     }
   }}
