@@ -19,19 +19,53 @@
   "pinataConfig": null,
   "hiddenSettings": null,
   "guards": {
-    "default": {
-      "solPayment": {
-        "value": 0.001,
-        "destination": "6BnRx4VUeiLsq4eUpLq2sKfvVQdRQVchc4gQarDmrAdw"
+    "default": {},
+    "groups": [
+      {
+        "label": "early",
+        "guards": {
+          "solPayment": {
+            "value": 0.000002,
+            "destination": "6BnRx4VUeiLsq4eUpLq2sKfvVQdRQVchc4gQarDmrAdw"
+          },
+          "botTax": {
+            "value": 0.001,
+            "lastInstruction": true
+          },
+          "allowList": {
+            "merkleRoot": "1369c0209224bd866a1be43b953dd0c71effef944d261bb924a603621be8ceda"
+          },
+          "startDate": {
+            "date": "2023-01-20T18:00:00Z"
+          },
+          "endDate": {
+            "date": "2024-10-20T19:00:00Z"
+          },
+          "mintLimit": {
+            "id": 1,
+            "limit": 2
+          }
+        }
       },
-      "botTax": {
-        "value": 0.003,
-        "lastInstruction": true
-      },
-      "startDate": {
-        "date": "2023-01-20T18:00:00Z"
+      {
+        "label": "public",
+        "guards": {
+          "solPayment": {
+            "value": 0.001,
+            "destination": "6BnRx4VUeiLsq4eUpLq2sKfvVQdRQVchc4gQarDmrAdw"
+          },
+          "botTax": {
+            "value": 0.003,
+            "lastInstruction": true
+          },
+
+          "mintLimit": {
+            "id": 2,
+            "limit": 4000
+          }
+        }
       }
-    }
+    ]
   },
   "maxEditionSupply": null
 }

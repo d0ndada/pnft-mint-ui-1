@@ -57,33 +57,42 @@ fs.readdir(assetsDir, (err, files) => {
       // Calculate rarity score and assign tier
       if (jsonData.attributes) {
         jsonData.attributes.forEach((attribute) => {
-          const rarityValue = parseFloat(
-            percentageRarity[
-              `${attribute.trait_type}: ${attribute.value}`
-            ]?.replace("%", "") || 0
-          )
-          attribute.rarity = rarityValue
+          //   const rarityValue = parseFloat(
+          //     percentageRarity[
+          //       `${attribute.trait_type}: ${attribute.value}`
+          //     ]?.replace("%", "") || 0
+          //   )
+          //   attribute.rarity = rarityValue
 
-          if (
-            rarityTiers.Legendary.includes(
-              `${attribute.trait_type}: ${attribute.value}`
-            )
-          ) {
-            attribute.rarityTier = "Legendary"
-          } else if (
-            rarityTiers.Rare.includes(
-              `${attribute.trait_type}: ${attribute.value}`
-            )
-          ) {
-            attribute.rarityTier = "Rare"
-          } else {
-            attribute.rarityTier = "Common"
-          }
+          //   if (
+          //     rarityTiers.Legendary.includes(
+          //       `${attribute.trait_type}: ${attribute.value}`
+          //     )
+          //   ) {
+          //     attribute.rarityTier = "Legendary"
+          //   } else if (
+          //     rarityTiers.Rare.includes(
+          //       `${attribute.trait_type}: ${attribute.value}`
+          //     )
+          //   ) {
+          //     attribute.rarityTier = "Rare"
+          //   } else {
+          //     attribute.rarityTier = "Common"
+          //   }
+          delete attribute.rarity
+          delete attribute.rarityTier
         })
       }
       delete jsonData.rarityScore
       delete jsonData.rarityTier
       delete jsonData.attributeRarities
+      delete jsonData.animation_url
+      delete jsonData.external_url
+      jsonData.collection = {
+        name: "SolarJuice Collection",
+        family: "SolarJuice",
+        description: "Collection of 3000 solar panels on the blockchain.",
+      }
 
       // Write the updated JSON back to the file
       fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2), "utf-8")
