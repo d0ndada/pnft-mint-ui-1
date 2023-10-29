@@ -1,12 +1,9 @@
 import { siteConfig } from '@/config/site'
 import Link from 'next/link'
 import React from 'react'
-import { Button, buttonVariants } from './ui/button'
+import {  buttonVariants } from './ui/button'
 import { Icons } from '@/components/icons'
-import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
-
-import logo from "public/logo.gif"
 
 interface FooterProps {
   enableScrollSnap?: boolean;
@@ -42,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({enableScrollSnap = false}) => {
       
       </div> 
     <div className='flex items-center justify-center space-x-4'>
-        <Image src={logo} alt="SolJuice Logo" width={48} height={48} />
+        <Image src="/logo.gif" alt="SolJuice Logo" width={48} height={48} />
         <span className="text-2xl font-bold">{siteConfig.name}</span>
       </div>
 

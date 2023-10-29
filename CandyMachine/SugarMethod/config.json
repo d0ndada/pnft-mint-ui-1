@@ -2,7 +2,7 @@
   "tokenStandard": "pnft",
   "number": 3000,
   "symbol": "SOL",
-  "sellerFeeBasisPoints": 1000,
+  "sellerFeeBasisPoints": 100,
   "isMutable": true,
   "isSequential": false,
   "creators": [
