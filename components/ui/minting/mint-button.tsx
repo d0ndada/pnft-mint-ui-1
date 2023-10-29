@@ -52,6 +52,7 @@ type MintButtonProps = React.ComponentProps<typeof Button> & {
   setMessageCallback?: (message?: string) => void
   setDisabledCallback?: (disabled?: boolean) => void
   mintLimit?: number,
+  setCountMinted: any
 }
 
 export function MintButton({
@@ -66,6 +67,7 @@ export function MintButton({
   setDisabledCallback,
   setMessageCallback,
   mintLimit,
+  setCountMinted,
   ...props
 }: MintButtonProps) {
   const { toast } = useToast()
@@ -93,7 +95,7 @@ export function MintButton({
   };
 }
    fetchNFTs();
-}, [umi, wallet]); // Empty dependency array means this effect runs once on mount
+}, [umi, wallet,mintedByYou]); // Empty dependency array means this effect runs once on mount
 
 const mintBtnHandler = async () => {
   if (!candyMachine) {
@@ -291,7 +293,8 @@ const mintBtnHandler = async () => {
         await umi.rpc.sendTransaction(signedTx);
       }
       if (signedTxs) {
-     
+        setMintedByYou(prev => prev + mintAmount)
+        setCountMinted((prev: number) => prev + mintAmount)
         toast({
           title: `Minted ${mintAmount} NFTs!`,
           description: `Click below to view`,

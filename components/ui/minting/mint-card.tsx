@@ -265,10 +265,13 @@ export function MintCard({ className, group, ...props }: CardProps) {
       }
     }
 
+    console.log("Items Redeemed:", candyMachine.itemsRedeemed);
+console.log("Updated countMinted:", countMinted);
     if (remaining > 0) {
       setDisableMint(false)
     }
-  }, [connected, publicKey, candyMachine, candyGuard?.groups, candyGuard?.guards, candyGuard?.publicKey, umi, toast, group, cost.amount, connection])
+
+  }, [connected, publicKey, candyMachine, candyGuard?.groups, candyGuard?.guards, candyGuard?.publicKey, umi, countMinted, toast, group, cost.amount, connection])
 
   useEffect(() => {
     setIsLoading(true);
@@ -339,7 +342,8 @@ export function MintCard({ className, group, ...props }: CardProps) {
             disabled={disableMint}
             setDisabledCallback={setDisabledCallback}
             setMessageCallback={setMessage}
-            mintLimit={mintLimit}
+              mintLimit={mintLimit}
+              setCountMinted={setCountMinted}
           />
           {mintLimit ? (
             <div className=" flex items-center space-x-4 p-2">
