@@ -79,39 +79,34 @@ export function MintButton({
   
   useEffect(() => {
     const fetchNFTs = async () => {
-    if(umi && wallet){
-    const ownedNft = await fetchAllDigitalAssetByOwner(umi, wallet);
+      if (umi && wallet) {
+        const ownedNft = await fetchAllDigitalAssetByOwner(umi, wallet);
 
-    const ownOfCollection = ownedNft.filter(
-      (nft) =>
-        nft.metadata.collection.__option === "Some" &&
-        nft.metadata.collection.value.key === process.env.NEXT_PUBLIC_COLLECTION_MINT
-    );
+        const ownOfCollection = ownedNft.filter(
+          (nft) =>
+            nft.metadata.collection.__option === "Some" &&
+            nft.metadata.collection.value.key === process.env.NEXT_PUBLIC_COLLECTION_MINT
+        );
 
-    console.log(ownOfCollection.length);
-      setMintedByYou(ownOfCollection.length);
-      // console.log(mintedByYou);
+        console.log(ownOfCollection.length);
+        setMintedByYou(ownOfCollection.length);
+        // console.log(mintedByYou);
       
-  };
-}
-   fetchNFTs();
-}, [umi, wallet,mintedByYou]); // Empty dependency array means this effect runs once on mount
+      };
+    }
+    fetchNFTs();
+  }, [umi, wallet, mintedByYou]); // Empty dependency array means this effect runs once on mount
 
-const mintBtnHandler = async () => {
-  if (!candyMachine) {
+  const mintBtnHandler = async () => {
+    if (!candyMachine) {
       return
     }
-    try {
-      setLoading(true)
+    const mintTransactions = []
 
-      const nftMintArr: KeypairSigner[] = [];
-
-      let txArray: Transaction[] = [];
-      let lastSignature: Uint8Array | undefined;
-      const nftSigner = generateSigner(umi)
-
-      for (let i = 0; i < mintAmount; i++) {
-  
+    const nfts: PublicKey[] = [];
+    for (let i = 0; i < mintAmount; i++) {
+      try {
+        setLoading(true)
         const mintArgs: Partial<DefaultGuardSetMintArgs> = {}
         console.log(guardToUse)
         //TODO: Implement rest of guard logic NFT BURN, NFT Payment, FreezeSolPayment FreezeTokenPayment etc also consolidate this logic, very cluttered
@@ -260,113 +255,124 @@ const mintBtnHandler = async () => {
           }
         }
         //Todo: for multimint, probably move these to their own txns
-        nftMintArr.push(nftSigner);
+        const nftSigner = generateSigner(umi)
+        const mintV2Builder = mintV2(umi, {
+          candyMachine: candyMachine.publicKey,
+          collectionMint: candyMachine.collectionMint,
+          collectionUpdateAuthority: candyMachine.authority,
+          nftMint: nftSigner,
+          minter: umi.identity,
+          candyGuard: candyGuard?.publicKey,
+          mintArgs: mintArgs,
+          group: group ? group : undefined,
+          tokenStandard: TokenStandard.ProgrammableNonFungible,
+        })
+      
 
-        const tx = transactionBuilder().add(
-          mintV2(umi, {
-            candyMachine: candyMachine.publicKey,
-            collectionMint: candyMachine.collectionMint,
-            collectionUpdateAuthority: candyMachine.authority,
-            nftMint: nftSigner,
-            minter: umi.identity,
-            candyGuard: candyGuard?.publicKey,
-            mintArgs: mintArgs,
-            group: group ? group : undefined,
-            tokenStandard: TokenStandard.ProgrammableNonFungible,
-          })
-        )
-          .prepend(setComputeUnitLimit(umi, { units: 800_000 }))
+        let tx = transactionBuilder()
+          .add(setComputeUnitLimit(umi, { units: 600_000 }))
+          .add(mintV2Builder)
+        if (routeBuilder) {
+          //Make sure route ix comes first
+          tx = routeBuilder
+            .add(setComputeUnitLimit(umi, { units: 600_000 }))
+            .add(mintV2Builder)
+        }
+        //TODO figure out who to sign multiple txns with umi... should be building up multiple txns then sending them outside the loop
+        const { signature } = await tx.sendAndConfirm(umi, {
+          confirm: { commitment: "finalized" },
+          send: {
+            skipPreflight: true,
+          },
+        })
+
         
-    
-        if (!tx) return;
-        const builtTransaction = await tx.buildWithLatestBlockhash(umi);
-        const signedTransaction = await nftSigner.signTransaction(builtTransaction);
-
-        txArray.push(signedTransaction);
-
-
-   
-      }
-      // Batch and send all transactions together
-      const signedTxs = await umi.identity.signAllTransactions(txArray);
-      for (let signedTx of signedTxs) {
-        await umi.rpc.sendTransaction(signedTx);
-      }
-      if (signedTxs) {
+        //Todo move this logic
+        nfts.push(nftSigner.publicKey)
+        const nft = await fetchDigitalAsset(umi, nftSigner.publicKey).catch(
+          (err) => {
+            console.log(err)
+            return undefined
+          }
+        )
+        onMintCallback &&
+          onMintCallback(nft, base58.deserialize(signature).toString())
+        // if (signedTxs) {
         setMintedByYou(prev => prev + mintAmount)
         setCountMinted((prev: number) => prev + mintAmount)
         toast({
           title: `Minted ${mintAmount} NFTs!`,
           description: `Click below to view`,
           action: (
-              <a href={getExplorerUrl(nftSigner.publicKey, "address")}>
-                <ToastAction altText="View NFT">View</ToastAction>
-              </a>),
+            <a href={getExplorerUrl(nftSigner.publicKey, "address")}>
+              <ToastAction altText="View NFT">View</ToastAction>
+            </a>),
           duration: 5000,
         });
       
-      } else {
-        toast({
-          title: "Mint failed!",
-          description: `Something went wrong.`,
-          // status: "success",
-          duration: 5000,
-        });
-      }
+        // } else {
+        //   toast({
+        //     title: "Mint failed!",
+        //     description: `Something went wrong.`,
+        //     // status: "success",
+        //     duration: 5000,
+        //   });
+        // }
    
-    }catch (error) {
-      toast({
+      } catch (error) {
+        toast({
           title: "Mint cancelled or  failed!",
           description: `Transaction was not completed.`,
           // status: "success",
           duration: 5000,
-      });
-      console.error(error)
-    } finally {
-      setLoading(false)
+        });
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
     }
   }
-  
-  return (
-    <div className="flex items-center justify-end">
-      <div className="relative  flex h-10 w-32 flex-row rounded-lg bg-transparent">
-        <Button
-          data-action="decrement"
-  className="h-full w-20 cursor-pointer rounded-l border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
-          onClick={() => mintAmount > 1 && setMintAmount((prev) => prev - 1)}
-        >
-          -
-        </Button>
-        <input
-          type="text"
-  className="text-md flex w-full cursor-default items-center rounded border-inc-dec-border bg-inc-dec-bg text-center font-semibold text-inc-dec-text hover:bg-inc-dec-hover hover:text-inc-dec-textHover md:text-base"
-          name="custom-input-number"
-          value={mintAmount}
-          readOnly
-        />
-        <Button
-          data-action="increment"
-  className="h-full w-20 cursor-pointer rounded-r  border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
+    return (
+      <div className="flex items-center justify-end">
+        <div className="relative  flex h-10 w-32 flex-row rounded-lg bg-transparent">
+          <Button
+            data-action="decrement"
+            className="h-full w-20 cursor-pointer rounded-l border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
+            onClick={() => mintAmount > 1 && setMintAmount((prev) => prev - 1)}
+          >
+            -
+          </Button>
+          <input
+            type="text"
+            className="text-md flex w-full cursor-default items-center rounded border-inc-dec-border bg-inc-dec-bg text-center font-semibold text-inc-dec-text hover:bg-inc-dec-hover hover:text-inc-dec-textHover md:text-base"
+            name="custom-input-number"
+            value={mintAmount}
+            readOnly
+          />
+          <Button
+            data-action="increment"
+            className="h-full w-20 cursor-pointer rounded-r  border-inc-dec-border bg-inc-dec-bg text-inc-dec-text hover:scale-105 hover:bg-inc-dec-hover hover:text-inc-dec-textHover"
             onClick={() => {
-    // if (mintLimit === undefined || mintLimit === null) {
-    //   setMintAmount((prev) => prev + 1);
-     if (mintAmount < Number(mintLimit) - Number(mintedByYou)) {
-      setMintAmount((prev) => prev + 1);
-    }
-  }}
->
+              // if (mintLimit === undefined || mintLimit === null) {
+              //   setMintAmount((prev) => prev + 1);
+              if (mintAmount < Number(mintLimit) - Number(mintedByYou)) {
+                setMintAmount((prev) => prev + 1);
+              }
+            }}
+          >
 
         
-          +
+            +
+          </Button>
+        </div>
+        <Button
+          className={`${className} ml-3 bg-mintButton-bg text-mintButton-text transition-all  duration-300 ease-in-out hover:scale-105 hover:bg-mintButton-hover active:bg-mintButton-active disabled:bg-mintButton-disabled`}
+          onClick={mintBtnHandler}
+          {...props}
+        >
+          {loading ? "Minting..." : "Mint"}
         </Button>
       </div>
-      <Button
-        className={`${className} ml-3 bg-mintButton-bg text-mintButton-text transition-all  duration-300 ease-in-out hover:scale-105 hover:bg-mintButton-hover active:bg-mintButton-active disabled:bg-mintButton-disabled`}
-        onClick={mintBtnHandler}
-        {...props}
-      >
-        {loading ? "Minting..." : "Mint"}
-      </Button>
-    </div>
-  )
+    )
+  
 }
