@@ -1,9 +1,13 @@
 const fs = require("fs")
 const path = require("path")
 
-const assetsDir = path.join(__dirname, "assets")
+const assetsDir = path.join(__dirname, "testt")
 
 const additionalAttributes = [
+  {
+    trait_type: "Location",
+    value: "Knutsboda, Åland",
+  },
   {
     trait_type: "Maximal Power (Pmax)",
     value: "420, 319, 462, and 504 watt",
@@ -50,6 +54,7 @@ const additionalAttributes = [
   },
 ]
 
+
 fs.readdir(assetsDir, (err, files) => {
   if (err) {
     console.error("Error reading the directory:", err)
@@ -88,6 +93,9 @@ fs.readdir(assetsDir, (err, files) => {
       // Remove specified fields
       delete jsonData.collection
       delete jsonData.seller_fee_basis_points
+      delete jsonData.animation_url
+      delete jsonData.external_url
+
       if (jsonData.properties) {
         delete jsonData.properties.category
         delete jsonData.properties.creators
@@ -96,22 +104,27 @@ fs.readdir(assetsDir, (err, files) => {
 
       jsonData.properties.category = "image"
 
-      // Calculate rarity score and assign tier
-      if (jsonData.attributes) {
-        jsonData.attributes.forEach((attribute) => {})
-      }
-      delete jsonData.rarityScore
-      delete jsonData.rarityTier
-      delete jsonData.attributeRarities
-      delete jsonData.animation_url
-      delete jsonData.external_url
+      // // Calculate rarity score and assign tier
+      //       const seen = new Map();
+      // jsonData.attributes.forEach(attr => {
+      //   seen.set(attr.trait_type, attr);
+      // });
+
+      // // Convert the map back to an array
+      // jsonData.attributes = Array.from(seen.values());
+
+      // // Ensure additional attributes are only added once
+      // const uniqueAdditionalAttributes = additionalAttributes.filter(attr => !seen.has(attr.trait_type));
+      // jsonData.attributes = [...jsonData.attributes, ...uniqueAdditionalAttributes];
+
 
       jsonData.collection = {
         name: "SolarJuice Collection",
         family: "SolarJuice",
         description: "Collection of 3000 solar panels on the blockchain.",
       }
-      jsonData.attributes = jsonData.attributes.concat(additionalAttributes)
+     
+      // jsonData.attributes = jsonData.attributes.concat(additionalAttributes)
 
       // Write the updated JSON back to the file
       fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2), "utf-8")
