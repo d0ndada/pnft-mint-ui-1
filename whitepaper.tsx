@@ -1,11 +1,10 @@
 // pages/whitepaper.tsx
-
 import React from 'react';
 
 const WhitepaperPage: React.FC = () => {
   return (
     <div>
-      <h1>SolJuice NFT Whitepaper</h1>
+      <h1>Solar Juice NFT Whitepaper</h1>
 
       <h2>1. Introduction</h2>
       <p>
@@ -65,8 +64,8 @@ const WhitepaperPage: React.FC = () => {
         Download our whitepaper for a detailed understanding of our terms,
         conditions, and the innovative solutions offered by Solar Juice NFT.
       </p>
-      <a href="https://yourwebsite.com/path/to/whitepaper.pdf" download>
-        Download Whitepaper
+      <a href="/home/lawliet/dl/SolarJuice.Whitepaper2.0.odt" download>
+        Download Terms and Conditions
       </a>
     </div>
   );
