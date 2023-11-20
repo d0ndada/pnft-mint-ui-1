@@ -5,7 +5,7 @@ import React from 'react';
 const WhitepaperPage: React.FC = () => {
   return (
     <div>
-      <h1>Solana NFT Whitepaper</h1>
+      <h1>SolJuice NFT Whitepaper</h1>
 
       <h2>1. Introduction</h2>
       <p>
