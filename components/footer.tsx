@@ -63,6 +63,9 @@ const Footer: React.FC<FooterProps> = ({enableScrollSnap = false}) => {
         <Link href="/terms-and-condition">
           <span className='cursor-pointer text-sm text-primary underline hover:text-accent'>SoJu Terms & Conditions</span>
         </Link>
+        <Link href="/whitepaper">
+          <span className='cursor-pointer text-sm text-primary underline hover:text-accent'>SoJu Whitepaper</span>
+        </Link>
       </div>
     </footer>
   )
