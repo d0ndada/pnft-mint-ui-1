@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import {
   CandyGuard,
   CandyMachine,
@@ -14,9 +14,11 @@ import {
 } from "@metaplex-foundation/mpl-candy-machine"
 import {
   DigitalAsset,
+  JsonMetadata,
   TokenStandard,
   fetchAllDigitalAssetByOwner,
   fetchDigitalAsset,
+  fetchJsonMetadata,
 } from "@metaplex-foundation/mpl-token-metadata"
 import { setComputeUnitLimit } from "@metaplex-foundation/mpl-toolbox"
 import {
@@ -24,8 +26,11 @@ import {
   PublicKey,
   Transaction,
   TransactionBuilder,
+  TransactionWithMeta,
+  Umi,
   generateSigner,
   none,
+  signAllTransactions,
   some,
   transactionBuilder,
   unwrapOption,
@@ -40,6 +45,45 @@ import { useToast } from "../toast/use-toast"
 import { toWeb3JsTransaction } from "@metaplex-foundation/umi-web3js-adapters"
 import { getExplorerUrl } from "@/lib/utils"
 import { ToastAction } from "@radix-ui/react-toast"
+import { GuardReturn } from "@/utils/checkerHelper"
+
+
+const updateLoadingText = (loadingText: string | undefined, guardList: GuardReturn[], label: string, setGuardList: Dispatch<SetStateAction<GuardReturn[]>>,) => {
+    const guardIndex = guardList.findIndex((g) => g.label === label);
+    if (guardIndex === -1) {
+        console.error("guard not found");
+        return;
+    }
+    const newGuardList = [...guardList];
+    newGuardList[guardIndex].loadingText = loadingText;
+    setGuardList(newGuardList);
+}
+const detectBotTax = (logs: string[]) => {
+    if (logs.find((l) => l.includes("Candy Guard Botting"))) {
+        throw new Error(`Candy Guard Bot Tax triggered. Check transaction`);
+    }
+    return false;
+}
+
+// const fetchNft = async (umi: Umi, nftAdress: PublicKey, toast: (options: Omit<UseToastOptions, "id">) => void) => {
+//     let digitalAsset: DigitalAsset | undefined;
+//     let jsonMetadata: JsonMetadata | undefined;
+//     try {
+//         digitalAsset = await fetchDigitalAsset(umi, nftAdress);
+//         jsonMetadata = await fetchJsonMetadata(umi, digitalAsset.metadata.uri)
+//     } catch (e) {
+//         console.error(e);
+//         toast({
+//             title: 'Nft could not be fetched!',
+//             description: "Please check your Wallet instead.",
+//             status: 'error',
+//             duration: 9000,
+//             isClosable: true,
+//         });
+//     }
+
+//     return { digitalAsset, jsonMetadata }
+// }
 
 type MintButtonProps = React.ComponentProps<typeof Button> & {
   group?: string
@@ -52,7 +96,9 @@ type MintButtonProps = React.ComponentProps<typeof Button> & {
   setMessageCallback?: (message?: string) => void
   setDisabledCallback?: (disabled?: boolean) => void
   mintLimit?: number,
-  setCountMinted: any
+  setCountMinted: any,
+      setMintsCreated: Dispatch<SetStateAction<{ mint: PublicKey; offChainMetadata: JsonMetadata | undefined; }[] | undefined>>
+
 }
 
 export function MintButton({
@@ -101,11 +147,16 @@ export function MintButton({
     if (!candyMachine) {
       return
     }
-    const mintTransactions = []
+    const mintTxs: Transaction[] = [];
+    let nftsigners = [] as KeypairSigner[];
 
-    const nfts: PublicKey[] = [];
+    const latestBlockhash = (await umi.rpc.getLatestBlockhash()).blockhash;
+
+
     for (let i = 0; i < mintAmount; i++) {
       try {
+        const nftMint = generateSigner(umi);
+        nftsigners.push(nftMint);
         setLoading(true)
         const mintArgs: Partial<DefaultGuardSetMintArgs> = {}
         console.log(guardToUse)
@@ -255,12 +306,11 @@ export function MintButton({
           }
         }
         //Todo: for multimint, probably move these to their own txns
-        const nftSigner = generateSigner(umi)
         const mintV2Builder = mintV2(umi, {
           candyMachine: candyMachine.publicKey,
           collectionMint: candyMachine.collectionMint,
           collectionUpdateAuthority: candyMachine.authority,
-          nftMint: nftSigner,
+          nftMint: nftMint,
           minter: umi.identity,
           candyGuard: candyGuard?.publicKey,
           mintArgs: mintArgs,
@@ -278,46 +328,11 @@ export function MintButton({
             .add(setComputeUnitLimit(umi, { units: 600_000 }))
             .add(mintV2Builder)
         }
-        //TODO figure out who to sign multiple txns with umi... should be building up multiple txns then sending them outside the loop
-        const { signature } = await tx.sendAndConfirm(umi, {
-          confirm: { commitment: "finalized" },
-          send: {
-            skipPreflight: true,
-          },
-        })
-
-        
-        //Todo move this logic
-        nfts.push(nftSigner.publicKey)
-        const nft = await fetchDigitalAsset(umi, nftSigner.publicKey).catch(
-          (err) => {
-            console.log(err)
-            return undefined
-          }
-        )
-        onMintCallback &&
-          onMintCallback(nft, base58.deserialize(signature).toString())
-        // if (signedTxs) {
-        setMintedByYou(prev => prev + mintAmount)
-        setCountMinted((prev: number) => prev + mintAmount)
-        toast({
-          title: `Minted ${mintAmount} NFTs!`,
-          description: `Click below to view`,
-          action: (
-            <a href={getExplorerUrl(nftSigner.publicKey, "address")}>
-              <ToastAction altText="View NFT">View</ToastAction>
-            </a>),
-          duration: 5000,
-        });
-      
-        // } else {
-        //   toast({
-        //     title: "Mint failed!",
-        //     description: `Something went wrong.`,
-        //     // status: "success",
-        //     duration: 5000,
-        //   });
-        // }
+        tx.prepend(setComputeUnitLimit(umi, { units: 800_00 }));
+        tx = tx.setBlockhash(latestBlockhash);
+        const transaction = tx.build(umi);
+        mintTxs.push(transaction);
+     
    
       } catch (error) {
         toast({
@@ -331,6 +346,92 @@ export function MintButton({
         setLoading(false)
       }
     }
+    
+        // updateLoadingText(`Please sign`, guardList, guardToUse.label, setGuardList);
+        const signedTransactions = await signAllTransactions(
+            mintTxs.map((transaction, index) => ({
+                transaction,
+                signers: [umi.payer, nftsigners[index]],
+            }))
+        );
+
+        let randSignature: Uint8Array;
+        let amountSent = 0;
+        const sendPromises = signedTransactions.map((tx, index) => {
+            return umi.rpc.sendTransaction(tx)
+                .then((signature) => {
+                    console.log(`Transaction ${index + 1} resolved with signature: ${signature}`);
+                    amountSent = amountSent + 1;
+                    randSignature = signature;
+                    return { status: 'fulfilled', value: signature };
+                })
+                .catch(error => {
+                    console.error(`Transaction ${index + 1} failed:`, error);
+                    return { status: 'rejected', reason: error };
+                });
+        });
+
+        await Promise.allSettled(sendPromises).then(results => {
+            let fulfilledCount = 0;
+            let rejectedCount = 0;
+
+            results.forEach(result => {
+                if (result.status === 'fulfilled') {
+                    fulfilledCount++;
+                } else if (result.status === 'rejected') {
+                    rejectedCount++;
+                }
+            });
+            // updateLoadingText(`Sent tx ${fulfilledCount} tx`, guardList, guardToUse.label, setGuardList);
+            console.log(`Fulfilled transactions: ${fulfilledCount}`);
+            console.log(`Rejected transactions: ${rejectedCount}`);
+        });
+
+        if (!(await sendPromises[0]).status === true) {
+            // throw error that no tx was created
+            throw new Error("no tx was created")
+        }
+        // updateLoadingText(`finalizing transaction(s)`, guardList, guardToUse.label, setGuardList);
+
+        toast({
+            title: 'Mint successful!',
+            description: `You can find your NFTs in your wallet.`,
+            // status: 'success',
+            duration: 90000,
+            // isClosable: true,
+        })
+
+        //loop umi.rpc.getTransaction(lastSignature) until it does not return null. Sleep 1 second between each try.
+        let transaction: TransactionWithMeta | null = null;
+        for (let i = 0; i < 60; i++) {
+            if (randSignature! === undefined) {
+                throw new Error(`no tx on chain for signature`);
+            }
+            transaction = await umi.rpc.getTransaction(randSignature);
+            if (transaction) {
+                break;
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+        if (transaction === null) {
+            throw new Error(`no tx on chain for test tx`)
+        }
+
+        const logs: string[] = transaction.meta.logs;
+        // detectBotTax(logs);
+
+        // updateLoadingText("Fetching your NFT", guardList, guardToUse.label, setGuardList);
+        // const fetchedNft = await fetchNft(umi, nftsigners[0].publicKey, toast);
+        // if (fetchedNft.digitalAsset && fetchedNft.jsonMetadata) {
+        //     if (mintsCreated === undefined) {
+        //         setMintsCreated([{ mint: nftsigners[0].publicKey, offChainMetadata: fetchedNft.jsonMetadata }]);
+        //     }
+        //     else {
+        //         setMintsCreated([...mintsCreated, { mint: nftsigners[0].publicKey, offChainMetadata: fetchedNft.jsonMetadata }]);
+        //     }
+        //     onOpen();
+        // }
+       
   }
     return (
       <div className="flex items-center justify-end">
