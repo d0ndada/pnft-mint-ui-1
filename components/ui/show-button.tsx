@@ -30,45 +30,18 @@ export function ShowButton({
 
 
   const ShowNFt = async () => {
-    // only when minted
-    // const digitalAsset = await fetchDigitalAsset(umi, wallet)
-    // const jsonMetadata = await fetchJsonMetadata(umi, digitalAsset.metadata.uri)
-    // if (offChainMetadata.findIndex((el) => el.name === jsonMetadata.name) === -1) {
-    //   setOffChainMetadata((prev) => {
-    //     const newOffChainMetadata = [...prev];
-    //     const index = newOffChainMetadata.findIndex((el) => el.name === "Loading...");
-    //     if (index !== -1) {
-    //       newOffChainMetadata[index] = jsonMetadata;
-    //     } else {
-    //       newOffChainMetadata.push(jsonMetadata);
-    //     }
-    //     return newOffChainMetadata;
-    //   });
-    //   console.log(jsonMetadata)
-    //   setMetadataVersion((prev) => prev + 1);
-    // }
-// 8m1LuiKMaTHa9z24ndC85Kpgk8kPJkaGgqPHQo8J8fUb
-    // const nftCollection = process.env.
-
     const ownedNft = await fetchAllDigitalAssetByOwner(umi, wallet)
-    // const owned = await fetchDigitalAsset(umi, wallet)
-
-
 const ownOfCollection = ownedNft.filter(nft => 
         nft.metadata.collection.__option === 'Some' && 
         nft.metadata.collection.value.key === process.env.NEXT_PUBLIC_COLLECTION_MINT
     )
-    console.log(ownOfCollection.length);
-    // console.log(owned);
-    
-    
-    
-    
-}
+    console.log(ownOfCollection)
+    return ownOfCollection
+  }
       
 
       return (
-                                        <Button onClick={ShowNFt}>my nfts</Button>
+                                        <Button onClick={ShowNFt}>Stake</Button>
 
     )
       }

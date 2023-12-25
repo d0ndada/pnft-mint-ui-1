@@ -16,9 +16,8 @@ export function MainNav({ items }: MainNavProps) {
 
   const handleScroll = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string | undefined) => {
   
-   
-   e.preventDefault();
-    if (href) {
+    if (href && href.startsWith("/#")) {
+      e.preventDefault();
     const sectionId = href.replace("/#", "");
     if (window.location.pathname !== '/') {
       window.location.href = `/#${sectionId}`;
@@ -28,7 +27,7 @@ export function MainNav({ items }: MainNavProps) {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  }
+    } 
 }
  React.useEffect(() => {
   if (typeof window !== "undefined") {

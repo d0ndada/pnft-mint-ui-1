@@ -1,16 +1,17 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { SetStateAction, useCallback, useEffect, useState } from "react"
 import {
   DefaultGuardSet,
   fetchMintCounterFromSeeds,
 } from "@metaplex-foundation/mpl-candy-machine"
 import {
   DigitalAsset,
+  JsonMetadata,
   safeFetchMetadata,
 } from "@metaplex-foundation/mpl-token-metadata"
 import { SPL_SYSTEM_PROGRAM_ID } from "@metaplex-foundation/mpl-toolbox"
-import { SolAmount, none, unwrapOption } from "@metaplex-foundation/umi"
+import { PublicKey, SolAmount, none, unwrapOption } from "@metaplex-foundation/umi"
 import { toWeb3JsPublicKey } from "@metaplex-foundation/umi-web3js-adapters"
 import {
   TOKEN_2022_PROGRAM_ID,
@@ -333,18 +334,19 @@ console.log("Updated countMinted:", countMinted);
         <CardFooter className="grid gap-2">
           <MintProgress minted={countMinted} total={countTotal} />
           <MintButton
-            className="w-full"
-            candyGuard={candyGuard}
-            candyMachine={candyMachine}
-            group={group}
-            guardToUse={guardToUse}
-            onMintCallback={onMint}
-            disabled={disableMint}
-            setDisabledCallback={setDisabledCallback}
-            setMessageCallback={setMessage}
+              className="w-full"
+              candyGuard={candyGuard}
+              candyMachine={candyMachine}
+              group={group}
+              guardToUse={guardToUse}
+              onMintCallback={onMint}
+              disabled={disableMint}
+              setDisabledCallback={setDisabledCallback}
+              setMessageCallback={setMessage}
               mintLimit={mintLimit}
-              setCountMinted={setCountMinted}
-          />
+              setCountMinted={setCountMinted} setMintsCreated={function (value: SetStateAction<{ mint: PublicKey; offChainMetadata: JsonMetadata | undefined }[] | undefined>): void {
+                throw new Error("Function not implemented.")
+              } }          />
           {mintLimit ? (
             <div className=" flex items-center space-x-4 p-2">
                 <div className="flex-1 space-y-1">

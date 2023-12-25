@@ -4,17 +4,22 @@ import { ScrollArea, ScrollBar } from './ui/scroll-area';
 import { Link } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ShowCard } from './ui/show-card';
+import { Button } from './ui/button';
+import { TokenStandard, delegateStakingV1, fetchAllDigitalAssetByOwner } from '@metaplex-foundation/mpl-token-metadata';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { useCandyMachine } from '@/hooks/useCandymachine';
+import { useUmi } from '@/hooks/useUmi';
+import { Umi, generateSigner } from '@metaplex-foundation/umi';
 
-interface MintNavProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-
-export function WalletNav({ className, ...props }: MintNavProps) {
   
+  
+    
+export function Staking() {
+
     return (
          <div>
 
-            <p>in development</p>
-            <ShowCard/>
+            <ShowCard />
     </div>
     )
 };
