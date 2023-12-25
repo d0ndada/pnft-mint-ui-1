@@ -36,6 +36,7 @@
     "@solana/web3.js": "^1.78.2",
     "@tippyjs/react": "^4.2.6",
     "autoprefixer": "^10.4.16",
+    "bs58": "^5.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.2.1",
     "lucide-react": "0.105.0-alpha.4",
